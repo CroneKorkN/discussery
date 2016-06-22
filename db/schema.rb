@@ -13,49 +13,45 @@
 
 ActiveRecord::Schema.define(version: 20151216160859) do
 
-  create_table "attachments", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=latin1" do |t|
+  create_table "attachments", force: :cascade do |t|
     t.integer  "post_id"
     t.integer  "medium_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["medium_id"], name: "index_attachments_on_medium_id"
+    t.index ["post_id"], name: "index_attachments_on_post_id"
   end
 
-  add_index "attachments", ["medium_id"], name: "index_attachments_on_medium_id", using: :btree
-  add_index "attachments", ["post_id"], name: "index_attachments_on_post_id", using: :btree
-
-  create_table "categories", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=latin1" do |t|
+  create_table "categories", force: :cascade do |t|
     t.string   "name"
-    t.text     "description", limit: 65535
-    t.datetime "created_at",                            null: false
-    t.datetime "updated_at",                            null: false
-    t.integer  "parent_id",                 default: 0
+    t.text     "description"
+    t.datetime "created_at",              null: false
+    t.datetime "updated_at",              null: false
+    t.integer  "parent_id",   default: 0
     t.integer  "category_id"
+    t.index ["category_id"], name: "index_categories_on_category_id"
+    t.index ["name"], name: "index_categories_on_name"
+    t.index ["parent_id"], name: "index_categories_on_parent_id"
   end
 
-  add_index "categories", ["category_id"], name: "index_categories_on_category_id", using: :btree
-  add_index "categories", ["name"], name: "index_categories_on_name", using: :btree
-  add_index "categories", ["parent_id"], name: "index_categories_on_parent_id", using: :btree
-
-  create_table "group_users", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=latin1" do |t|
+  create_table "group_users", force: :cascade do |t|
     t.integer  "group_id"
     t.integer  "user_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["group_id"], name: "index_group_users_on_group_id"
+    t.index ["user_id"], name: "index_group_users_on_user_id"
   end
 
-  add_index "group_users", ["group_id"], name: "index_group_users_on_group_id", using: :btree
-  add_index "group_users", ["user_id"], name: "index_group_users_on_user_id", using: :btree
-
-  create_table "groups", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=latin1" do |t|
+  create_table "groups", force: :cascade do |t|
     t.string   "name"
-    t.text     "description", limit: 65535
-    t.datetime "created_at",                null: false
-    t.datetime "updated_at",                null: false
+    t.text     "description"
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
+    t.index ["name"], name: "index_groups_on_name"
   end
 
-  add_index "groups", ["name"], name: "index_groups_on_name", using: :btree
-
-  create_table "media", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=latin1" do |t|
+  create_table "media", force: :cascade do |t|
     t.datetime "created_at",        null: false
     t.datetime "updated_at",        null: false
     t.integer  "user_id"
@@ -63,147 +59,117 @@ ActiveRecord::Schema.define(version: 20151216160859) do
     t.string   "file_content_type"
     t.integer  "file_file_size"
     t.datetime "file_updated_at"
+    t.index ["user_id"], name: "index_media_on_user_id"
   end
 
-  add_index "media", ["user_id"], name: "index_media_on_user_id", using: :btree
-
-  create_table "permissions", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=latin1" do |t|
+  create_table "permissions", force: :cascade do |t|
     t.string   "controller"
     t.string   "action"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["action"], name: "index_permissions_on_action"
+    t.index ["controller"], name: "index_permissions_on_controller"
   end
 
-  add_index "permissions", ["action"], name: "index_permissions_on_action", using: :btree
-  add_index "permissions", ["controller"], name: "index_permissions_on_controller", using: :btree
-
-  create_table "posts", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=latin1" do |t|
-    t.text     "content",            limit: 65535
-    t.text     "content_searchable", limit: 65535
+  create_table "posts", force: :cascade do |t|
+    t.text     "content"
+    t.text     "content_searchable"
     t.integer  "topic_id"
     t.integer  "user_id"
     t.datetime "date"
-    t.datetime "created_at",                       null: false
-    t.datetime "updated_at",                       null: false
+    t.datetime "created_at",         null: false
+    t.datetime "updated_at",         null: false
+    t.index ["date"], name: "index_posts_on_date"
+    t.index ["topic_id"], name: "index_posts_on_topic_id"
+    t.index ["user_id"], name: "index_posts_on_user_id"
   end
 
-  add_index "posts", ["date"], name: "index_posts_on_date", using: :btree
-  add_index "posts", ["topic_id"], name: "index_posts_on_topic_id", using: :btree
-  add_index "posts", ["user_id"], name: "index_posts_on_user_id", using: :btree
-
-  create_table "role_permissions", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=latin1" do |t|
+  create_table "role_permissions", force: :cascade do |t|
     t.integer  "role_id"
     t.integer  "permission_id"
     t.integer  "grant"
     t.datetime "created_at",    null: false
     t.datetime "updated_at",    null: false
+    t.index ["permission_id"], name: "index_role_permissions_on_permission_id"
+    t.index ["role_id"], name: "index_role_permissions_on_role_id"
   end
 
-  add_index "role_permissions", ["permission_id"], name: "index_role_permissions_on_permission_id", using: :btree
-  add_index "role_permissions", ["role_id"], name: "index_role_permissions_on_role_id", using: :btree
-
-  create_table "roles", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=latin1" do |t|
+  create_table "roles", force: :cascade do |t|
     t.string   "name"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
 
-  create_table "setting_groups", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=latin1" do |t|
+  create_table "setting_groups", force: :cascade do |t|
     t.string   "name"
     t.integer  "setting_group_id"
     t.datetime "created_at",       null: false
     t.datetime "updated_at",       null: false
+    t.index ["name"], name: "index_setting_groups_on_name"
+    t.index ["setting_group_id"], name: "index_setting_groups_on_setting_group_id"
   end
 
-  add_index "setting_groups", ["name"], name: "index_setting_groups_on_name", using: :btree
-  add_index "setting_groups", ["setting_group_id"], name: "index_setting_groups_on_setting_group_id", using: :btree
-
-  create_table "settings", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=latin1" do |t|
+  create_table "settings", force: :cascade do |t|
     t.string   "key"
-    t.text     "value",            limit: 65535
+    t.text     "value"
     t.string   "name"
-    t.text     "description",      limit: 65535
+    t.text     "description"
     t.integer  "setting_group_id"
     t.integer  "order"
-    t.datetime "created_at",                     null: false
-    t.datetime "updated_at",                     null: false
+    t.datetime "created_at",       null: false
+    t.datetime "updated_at",       null: false
     t.string   "datatype"
+    t.index ["key"], name: "index_settings_on_key"
+    t.index ["name"], name: "index_settings_on_name"
+    t.index ["order"], name: "index_settings_on_order"
+    t.index ["setting_group_id"], name: "index_settings_on_setting_group_id"
   end
 
-  add_index "settings", ["key"], name: "index_settings_on_key", using: :btree
-  add_index "settings", ["name"], name: "index_settings_on_name", using: :btree
-  add_index "settings", ["order"], name: "index_settings_on_order", using: :btree
-  add_index "settings", ["setting_group_id"], name: "index_settings_on_setting_group_id", using: :btree
-
-  create_table "topics", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=latin1" do |t|
+  create_table "topics", force: :cascade do |t|
     t.string   "name"
     t.integer  "category_id"
     t.integer  "user_id"
     t.datetime "created_at",  null: false
     t.datetime "updated_at",  null: false
+    t.index ["category_id"], name: "index_topics_on_category_id"
+    t.index ["name"], name: "index_topics_on_name"
+    t.index ["user_id"], name: "index_topics_on_user_id"
   end
 
-  add_index "topics", ["category_id"], name: "index_topics_on_category_id", using: :btree
-  add_index "topics", ["name"], name: "index_topics_on_name", using: :btree
-  add_index "topics", ["user_id"], name: "index_topics_on_user_id", using: :btree
-
-  create_table "user_groups", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=latin1" do |t|
+  create_table "user_groups", force: :cascade do |t|
     t.integer  "group_id"
     t.integer  "user_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["group_id"], name: "index_user_groups_on_group_id"
+    t.index ["user_id"], name: "index_user_groups_on_user_id"
   end
 
-  add_index "user_groups", ["group_id"], name: "index_user_groups_on_group_id", using: :btree
-  add_index "user_groups", ["user_id"], name: "index_user_groups_on_user_id", using: :btree
-
-  create_table "user_roles", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=latin1" do |t|
+  create_table "user_roles", force: :cascade do |t|
     t.integer  "user_id"
     t.integer  "role_id"
     t.datetime "created_at",  null: false
     t.datetime "updated_at",  null: false
     t.integer  "category_id"
     t.boolean  "recursive"
+    t.index ["category_id"], name: "index_user_roles_on_category_id"
+    t.index ["recursive"], name: "index_user_roles_on_recursive"
+    t.index ["role_id"], name: "index_user_roles_on_role_id"
+    t.index ["user_id"], name: "index_user_roles_on_user_id"
   end
 
-  add_index "user_roles", ["category_id"], name: "index_user_roles_on_category_id", using: :btree
-  add_index "user_roles", ["recursive"], name: "index_user_roles_on_recursive", using: :btree
-  add_index "user_roles", ["role_id"], name: "index_user_roles_on_role_id", using: :btree
-  add_index "user_roles", ["user_id"], name: "index_user_roles_on_user_id", using: :btree
-
-  create_table "users", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=latin1" do |t|
+  create_table "users", force: :cascade do |t|
     t.string   "name"
     t.string   "mail"
     t.string   "password"
     t.string   "password_digest"
-    t.datetime "created_at",                    null: false
-    t.datetime "updated_at",                    null: false
-    t.text     "acl_cache",       limit: 65535
+    t.datetime "created_at",      null: false
+    t.datetime "updated_at",      null: false
+    t.text     "acl_cache"
     t.integer  "medium_id"
+    t.index ["mail"], name: "index_users_on_mail"
+    t.index ["medium_id"], name: "index_users_on_medium_id"
+    t.index ["name"], name: "index_users_on_name"
   end
 
-  add_index "users", ["mail"], name: "index_users_on_mail", using: :btree
-  add_index "users", ["medium_id"], name: "index_users_on_medium_id", using: :btree
-  add_index "users", ["name"], name: "index_users_on_name", using: :btree
-
-  add_foreign_key "attachments", "media"
-  add_foreign_key "attachments", "posts"
-  add_foreign_key "categories", "categories"
-  add_foreign_key "group_users", "groups"
-  add_foreign_key "group_users", "users"
-  add_foreign_key "media", "users"
-  add_foreign_key "posts", "topics"
-  add_foreign_key "posts", "users"
-  add_foreign_key "role_permissions", "permissions"
-  add_foreign_key "role_permissions", "roles"
-  add_foreign_key "setting_groups", "setting_groups"
-  add_foreign_key "settings", "setting_groups"
-  add_foreign_key "topics", "categories"
-  add_foreign_key "topics", "users"
-  add_foreign_key "user_groups", "groups"
-  add_foreign_key "user_groups", "users"
-  add_foreign_key "user_roles", "categories"
-  add_foreign_key "user_roles", "roles"
-  add_foreign_key "user_roles", "users"
-  add_foreign_key "users", "media"
 end
