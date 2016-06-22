@@ -1,0 +1,28 @@
+html {
+  font-family: "noto sans";
+  font-family: "Titillium Web";
+  font-weight: 300;
+  font-size: 110%;
+  letter-spacing: 0.01em;
+}
+
+html, body {
+   padding: 0;
+   margin: 0;
+}
+
+body {
+  
+}
+
+* {
+     box-sizing: border-box;
+}
+
+a {
+  text-decoration: none;
+}
+
+a:link, a:visited {
+  color: #a50;
+}

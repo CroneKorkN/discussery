@@ -1,0 +1,11 @@
+<h2>
+  Settings
+</h2>
+
+<ul class=setting_groups>
+  <%= render @setting_groups %>
+</ul>
+
+<if-editing>
+  <%= link_to 'New Group', new_setting_group_path %>
+</if-editing>

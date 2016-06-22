@@ -1,0 +1,23 @@
+h1 Listing permissions
+
+table
+  thead
+    tr
+      th Controller
+      th Action
+      th
+      th
+      th
+
+  tbody
+    - @permissions.each do |permission|
+      tr
+        td = permission.controller
+        td = permission.action
+        td = link_to 'Show', permission
+        td = link_to 'Edit', edit_permission_path(permission)
+        td = link_to 'Destroy', permission, data: {:confirm => 'Are you sure?'}, :method => :delete
+
+br
+
+= link_to 'New Permission', new_permission_path

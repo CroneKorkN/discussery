@@ -1,0 +1,13 @@
+li.post class=("own" if post.user == current_user)
+  .info
+    .avatar
+      = image_tag post.user.avatar.file.url(:thumbnail) if post.user and post.user.avatar
+  .content 
+    article.speechbubble
+      = editable post, :content, trigger: :button
+      .if-editing
+        = link_to 'Destroy', post, data: {:confirm => 'Are you sure?'}, :method => :delete
+    .author
+      = time_ago_in_words(post.date || post.created_at)
+      |  ago by
+      =< post.user.name if post.user

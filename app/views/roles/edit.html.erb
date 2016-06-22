@@ -1,0 +1,8 @@
+<h2>Editing Role</h2>
+
+<%= render 'form' %>
+
+<td><%= link_to 'Löschen', @role, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+
+<%= link_to 'Show', @role %> |
+<%= link_to 'Back', roles_path %>

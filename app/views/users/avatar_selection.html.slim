@@ -1,0 +1,8 @@
+h2 choose avatar
+
+fieldset
+  - @images.each |image|
+    input type=radio id=#{image.id}
+    label for=#{image.id}
+      = image_tag image.file.url(:thumbnail)
+  

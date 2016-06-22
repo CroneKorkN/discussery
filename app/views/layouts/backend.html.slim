@@ -1,0 +1,23 @@
+doctype html
+html
+  head
+    title 
+      | Forum
+    = stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true
+    = javascript_include_tag 'application', 'data-turbolinks-track' => true
+    = csrf_meta_tags
+  body.app
+    header.header
+      .wrapper
+        = render 'head'
+    main.main
+      .wrapper
+        p id="notice"
+          = notice
+        nav.nav
+          = render "pagination"
+        = render "backend/tabs"
+        = yield
+    footer.footer
+      .wrapper
+        = render 'foot'

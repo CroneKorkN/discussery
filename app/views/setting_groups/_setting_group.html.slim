@@ -1,0 +1,11 @@
+li.setting_group
+  h3
+    = link_to setting_group.name, edit_setting_group_path(setting_group)
+    if-editing
+      =< link_to "[x]", setting_group_path(setting_group), method: :delete, data: { confirm: 'Are you certain you want to delete this?' }
+  ul.setting_groups
+    = render setting_group.setting_groups
+  ul.settings
+    = render setting_group.settings
+    li.setting.new
+      = link_to '[+]', new_setting_group_setting_path(setting_group)

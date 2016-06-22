@@ -1,0 +1,25 @@
+h1 Listing role_permissions
+
+table
+  thead
+    tr
+      th Role
+      th Permission
+      th Grant
+      th
+      th
+      th
+
+  tbody
+    - @role_permissions.each do |role_permission|
+      tr
+        td = role_permission.role
+        td = role_permission.permission
+        td = role_permission.grant
+        td = link_to 'Show', role_permission
+        td = link_to 'Edit', edit_role_permission_path(role_permission)
+        td = link_to 'Destroy', role_permission, data: {:confirm => 'Are you sure?'}, :method => :delete
+
+br
+
+= link_to 'New Role permission', new_role_permission_path

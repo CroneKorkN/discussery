@@ -1,0 +1,9 @@
+li.setting
+  .name title=setting.key
+    = link_to setting.name, edit_setting_path(setting)
+  .value
+    = setting.value
+  .description
+    = setting.description
+  .delete.if-editing
+    = link_to "[x]", setting_path(setting), method: :delete, data: { confirm: 'sure?' }

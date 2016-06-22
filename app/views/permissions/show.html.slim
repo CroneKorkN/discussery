@@ -1,0 +1,12 @@
+p#notice = notice
+
+p
+  strong Controller:
+  = @permission.controller
+p
+  strong Action:
+  = @permission.action
+
+= link_to 'Edit', edit_permission_path(@permission)
+'|
+= link_to 'Back', permissions_path

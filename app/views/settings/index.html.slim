@@ -1,0 +1,8 @@
+h2
+  Settings
+
+ul.setting_groups
+  = render @setting_groups
+
+if-editing
+  = link_to 'New Group', new_setting_group_path

@@ -1,0 +1,7 @@
+[contenteditable] {
+  background: lightyellow;
+}
+
+:not(.editing) .if-editing {
+  display: none;
+}

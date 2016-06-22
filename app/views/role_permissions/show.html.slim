@@ -1,0 +1,15 @@
+p#notice = notice
+
+p
+  strong Role:
+  = @role_permission.role
+p
+  strong Permission:
+  = @role_permission.permission
+p
+  strong Grant:
+  = @role_permission.grant
+
+= link_to 'Edit', edit_role_permission_path(@role_permission)
+'|
+= link_to 'Back', role_permissions_path

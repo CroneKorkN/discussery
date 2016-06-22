@@ -1,0 +1,39 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Key:</strong>
+  <%= @setting.key %>
+</p>
+
+<p>
+  <strong>Value:</strong>
+  <%= @setting.value %>
+</p>
+
+<p>
+  <strong>Type:</strong>
+  <%= @setting.datatype %>
+</p>
+
+<p>
+  <strong>Name:</strong>
+  <%= @setting.name %>
+</p>
+
+<p>
+  <strong>Description:</strong>
+  <%= @setting.description %>
+</p>
+
+<p>
+  <strong>Setting group:</strong>
+  <%= @setting.setting_group %>
+</p>
+
+<p>
+  <strong>Order:</strong>
+  <%= @setting.order %>
+</p>
+
+<%= link_to 'Edit', edit_setting_path(@setting) %> |
+<%= link_to 'Back', settings_path %>

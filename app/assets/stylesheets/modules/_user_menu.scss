@@ -1,0 +1,11 @@
+.user-menu-trigger {
+  position: relative;
+  
+  .user-menu {
+    position: absolute;
+    top: 100%;
+    right: 0;
+    width: 200px;
+    text-align: right;
+  }
+}

@@ -1,0 +1,51 @@
+.header {
+  padding: 0;
+  margin: 0;
+  #background: #ef8807;
+  color: #333;
+  #box-shadow: $shadow;
+  
+  .main-menu {
+    margin: 0;
+    padding: 0;
+    list-style-type: none;
+    display: flex;
+    
+    
+    
+    > li {
+      margin-right: 1em;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 5rem;
+
+      &.placeholder {
+         flex-grow: 1;
+       }
+       
+      &:first-of-type a {
+        font-weight: bold;
+      }
+      
+      >  a {
+        display: block;
+        height: 5rem;
+        line-height: 5rem;
+        font-size: 2rem;
+        font-weight: 300;
+      }
+      
+      &:last-of-type {
+        margin-right: 0;
+      }
+    }
+
+    
+    a:visited {
+      color: #333;
+    }
+    
+
+  }
+}
