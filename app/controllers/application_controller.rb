@@ -10,11 +10,10 @@ class ApplicationController < ActionController::Base
   end
 
   # first arg: ommit or user; second arg: `action: object`
-  def authorize(*args)
-    user, action, object = extract_authorization_arguments(args)
-    p "######## #{user} #{action} #{object}"
+  def authorize(action, categroy=nil)
+    p "authorize? #{current_user.name}, #{action}, #{categroy}"
     begin
-      Authorization.new user, action, object
+      Authorization.new current_user, action, categroy
     rescue Exceptions::AuthorizationError
       render text: "Prohibited"
     end

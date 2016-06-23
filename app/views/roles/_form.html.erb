@@ -18,7 +18,7 @@
   
   <% Permission.all.each do |permission| %>
       <%= check_box_tag :permission_ids, permission.id, @role.permissions.include?(permission), name: 'role[permission_ids][]' %>
-      <%= label_tag :permission_ids, "#{permission.action} #{permission.controller}" %><br>
+      <%= label_tag :permission_ids, "#{permission.action}" %><br>
   <% end %>
   
   <div class="actions">

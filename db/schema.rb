@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160623095344) do
+ActiveRecord::Schema.define(version: 20160623114100) do
 
   create_table "attachments", force: :cascade do |t|
     t.integer  "post_id"
@@ -31,6 +31,15 @@ ActiveRecord::Schema.define(version: 20160623095344) do
     t.index ["category_id"], name: "index_categories_on_category_id"
     t.index ["name"], name: "index_categories_on_name"
     t.index ["parent_id"], name: "index_categories_on_parent_id"
+  end
+
+  create_table "group_groups", force: :cascade do |t|
+    t.integer  "group_id"
+    t.integer  "member_group_id"
+    t.datetime "created_at",      null: false
+    t.datetime "updated_at",      null: false
+    t.index ["group_id"], name: "index_group_groups_on_group_id"
+    t.index ["member_group_id"], name: "index_group_groups_on_member_group_id"
   end
 
   create_table "group_roles", force: :cascade do |t|
@@ -74,12 +83,10 @@ ActiveRecord::Schema.define(version: 20160623095344) do
   end
 
   create_table "permissions", force: :cascade do |t|
-    t.string   "controller"
     t.string   "action"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["action"], name: "index_permissions_on_action"
-    t.index ["controller"], name: "index_permissions_on_controller"
   end
 
   create_table "posts", force: :cascade do |t|
@@ -98,9 +105,9 @@ ActiveRecord::Schema.define(version: 20160623095344) do
   create_table "role_permissions", force: :cascade do |t|
     t.integer  "role_id"
     t.integer  "permission_id"
-    t.integer  "grant"
-    t.datetime "created_at",    null: false
-    t.datetime "updated_at",    null: false
+    t.datetime "created_at",                    null: false
+    t.datetime "updated_at",                    null: false
+    t.boolean  "denied",        default: false, null: false
     t.index ["permission_id"], name: "index_role_permissions_on_permission_id"
     t.index ["role_id"], name: "index_role_permissions_on_role_id"
   end

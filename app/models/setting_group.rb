@@ -1,5 +1,5 @@
 class SettingGroup < ActiveRecord::Base
-  belongs_to :setting_group 
+  belongs_to :setting_group, optional: true
   has_many :setting_groups
   has_many :settings
   

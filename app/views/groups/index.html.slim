@@ -1,23 +1,6 @@
-h1 Listing groups
+h2 = "groups #{link_to '+', new_group_path}".html_safe
 
-table
-  thead
-    tr
-      th Name
-      th Description
-      th
-      th
-      th
+ul
+  = render @groups
 
-  tbody
-    - @groups.each do |group|
-      tr
-        td = group.name
-        td = group.description
-        td = link_to 'Show', group
-        td = link_to 'Edit', edit_group_path(group)
-        td = link_to 'Destroy', group, data: {:confirm => 'Are you sure?'}, :method => :delete
 
-br
-
-= link_to 'New Group', new_group_path

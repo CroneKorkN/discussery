@@ -40,11 +40,13 @@ private
       visible: []
     }
     Category.all.each do |category|
-      user.user_roles.where(category_id: category.id).each do |user_role|
-        acl[:category][category.id] = [] if not acl[:category][category.id]
-        user_role.role.permissions.each do |permission|
-          acl[:category][category.id] << "#{permission.action}_#{permission.controller.downcase}".to_sym
-          acl[:visible] << category.id
+      user.groups.each do |group|
+        group.roles.where(category_id: category.id).each do |user_role|
+          acl[:category][category.id] = [] if not acl[:category][category.id]
+          user_role.role.permissions.each do |permission|
+            acl[:category][category.id] << permission.action.to_sym
+            acl[:visible] << category.id
+          end
         end
       end
     end

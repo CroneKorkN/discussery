@@ -1,7 +1,5 @@
 li
-  = link_to edit_permission_path(permission) do
-    = permission.action
-    =< permission.controller
+  = link_to permission.action, edit_permission_path(permission)
   if-editing
     = link_to permission, data: {confirm: 'Are you sure?'}, method: :delete do
       button löschen

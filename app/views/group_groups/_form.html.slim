@@ -1,0 +1,15 @@
+= form_for @group_group do |f|
+  - if @group_group.errors.any?
+    #error_explanation
+      h2 = "#{pluralize(@group_group.errors.count, "error")} prohibited this group_group from being saved:"
+      ul
+        - @group_group.errors.full_messages.each do |message|
+          li = message
+
+  .field
+    = f.label :group
+    = f.text_field :group
+  .field
+    = f.label :member_group_id
+    = f.number_field :member_group_id
+  .actions = f.submit

@@ -1,12 +1,17 @@
-p#notice = notice
-
+h2 = "#{editable @group, :name} - group".html_safe
 p
-  strong Name:
-  = @group.name
-p
-  strong Description:
-  = @group.description
+  = editable @group, :description
 
-= link_to 'Edit', edit_group_path(@group)
-'|
-= link_to 'Back', groups_path
+| members
+ul 
+  li
+    | users
+    ul
+      - @group.users.each do |user|
+        li = link_to user.name, user
+  
+  li 
+    | groups
+    ul
+      - @group.member_groups.each do |group|
+        li = link_to group.name, group
