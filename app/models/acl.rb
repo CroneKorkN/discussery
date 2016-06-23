@@ -36,14 +36,22 @@ private
   def build_acl user
     acl = {
       global: [],
-      category: {},
+      categories: {},
       visible: []
     }
     
     # todo: group_groups permissions
-    user.groups.group_roles.each do |group_role|
-      group_role.
+    user.groups.each do |group|
+      group.group_roles.each do |group_role|
+        c_id = group_role.category.id
+        acl[:categories][c_id] = [] unless acl[:categories][c_id]
+        group_role.role.permissions.each do |permission|
+          acl[:categories][c_id] << permission.action
+        end
+      end
     end
+    
+    puts acl.inspect
     
     Category.all.each do |category|
       user.groups.each do |group|
