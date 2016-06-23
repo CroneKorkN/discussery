@@ -1,0 +1,18 @@
+p#notice = notice
+
+p
+  strong Group:
+  = @group_role.group
+p
+  strong Role:
+  = @group_role.role
+p
+  strong Category:
+  = @group_role.category
+p
+  strong Recursive:
+  = @group_role.recursive
+
+= link_to 'Edit', edit_group_role_path(@group_role)
+'|
+= link_to 'Back', group_roles_path

@@ -9,7 +9,7 @@ class User < ActiveRecord::Base
   has_many :roles, through: :user_roles
   has_many :user_groups
   has_many :groups, through: :user_groups
-  belongs_to :medium
+  belongs_to :medium, optional: true
 
   alias_attribute :avatar, :medium
   #def avatar

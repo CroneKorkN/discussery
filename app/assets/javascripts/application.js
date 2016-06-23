@@ -12,8 +12,22 @@
 //
 //= require jquery
 //= require jquery_ujs
-//= require foundation
-//= require turbolinks
+// require turbolinks
+//= require cable
 //= require_tree ./modules
 
-$(function(){ $(document).foundation(); });
+var app = function() {
+  console.log("initialize");
+
+  $("body").topic();
+
+  var editing = false;
+  $("[data-edit]").edit_button();
+
+
+  $(".has-dropdown").toggle_menu();
+  $("[data-toggle]:not(.has-dropdown)").toggle_menu();
+
+}
+
+$(document).ready(app);

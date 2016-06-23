@@ -1,0 +1,43 @@
+.row {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  
+  > .column {
+    flex-grow: 1;
+  }
+  
+  > .one.column {
+    width: 100%/12*1;
+  }
+  > .two.columns {
+    width: 100%/12*2;
+  }
+  > .three.columns {
+    width: 100%/12*3;
+  }
+  > .four.columns {
+    width: 100%/12*4;
+  }
+  > .five.columns {
+    width: 100%/12*5;
+  }
+  > .six.columns {
+    width: 100%/12*6;
+  }
+  > .seven.columns {
+    width: 100%/12*7;
+  }
+  > .eight.columns {
+    width: 100%/12*8;
+  }
+  > .nine.columns {
+    width: 100%/12*9;
+  }
+  > .ten.columns {
+    width: 100%/12*10;
+  }
+  > .eleven.columns {
+    width: 100%/12*11;
+  }
+}

@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  resources :group_roles
   root to: "users#activity"
   get 'test/new'
 

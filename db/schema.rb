@@ -1,4 +1,3 @@
-# encoding: UTF-8
 # This file is auto-generated from the current state of the database. Instead
 # of editing this file, please use the migrations feature of Active Record to
 # incrementally modify your database, and then regenerate this schema definition.
@@ -11,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151216160859) do
+ActiveRecord::Schema.define(version: 20160623095344) do
 
   create_table "attachments", force: :cascade do |t|
     t.integer  "post_id"
@@ -32,6 +31,18 @@ ActiveRecord::Schema.define(version: 20151216160859) do
     t.index ["category_id"], name: "index_categories_on_category_id"
     t.index ["name"], name: "index_categories_on_name"
     t.index ["parent_id"], name: "index_categories_on_parent_id"
+  end
+
+  create_table "group_roles", force: :cascade do |t|
+    t.integer  "group_id"
+    t.integer  "role_id"
+    t.integer  "category_id"
+    t.boolean  "recursive"
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
+    t.index ["category_id"], name: "index_group_roles_on_category_id"
+    t.index ["group_id"], name: "index_group_roles_on_group_id"
+    t.index ["role_id"], name: "index_group_roles_on_role_id"
   end
 
   create_table "group_users", force: :cascade do |t|

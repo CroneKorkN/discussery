@@ -6,20 +6,19 @@ ul.main-menu
   li
     = link_to "Users", users_path
   li.placeholder
-  li.user-menu-trigger
+  li.has-dropdown data-toggle="user-menu"
     - if current_user
-      = link_to current_user.name, current_user
+      span = current_user.name
     - else
-      = link_to "Einloggen", login_path
-    .user-menu.hidden
-      ul
-        - if current_user
-          li
-            = link_to "Log Out", logout_path
-          li
-            = link_to "Admin", backend_path
-        - else
-          li
-            = link_to "Registrieren", signup_path
+      span = "Einloggen"
+    ul#user-menu.dropdown.hidden
+      - if current_user
         li
-          button [data-edit] = "[edit]"
+          = link_to "Log Out", logout_path
+        li
+          = link_to "Admin", backend_path
+      - else
+        li
+          = link_to "Registrieren", signup_path
+      li
+        button [data-edit] = "[edit]"
