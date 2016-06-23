@@ -1,16 +1,24 @@
 class Recursion
-  attr_reader :collection
+  def self.collect object, relation
+    Object.const_get(object.class.name).find dig(object, relation).flatten
+  end
   
-  def initialize object, property
-    @collection = Object.const_get(object.class.name).find collect(object, property).flatten
+  def self.collect_all objects, relation
+    objects.each do |object|
+      collect object, relation
+    end      
   end
   
   private
   
-  def collect object, property
+  def load object, relation
+    Object.const_get(object.class.name).find dig(object, relation).flatten
+  end
+  
+  def self.dig object, relation
     ids = [object.id]
-    object.send(property).each do |subobject|
-      ids << collect(subobject, property)
+    object.send(relation).each do |subobject|
+      ids << dig(subobject, relation)
     end
     ids
   end

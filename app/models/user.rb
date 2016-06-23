@@ -33,6 +33,9 @@ class User < ActiveRecord::Base
   end
   
   def groups
+    @groups = Recursion.collect_all memberships, :groups
+    
+    
     unless @all_groups
       @all_group_ids = []
       memberships.each do |group|
