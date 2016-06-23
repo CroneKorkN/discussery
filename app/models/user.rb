@@ -7,14 +7,18 @@ class User < ActiveRecord::Base
   has_many :attachments
   has_many :user_roles
   has_many :roles, through: :user_roles
+  
   has_many :user_groups
-  has_many :groups, through: :user_groups
+  has_many :memberships,
+    through: :user_groups,
+    source: :group
+    
   belongs_to :medium, optional: true
 
-  alias_attribute :avatar, :medium
-  #def avatar
-  #  medium || Medium.find(Setting["avatar_placeholder_medium_id"])
-  #end
+  #alias_attribute :avatar, :medium
+  def avatar
+    medium || Medium.find(Setting["avatar_placeholder_medium_id"])
+  end
 
   serialize :acl_cache
 
@@ -26,5 +30,25 @@ class User < ActiveRecord::Base
 
   def categories
     Category.where("id IN(?)", acl.visible_categories)
+  end
+  
+  def groups
+    unless @all_groups
+      @all_group_ids = []
+      memberships.each do |group|
+        collect_group_ids group
+      end
+      @all_groups = Group.where "ID IN(?)", @all_group_ids
+    end
+    return @all_groups
+  end
+  
+private
+  
+  def collect_group_ids group
+    @all_group_ids << group
+    group.memberships.each do |group|
+      collect_group_ids group
+    end
   end
 end

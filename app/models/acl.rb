@@ -1,41 +1,24 @@
 class ACL # Access Controll List
   def initialize(user)
-    @acl = user.acl_cache || build_acl(user)
-    @acl = build_acl(user)
+    build_for user unless @acl
+    @acl
   end
 
-  def allows(action, object)
+def allows?(action, category=Category.find(Setting["global_category_id"]))
     false
-    unless object.nil?
-      permission = "#{action}_#{object.class.name.downcase}".to_sym
-      id = category_id_of object
-      puts "#{object.class.name.downcase}; #{permission}"
-      if @acl[:category][id] and @acl[:category][id].include?(permission)
-        true
-      end
-    else
-      if @acl[:global] and @acl[:global][permission]
-        true
-      end
+    if @acl[:categories][category.id] and @acl[:categories][category.id].include?(action)
+      true
     end
   end
-
+  
   def visible_categories
     @acl[:visible]
   end
 
 private
 
-  {
-    category: {
-      "1": ["read"]
-    },
-    visible: [1, 5, 6, 8]
-  }
-
-  def build_acl user
-    acl = {
-      global: [],
+  def build_for user
+    @acl = {
       categories: {},
       visible: []
     }
@@ -44,29 +27,16 @@ private
     user.groups.each do |group|
       group.group_roles.each do |group_role|
         c_id = group_role.category.id
-        acl[:categories][c_id] = [] unless acl[:categories][c_id]
+        @acl[:categories][c_id] = [] unless @acl[:categories][c_id]
         group_role.role.permissions.each do |permission|
-          acl[:categories][c_id] << permission.action
+          @acl[:categories][c_id] << permission.action
         end
       end
     end
     
-    puts acl.inspect
-    
-    Category.all.each do |category|
-      user.groups.each do |group|
-        group.roles.where(category_id: category.id).each do |user_role|
-          acl[:category][category.id] = [] if not acl[:category][category.id]
-          user_role.role.permissions.each do |permission|
-            acl[:category][category.id] << permission.action.to_sym
-            acl[:visible] << category.id
-          end
-        end
-      end
-    end
-    acl[:visible].uniq!
-    user.update acl_cache: acl
-    acl
+    @acl[:visible].uniq!
+    user.update acl_cache: @acl
+    return @acl
   end
 
   def category_id_of object

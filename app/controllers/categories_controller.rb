@@ -16,7 +16,7 @@ class CategoriesController < ApplicationController
   # GET /categories/1
   # GET /categories/1.json
   def show
-    authorize read: @category
+    authorize :read_category, @category
   end
 
   # GET /categories/new

@@ -4,7 +4,7 @@ class CreateGroupRoles < ActiveRecord::Migration[5.0]
       t.references :group, foreign_key: true
       t.references :role, foreign_key: true
       t.references :category, foreign_key: true
-      t.boolean :recursive
+      t.boolean :recursive, null: false, default: false
 
       t.timestamps
     end

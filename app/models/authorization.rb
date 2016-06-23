@@ -1,5 +1,5 @@
 class Authorization
-  def initialize(user, action, object)
-    raise "#{user.name} #{action} #{object.class.name if object} #{object.id if object} authorization error" unless user.acl.allows action, object
+  def initialize(user, action, category)
+    raise "#{user.name} #{action} in category #{category.id} authorization error" unless user.acl.allows? action, category
   end
 end

@@ -7,7 +7,6 @@
 #   Character.create(name: 'Luke', movie: movies.first)
 
 # categories
-global_category = Category.create name: "GLOBAL"
 root_category = Category.create name: "ROOT"
 discussion_category = root_category.categories.create name: "Discussions"
 discussion_category.categories.create name: "Politics"
@@ -79,11 +78,11 @@ staff_group.group_groups.create member_group: admin_group
 staff_group.group_groups.create member_group: supermod_group
 
 # group roles
-admin_group.group_roles.create role: admin_role, category: global_category
-supermod_group.group_roles.create role: mod_role, category: global_category
-member_group.group_roles.create role: member_role, category: global_category
-guest_group.group_roles.create role: guest_role, category: global_category
-blocked_group.group_roles.create role: blocked_role, category: global_category
+admin_group.group_roles.create role: admin_role, category: root_category, recursive: true
+supermod_group.group_roles.create role: mod_role, category: root_category, recursive: true
+member_group.group_roles.create role: member_role, category: root_category, recursive: true
+guest_group.group_roles.create role: guest_role, category: root_category, recursive: true
+blocked_group.group_roles.create role: blocked_role, category: root_category, recursive: true
 
 # users
 admin = admin_group.users.create name: "admin", password: "admin", password_confirmation: "admin", mail: "admin"
@@ -96,4 +95,4 @@ setting_group.settings.create key: "root_category", value: root_category.id
 setting_group.settings.create key: "threads_per_page", value: 20
 setting_group.settings.create key: "admin_group_id", value: admin_group.id
 setting_group.settings.create key: "member_group_id", value: member_group.id
-setting_group.settings.create key: "global_category_id", value: global_category.id
+setting_group.settings.create key: "root_category_id", value: root_category.id

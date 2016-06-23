@@ -10,10 +10,10 @@ class ApplicationController < ActionController::Base
   end
 
   # first arg: ommit or user; second arg: `action: object`
-  def authorize(action, categroy=nil)
-    p "authorize? #{current_user.name}, #{action}, #{categroy}"
+  def authorize(action, category)
+    p "authorize? #{current_user.name}, #{action}, #{category}"
     begin
-      Authorization.new current_user, action, categroy
+      Authorization.new current_user, action, category
     rescue Exceptions::AuthorizationError
       render text: "Prohibited"
     end

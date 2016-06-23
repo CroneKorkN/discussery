@@ -35,9 +35,9 @@ ActiveRecord::Schema.define(version: 20160623114100) do
 
   create_table "group_groups", force: :cascade do |t|
     t.integer  "group_id"
-    t.integer  "member_group_id"
-    t.datetime "created_at",      null: false
-    t.datetime "updated_at",      null: false
+    t.integer  "member_group_id", default: 0, null: false
+    t.datetime "created_at",                  null: false
+    t.datetime "updated_at",                  null: false
     t.index ["group_id"], name: "index_group_groups_on_group_id"
     t.index ["member_group_id"], name: "index_group_groups_on_member_group_id"
   end
@@ -46,9 +46,9 @@ ActiveRecord::Schema.define(version: 20160623114100) do
     t.integer  "group_id"
     t.integer  "role_id"
     t.integer  "category_id"
-    t.boolean  "recursive"
-    t.datetime "created_at",  null: false
-    t.datetime "updated_at",  null: false
+    t.boolean  "recursive",   default: false, null: false
+    t.datetime "created_at",                  null: false
+    t.datetime "updated_at",                  null: false
     t.index ["category_id"], name: "index_group_roles_on_category_id"
     t.index ["group_id"], name: "index_group_roles_on_group_id"
     t.index ["role_id"], name: "index_group_roles_on_role_id"
