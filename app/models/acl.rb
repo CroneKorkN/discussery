@@ -39,6 +39,12 @@ private
       category: {},
       visible: []
     }
+    
+    # todo: group_groups permissions
+    user.groups.group_roles.each do |group_role|
+      group_role.
+    end
+    
     Category.all.each do |category|
       user.groups.each do |group|
         group.roles.where(category_id: category.id).each do |user_role|

@@ -7,7 +7,8 @@
 #   Character.create(name: 'Luke', movie: movies.first)
 
 # categories
-root_category = Category.create name: "root"
+global_category = Category.create name: "GLOBAL"
+root_category = Category.create name: "ROOT"
 discussion_category = root_category.categories.create name: "Discussions"
 discussion_category.categories.create name: "Politics"
 discussion_category.categories.create name: "Science"
@@ -27,7 +28,18 @@ blocked_role = Role.create name: "blocked"
   "read_topics",
   "read_category",
 ].each do |action|
-  admin_role.permissions.create action: action
+  Permission.create action: action
+end
+  
+# permissions
+[ # admin
+  "admin",
+  "create_topic",
+  "create_post",
+  "read_topics",
+  "read_category",
+].each do |action|
+  admin_role.role_permissions.create permission: Permission[action]
 end
 [ # mod
   "create_topic",
@@ -35,7 +47,7 @@ end
   "read_topics",
   "read_category",
 ].each do |action|
-  mod_role.permissions.create action: action
+  mod_role.role_permissions.create permission: Permission[action]
 end
 [ # member
   "create_topic",
@@ -43,13 +55,13 @@ end
   "read_topics",
   "read_category",
 ].each do |action|
-  member_role.permissions.create action: action
+  member_role.role_permissions.create permission: Permission[action]
 end
 [ # guest
   "read_topics",
   "read_category",
 ].each do |action|
-  guest_role.permissions.create action: action
+  guest_role.role_permissions.create permission: Permission[action]
 end
 
 Permission.all.each do |permission|
@@ -67,11 +79,11 @@ staff_group.group_groups.create member_group: admin_group
 staff_group.group_groups.create member_group: supermod_group
 
 # group roles
-admin_group.roles.create name: admin_role.name
-supermod_group.roles.create name: mod_role.name
-member_group.roles.create name: member_role.name
-guest_group.roles.create name: guest_role.name
-blocked_group.roles.create name: blocked_role.name
+admin_group.group_roles.create role: admin_role, category: global_category
+supermod_group.group_roles.create role: mod_role, category: global_category
+member_group.group_roles.create role: member_role, category: global_category
+guest_group.group_roles.create role: guest_role, category: global_category
+blocked_group.group_roles.create role: blocked_role, category: global_category
 
 # users
 admin = admin_group.users.create name: "admin", password: "admin", password_confirmation: "admin", mail: "admin"
@@ -84,3 +96,4 @@ setting_group.settings.create key: "root_category", value: root_category.id
 setting_group.settings.create key: "threads_per_page", value: 20
 setting_group.settings.create key: "admin_group_id", value: admin_group.id
 setting_group.settings.create key: "member_group_id", value: member_group.id
+setting_group.settings.create key: "global_category_id", value: global_category.id
