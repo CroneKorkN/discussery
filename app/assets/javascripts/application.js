@@ -27,7 +27,8 @@ var app = function() {
 
   $(".has-dropdown").toggle_menu();
   $("[data-toggle]:not(.has-dropdown)").toggle_menu();
-
+  
+  $("[data-link-scope]").link_scope();
 }
 
 $(document).ready(app);

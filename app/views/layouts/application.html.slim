@@ -16,7 +16,9 @@ html
           = notice
         nav.nav
           = render "pagination"
-        = yield
+        #page-content
+          = "MMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMM" if request.xhr?
+          = yield
     footer.footer
       .wrapper
         = render 'foot'

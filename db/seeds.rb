@@ -90,12 +90,16 @@ admin = admin_group.users.create name: "admin", password: "admin", password_conf
 # setting groups
 setting_group = SettingGroup.create name: "default"
 
+# media
+avatar_placeholder_medium = Medium.create file: File.new("#{Rails.root}/app/assets/images/avatar.svg")
+
 # settings
 setting_group.settings.create key: "root_category", value: root_category.id
 setting_group.settings.create key: "threads_per_page", value: 20
 setting_group.settings.create key: "admin_group_id", value: admin_group.id
 setting_group.settings.create key: "member_group_id", value: member_group.id
 setting_group.settings.create key: "root_category_id", value: root_category.id
+setting_group.settings.create key: "avatar_placeholder_medium_id", value: avatar_placeholder_medium.id
 
 # threads
 example_topic = example_category.topics.create user: admin, name: "hello world!"
