@@ -3,4 +3,4 @@ h2
   =< link_to '[+]', new_category_path
 
 ul
-  = render collection: @categories, as: :category, partial: "manage_category"
+  = render collection: @root_category.categories, as: :category, partial: "manage_category"

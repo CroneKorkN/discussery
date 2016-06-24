@@ -4,11 +4,9 @@ class ACL # Access Controll List
     @acl
   end
 
-def allows?(action, category=Category.find(Setting["global_category_id"]))
+  def allows?(action, category)
     false
-    if @acl[:categories][category.id] and @acl[:categories][category.id].include?(action)
-      true
-    end
+    true if @acl[:categories][category.id] and @acl[:categories][category.id].include?(action)
   end
   
   def visible_categories
@@ -24,12 +22,17 @@ private
     }
     
     # todo: group_groups permissions
-    user.groups.each do |group|
+    Recursion.collect_all(user.groups, :groups).each do |group|
       group.group_roles.each do |group_role|
-        c_id = group_role.category.id
-        @acl[:categories][c_id] = [] unless @acl[:categories][c_id]
-        group_role.role.permissions.each do |permission|
-          @acl[:categories][c_id] << permission.action
+        c_ids = [group_role.category.id]
+        c_ids << Recursion.collect(group_role.category, :categories).pluck(:id) if group_role.recursive
+        
+        c_ids.flatten.each do |c_id|
+          @acl[:categories][c_id] = [] unless @acl[:categories][c_id]
+          group_role.role.permissions.each do |permission|
+            @acl[:categories][c_id] << permission.action
+            @acl[:visible] << c_id if permission.action.to_sym == :read_category
+          end
         end
       end
     end

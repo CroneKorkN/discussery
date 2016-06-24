@@ -3,14 +3,14 @@ class CategoriesController < ApplicationController
   layout "backend", only: [:manage]
   
   def manage
-    @categories = Category.root
+    @root_category = Category.find(Setting[:root_category_id])
   end
   
   # GET /categories
   # GET /categories.json
   def index
 #    @categories = Category.root.visible_for current_user
-    @categories = current_user.categories.root
+    @categories = Category.find(Setting[:root_category_id]).categories.where id: current_user.categories.pluck(:id)
   end
 
   # GET /categories/1
