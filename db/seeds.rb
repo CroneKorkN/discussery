@@ -9,7 +9,7 @@
 # categories
 root_category = Category.create name: "ROOT"
 discussion_category = root_category.categories.create name: "Discussions"
-discussion_category.categories.create name: "Politics"
+example_category = discussion_category.categories.create name: "Politics"
 discussion_category.categories.create name: "Science"
 
 # roles
@@ -96,3 +96,9 @@ setting_group.settings.create key: "threads_per_page", value: 20
 setting_group.settings.create key: "admin_group_id", value: admin_group.id
 setting_group.settings.create key: "member_group_id", value: member_group.id
 setting_group.settings.create key: "root_category_id", value: root_category.id
+
+# threads
+example_topic = example_category.topics.create user: admin, name: "hello world!"
+3.times do
+  example_topic.posts.create user: admin, content: "hallo welt!"
+end

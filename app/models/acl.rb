@@ -5,8 +5,7 @@ class ACL # Access Controll List
   end
 
   def allows?(action, category)
-    false
-    true if @acl[:categories][category.id] and @acl[:categories][category.id].include?(action)
+    @acl[:categories][category.id] and @acl[:categories][category.id].include?(action.to_sym)
   end
   
   def visible_categories
@@ -30,7 +29,7 @@ private
         c_ids.flatten.each do |c_id|
           @acl[:categories][c_id] = [] unless @acl[:categories][c_id]
           group_role.role.permissions.each do |permission|
-            @acl[:categories][c_id] << permission.action
+            @acl[:categories][c_id] << permission.action.to_sym
             @acl[:visible] << c_id if permission.action.to_sym == :read_category
           end
         end
