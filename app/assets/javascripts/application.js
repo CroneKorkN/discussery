@@ -16,19 +16,6 @@
 //= require cable
 //= require_tree ./modules
 
-var app = function() {
-  console.log("initialize");
-
-  $("body").topic();
-
-  var editing = false;
-  $("[data-edit]").edit_button();
-
-
-  $(".has-dropdown").toggle_menu();
-  $("[data-toggle]:not(.has-dropdown)").toggle_menu();
-  
-  $("[data-link-scope]").link_scope();
-}
-
-$(document).ready(app);
+$(document).ready(function(){
+  $("body").initialize();
+});

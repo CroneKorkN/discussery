@@ -1,6 +1,5 @@
 class CategoriesController < ApplicationController
   before_action :set_category, only: [:show, :edit, :update, :destroy]
-  layout "backend", only: [:manage]
   
   def manage
     @root_category = Category.find(Setting[:root_category_id])
