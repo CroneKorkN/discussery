@@ -1,24 +1,28 @@
-ul.main-menu
-  li.h1
-      = link_to "Forum", "/", "data-link-scope": "#page-content"
-  li
-    = link_to "Browse", "/categories", "data-link-scope": "#page-content"
-  li
-    = link_to "Users", users_path, "data-link-scope": "#page-content"
-  li.placeholder
-  li.has-dropdown data-toggle="user-menu"
-    - if current_user
-      span = current_user.name
-    - else
-      span = "Einloggen"
-    ul#user-menu.dropdown.hidden
-      - if current_user
-        li
-          = link_to "Log Out", logout_path
-        li
-          = link_to "Admin", backend_path, "data-link-scope": "#page-content"
-      - else
-        li
-          = link_to "Registrieren", signup_path
-      li
-        button [data-edit] = "[edit]"
+nav
+  ul
+    li.h1
+        = link_to "Forum", "/", "data-link-scope": "#page-content"
+    li
+      = link_to "Browse", "/categories", "data-link-scope": "#page-content"
+    li
+      = link_to "Users", users_path, "data-link-scope": "#page-content"
+    li.placeholder
+    li.has-dropdown data-toggle="user-menu"
+      img src=image_path("menu.svg")
+      ul#user-menu.dropdown.hidden.context-menu
+        - if current_user
+          li.row
+            .column
+              = link_to "Settings", backend_path, "data-link-scope": "#page-content"
+            .column
+              label
+                | manage
+                input type="checkbox" data-edit-mode=""
+          li.row
+            .column
+              = link_to current_user.name, current_user
+            .column
+              = link_to "log out", logout_path
+        - else
+          li
+            = link_to "Registrieren", signup_path

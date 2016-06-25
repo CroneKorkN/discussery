@@ -1,6 +1,5 @@
 class SettingGroupsController < ApplicationController
   before_action :set_setting_group, only: [:show, :edit, :update, :destroy]
-  layout "backend"
 
   # GET /setting_groups
   # GET /setting_groups.json

@@ -17,5 +17,5 @@
 //= require_tree ./modules
 
 $(document).ready(function(){
-  $("body").initialize();
+  $("html").initialize();
 });

@@ -2,7 +2,7 @@ class ApplicationController < ActionController::Base
   protect_from_forgery with: :exception
   helper_method :current_user, :authorize
   before_action :require_login, except: [:login, :signup]
-  layout proc { "none" if request.xhr? }
+  layout proc { false if request.xhr? }
   
   def current_user
     @current_user ||= User.find_by(id: session[:user_id])
