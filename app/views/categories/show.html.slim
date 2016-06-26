@@ -1,14 +1,19 @@
 h2
-  = editable @category, :name, trigger: :button
+  = editable @category, :name, trigger: "edit-mode"
+  .if-edit-mode
+    =< link_to "+", new_category_category_path(@category)
 
-= editable @category, :description, trigger: :button
+= editable @category, :description, trigger: "edit-mode"
 
 <!-- sub categories -->
-ul
-  = render partial: "sub_category", collection: @category.categories, as: :category
+- if @category.categories.any?
+  h3 categories
+  ul
+    = render partial: "sub_category", collection: @category.categories, as: :category
 
 <!-- topics -->
+h3 topics
 ul.topics
   = render @category.topics
   li
-    = link_to 'New Topic', new_category_topic_path(@category)
+    = link_to '+', new_category_topic_path(@category)

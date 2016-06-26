@@ -1,0 +1,11 @@
+input[type=text], input[type=password], textarea {
+  width: 100%;
+  background: none;
+  border: none;
+  font-size: 1rem;
+  background: #fed;
+}
+
+textarea {
+  min-height: 10em;
+}

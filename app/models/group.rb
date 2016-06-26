@@ -2,16 +2,20 @@ class Group < ActiveRecord::Base
   has_many :user_groups
   has_many :users,
     through: :user_groups
-  
-  has_many :member_groups,
-    through: :group_groups
-  has_many :group_roles
-  
+    
+  has_many :role_scopes
   has_many :roles,
-    through: :group_roles
+    through: :role_scopes
+  has_many :scoping_role_scopes,
+    class_name: "RoleScope"
+  has_many :scoping_roles,
+    through: :scoping_role_scopes,
+    source: :role
   
   has_many :group_groups
   has_many :groups,
+    through: :group_groups
+  has_many :member_groups,
     through: :group_groups
   
   has_many :group_memberships,

@@ -1,0 +1,27 @@
+h1 Listing role_scopes
+
+table
+  thead
+    tr
+      th Group
+      th Role
+      th Scopable
+      th Scopable type
+      th
+      th
+      th
+
+  tbody
+    - @role_scopes.each do |role_scope|
+      tr
+        td = role_scope.group
+        td = role_scope.role
+        td = role_scope.scopable_id
+        td = role_scope.scopable_type
+        td = link_to 'Show', role_scope
+        td = link_to 'Edit', edit_role_scope_path(role_scope)
+        td = link_to 'Destroy', role_scope, data: { confirm: 'Are you sure?' }, method: :delete
+
+br
+
+= link_to 'New Role scope', new_role_scope_path

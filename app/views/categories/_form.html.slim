@@ -1,0 +1,18 @@
+= form_for @category do |f|
+  - if @category.errors.any?
+    #error_explanation
+      h2 = "#{pluralize(@category.errors.count, "error")} prohibited this group from being saved:"
+      ul
+        - @category.errors.full_messages.each do |message|
+          li = message
+
+  .field
+  .row
+    .column
+      = f.text_field :name, placeholder: :name
+    .column
+      = f.label :parent_id
+      = f.collection_select(:parent_id, Category.where.not(id: @category.id), :id, :name, prompt: true, include_blank: "Root")
+  .field
+    = f.text_area :description, placeholder: :description
+  .actions = f.submit

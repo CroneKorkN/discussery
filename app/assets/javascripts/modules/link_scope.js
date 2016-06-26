@@ -3,6 +3,10 @@ $.fn.link_scope = function() {
     // supress default link action
     e.preventDefault();
     
+    // move active class
+    $("a.active").removeClass("active");
+    $(this).addClass("active");
+        
     if ($(this).attr("data-link-scope")) {
       target_id = $(this).attr("data-link-scope");
     } else {

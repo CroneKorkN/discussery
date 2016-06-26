@@ -1,7 +1,7 @@
 section.topic
   header
     h2
-      = editable @topic, :name, trigger: :button
+      = editable @topic, :name, trigger: "edit-mode"
     = pluralize @topic.posts.count, "posts"
   ul.posts
     = render @topic.posts 

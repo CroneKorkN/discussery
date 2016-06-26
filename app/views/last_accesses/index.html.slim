@@ -1,0 +1,25 @@
+h1 Listing last_accesses
+
+table
+  thead
+    tr
+      th User
+      th Topic
+      th Time
+      th
+      th
+      th
+
+  tbody
+    - @last_accesses.each do |last_access|
+      tr
+        td = last_access.user
+        td = last_access.topic
+        td = last_access.time
+        td = link_to 'Show', last_access
+        td = link_to 'Edit', edit_last_access_path(last_access)
+        td = link_to 'Destroy', last_access, data: { confirm: 'Are you sure?' }, method: :delete
+
+br
+
+= link_to 'New Last access', new_last_access_path

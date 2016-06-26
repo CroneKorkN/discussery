@@ -5,7 +5,6 @@ $.fn.toggle_menu = function() {
     } else {
       var element = $($(this).attr("data-toggle"));  
     }
-    console.log("menue toggle");
     element.toggle();
   });
 }

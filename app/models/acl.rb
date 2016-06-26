@@ -20,15 +20,14 @@ private
       visible: []
     }
     
-    # todo: group_groups permissions
     Recursion.collect_all(user.groups, :groups).each do |group|
-      group.group_roles.each do |group_role|
-        c_ids = [group_role.category.id]
-        c_ids << Recursion.collect(group_role.category, :categories).pluck(:id) if group_role.recursive
+      group.role_scopes.each do |role_scope|
+        c_ids = [role_scope.scopable.id]
+        c_ids << Recursion.collect(role_scope.scopable, :categories).pluck(:id) if role_scope.recursive
         
         c_ids.flatten.each do |c_id|
           @acl[:categories][c_id] = [] unless @acl[:categories][c_id]
-          group_role.role.permissions.each do |permission|
+          role_scope.role.permissions.each do |permission|
             @acl[:categories][c_id] << permission.action.to_sym
             @acl[:visible] << c_id if permission.action.to_sym == :read_category
           end

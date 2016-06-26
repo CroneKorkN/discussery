@@ -1,8 +1,11 @@
 Rails.application.routes.draw do
+  resources :role_scopes
+  resources :last_accesses
+  resources :contacts
   resources :group_groups
-  resources :group_roles
   root to: "users#activity"
   get 'test/new'
+  get "activity", to: "users#activity"
 
   resources :group_users
   patch "/editable", to: "editables#update"
@@ -12,7 +15,8 @@ Rails.application.routes.draw do
   
   get "/categories/manage", to: "categories#manage", as: 'manage_categories'
   resources :categories, shallow: true do
-    get "sub_categories/new", to: "categories#new", as: 'new_sub_category'
+    resources :categories
+    #get "sub_categories/new", to: "categories#new", as: 'new_sub_category'
     resources :topics, shallow: true do
       resources :posts, shallow: true do
         resources :attachments
@@ -21,8 +25,7 @@ Rails.application.routes.draw do
   end
 
   resources :users, shallow: true do
-    resources :user_roles
-    resources :user_groups
+      resources :user_groups
     resources :media
   end
   resources :roles, shallow: true do

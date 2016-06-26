@@ -1,0 +1,13 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  group: one
+  role: one
+  scopable_id: 1
+  scopable_type: 1
+
+two:
+  group: two
+  role: two
+  scopable_id: 1
+  scopable_type: 1

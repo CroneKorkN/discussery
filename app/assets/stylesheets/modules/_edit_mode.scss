@@ -1,0 +1,7 @@
+.if-edit-mode {
+  display: inline;
+}
+
+body:not(.edit-mode) .if-edit-mode {
+  display: none;
+}

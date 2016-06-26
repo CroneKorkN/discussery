@@ -14,8 +14,14 @@
 //= require jquery_ujs
 // require turbolinks
 //= require cable
+//= require initializer
 //= require_tree ./modules
 
 $(document).ready(function(){
   $("html").initialize();
+});
+
+// back button
+$(window).bind("popstate", function() {
+  $.getScript(location.href);
 });

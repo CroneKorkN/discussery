@@ -2,57 +2,30 @@
   display: flex;
   flex-direction: row;
   flex-wrap: nowrap;
+  width: 100%;
 
-  > .column {
+  > * {
     flex-basis: 0;
     flex-grow: 1;
-    padding: 0 .5rem;
-
+    _padding: 0 .5rem;
+    
     &:last-of-type {
       text-align: right;
     }
   }
   
+  > .half {
+    flex-grow: .5;
+  }
+  > .compact {
+    flex-basis: auto;
+    flex-grow: 0; 
+  }
   > .double {
     flex-grow: 2;
   }
   > .triple {
     flex-grow: 3;
   }
-  
-  
-  
-  > .one.column {
-    width: 100%/12*1;
-  }
-  > .two.columns {
-    width: 100%/12*2;
-  }
-  > .three.columns {
-    width: 100%/12*3;
-  }
-  > .four.columns {
-    width: 100%/12*4;
-  }
-  > .five.columns {
-    width: 100%/12*5;
-  }
-  > .six.columns {
-    width: 100%/12*6;
-  }
-  > .seven.columns {
-    width: 100%/12*7;
-  }
-  > .eight.columns {
-    width: 100%/12*8;
-  }
-  > .nine.columns {
-    width: 100%/12*9;
-  }
-  > .ten.columns {
-    width: 100%/12*10;
-  }
-  > .eleven.columns {
-    width: 100%/12*11;
-  }
+
 }

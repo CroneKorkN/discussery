@@ -6,10 +6,10 @@
         - @group.errors.full_messages.each do |message|
           li = message
 
+  .field.row
+    .column
+      = f.text_field :name, placeholder: :name
+    .compact.column
+      .actions = f.submit
   .field
-    = f.label :name
-    = f.text_field :name
-  .field
-    = f.label :description
-    = f.text_area :description
-  .actions = f.submit
+    = f.text_area :description, placeholder: :description

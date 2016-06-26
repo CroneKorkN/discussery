@@ -4,7 +4,7 @@ module ApplicationHelper
       method,
       display_with: nil,
       tag: :span,
-      trigger: :global
+      trigger: :"edit-mode"
     )
 
     datatype        = object.class.columns_hash[method.to_s].type

@@ -3,10 +3,18 @@ li.post class=("own" if post.user == current_user)
     .avatar
       = image_tag post.user.avatar.file.url(:thumbnail) if post.user and post.user.avatar
   .content 
-    article.speechbubble
-      = editable post, :content, trigger: :button
-      .if-editing
-        = link_to 'Destroy', post, data: {:confirm => 'Are you sure?'}, :method => :delete
+    article.speechbubble.has-dropdown
+      = editable post, :content, trigger: :"edit-mode"
+      ul.post-menu.dropdown.hidden.context-menu
+        li
+          a href="" 
+            = link_to "answer", new_topic_post_path(post.topic)
+        li
+          a href="" edit
+        li
+          a href="" report
+        li
+          = link_to 'trash', post, data: {:confirm => 'Are you sure?'}, method: :delete
     .author
       = time_ago_in_words(post.date || post.created_at)
       |  ago by

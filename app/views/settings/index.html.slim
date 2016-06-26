@@ -1,8 +1,6 @@
-h2
-  Settings
+h2 Settings
 
-ul.setting_groups
+.setting_groups
   = render @setting_groups
-
-if-editing
+.if-edit-mode
   = link_to 'New Group', new_setting_group_path

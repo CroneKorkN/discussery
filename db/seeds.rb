@@ -78,14 +78,18 @@ staff_group.group_groups.create member_group: admin_group
 staff_group.group_groups.create member_group: supermod_group
 
 # group roles
-admin_group.group_roles.create role: admin_role, category: root_category, recursive: true
-supermod_group.group_roles.create role: mod_role, category: root_category, recursive: true
-member_group.group_roles.create role: member_role, category: root_category, recursive: true
-guest_group.group_roles.create role: guest_role, category: root_category, recursive: true
-blocked_group.group_roles.create role: blocked_role, category: root_category, recursive: true
+admin_group.role_scopes.create    role: admin_role,   scopable: root_category, recursive: true
+supermod_group.role_scopes.create role: mod_role,     scopable: root_category, recursive: true
+member_group.role_scopes.create   role: member_role,  scopable: root_category, recursive: true
+guest_group.role_scopes.create    role: guest_role,   scopable: root_category, recursive: true
+blocked_group.role_scopes.create  role: blocked_role, scopable: root_category, recursive: true
 
 # users
 admin = admin_group.users.create name: "admin", password: "admin", password_confirmation: "admin", mail: "admin"
+example_user = member_group.users.create name: "Jon Doe", password: "admin", password_confirmation: "admin", mail: "jon.doe@example.com"
+
+# contacts
+admin.contact_links.create contact: example_user
 
 # setting groups
 setting_group = SettingGroup.create name: "default"

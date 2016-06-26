@@ -1,9 +1,11 @@
 li.setting
-  .name title=setting.key
-    = link_to setting.name, edit_setting_path(setting)
-  .value
-    = setting.value
-  .description
-    = setting.description
-  .delete.if-editing
-    = link_to "[x]", setting_path(setting), method: :delete, data: { confirm: 'sure?' }
+  .row
+    .col title=setting.key
+      = editable setting, :key, trigger: "edit-mode"
+    .compact.col
+      = editable setting, :value
+    .compact.col.if-edit-mode
+      | &nbsp;&nbsp;
+      = link_to "x", setting_path(setting), method: :delete, data: { confirm: 'sure?' }
+
+  = editable setting, :description, trigger: "edit-mode"

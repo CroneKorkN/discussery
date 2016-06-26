@@ -2,14 +2,14 @@
   display: flex;
   margin: 1rem 0;
 
-  /*&.own {
+  &.own {
     .info {
       order: 2;
       margin-left: 1rem;
     }
     .content {order: 1;}
-  }*/
-  &/*:not(.own)*/ {
+  }
+  &:not(.own) {
     .info {
       order: 1;
       margin-right: 1rem;
@@ -51,10 +51,18 @@
       background: white;
       border-radius: $border-radius;
       box-shadow: $shadow;
+      
+      position: relative;
+      
+      > .post-menu {
+        > li {
+        display: inline;
+        }
+      }
     }
   }
   &.new .speechbubble {
-    min-height: 3rem;
+    min-height: 2rem;
   }
 
   &.new .info .button {
@@ -71,7 +79,7 @@
   .answer {
     border: 0;
     color: #080;
-    font-size: 4rem;
+    font-size: 2rem;
     line-height: 3rem;
   }
 }

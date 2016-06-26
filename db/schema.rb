@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160623114100) do
+ActiveRecord::Schema.define(version: 20160626101041) do
 
   create_table "attachments", force: :cascade do |t|
     t.integer  "post_id"
@@ -33,6 +33,15 @@ ActiveRecord::Schema.define(version: 20160623114100) do
     t.index ["parent_id"], name: "index_categories_on_parent_id"
   end
 
+  create_table "contacts", force: :cascade do |t|
+    t.integer  "user_id"
+    t.integer  "contact_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["contact_id"], name: "index_contacts_on_contact_id"
+    t.index ["user_id"], name: "index_contacts_on_user_id"
+  end
+
   create_table "group_groups", force: :cascade do |t|
     t.integer  "group_id"
     t.integer  "member_group_id", default: 0, null: false
@@ -40,18 +49,6 @@ ActiveRecord::Schema.define(version: 20160623114100) do
     t.datetime "updated_at",                  null: false
     t.index ["group_id"], name: "index_group_groups_on_group_id"
     t.index ["member_group_id"], name: "index_group_groups_on_member_group_id"
-  end
-
-  create_table "group_roles", force: :cascade do |t|
-    t.integer  "group_id"
-    t.integer  "role_id"
-    t.integer  "category_id"
-    t.boolean  "recursive",   default: false, null: false
-    t.datetime "created_at",                  null: false
-    t.datetime "updated_at",                  null: false
-    t.index ["category_id"], name: "index_group_roles_on_category_id"
-    t.index ["group_id"], name: "index_group_roles_on_group_id"
-    t.index ["role_id"], name: "index_group_roles_on_role_id"
   end
 
   create_table "group_users", force: :cascade do |t|
@@ -69,6 +66,14 @@ ActiveRecord::Schema.define(version: 20160623114100) do
     t.datetime "created_at",  null: false
     t.datetime "updated_at",  null: false
     t.index ["name"], name: "index_groups_on_name"
+  end
+
+  create_table "last_accesses", force: :cascade do |t|
+    t.integer "user_id"
+    t.integer "topic_id"
+    t.time    "time"
+    t.index ["topic_id"], name: "index_last_accesses_on_topic_id"
+    t.index ["user_id"], name: "index_last_accesses_on_user_id"
   end
 
   create_table "media", force: :cascade do |t|
@@ -112,10 +117,20 @@ ActiveRecord::Schema.define(version: 20160623114100) do
     t.index ["role_id"], name: "index_role_permissions_on_role_id"
   end
 
+  create_table "role_scopes", force: :cascade do |t|
+    t.integer "group_id"
+    t.integer "role_id"
+    t.string  "scopable_type"
+    t.integer "scopable_id"
+    t.boolean "recursive",     default: false, null: false
+    t.index ["group_id"], name: "index_role_scopes_on_group_id"
+    t.index ["role_id"], name: "index_role_scopes_on_role_id"
+    t.index ["scopable_type", "scopable_id"], name: "index_role_scopes_on_scopable_type_and_scopable_id"
+  end
+
   create_table "roles", force: :cascade do |t|
-    t.string   "name"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.string "name", null: false
+    t.index ["name"], name: "index_roles_on_name"
   end
 
   create_table "setting_groups", force: :cascade do |t|
@@ -163,22 +178,9 @@ ActiveRecord::Schema.define(version: 20160623114100) do
     t.index ["user_id"], name: "index_user_groups_on_user_id"
   end
 
-  create_table "user_roles", force: :cascade do |t|
-    t.integer  "user_id"
-    t.integer  "role_id"
-    t.datetime "created_at",  null: false
-    t.datetime "updated_at",  null: false
-    t.integer  "category_id"
-    t.boolean  "recursive"
-    t.index ["category_id"], name: "index_user_roles_on_category_id"
-    t.index ["recursive"], name: "index_user_roles_on_recursive"
-    t.index ["role_id"], name: "index_user_roles_on_role_id"
-    t.index ["user_id"], name: "index_user_roles_on_user_id"
-  end
-
   create_table "users", force: :cascade do |t|
-    t.string   "name"
-    t.string   "mail"
+    t.string   "name",            null: false
+    t.string   "mail",            null: false
     t.string   "password"
     t.string   "password_digest"
     t.datetime "created_at",      null: false

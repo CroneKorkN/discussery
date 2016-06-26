@@ -1,0 +1,18 @@
+p#notice = notice
+
+p
+  strong Group:
+  = @role_scope.group
+p
+  strong Role:
+  = @role_scope.role
+p
+  strong Scopable:
+  = @role_scope.scopable_id
+p
+  strong Scopable type:
+  = @role_scope.scopable_type
+
+= link_to 'Edit', edit_role_scope_path(@role_scope)
+'|
+= link_to 'Back', role_scopes_path
