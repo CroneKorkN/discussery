@@ -1,8 +1,8 @@
 class Category < ActiveRecord::Base
   has_many :categories,
-    foreign_key: 'parent_id'
+    as: :parent
   has_many :topics
-  belongs_to :category, optional: true
+  belongs_to :parent, polymorphic: true, optional: true
 
   def all_categories
     @all_categories ||= Recursion.collect self, :categories

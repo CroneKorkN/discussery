@@ -91,6 +91,9 @@ example_user = member_group.users.create name: "Jon Doe", password: "admin", pas
 # contacts
 admin.contact_links.create contact: example_user
 
+# groups
+example_group = Group.create name: "Example Group"
+
 # setting groups
 setting_group = SettingGroup.create name: "default"
 
