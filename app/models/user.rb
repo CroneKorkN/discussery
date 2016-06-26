@@ -29,7 +29,7 @@ class User < ActiveRecord::Base
   end
 
   def acl
-    @acl ||= ACL.new(self)
+    ACL.new(self)
   end
 
   def categories

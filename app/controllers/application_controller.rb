@@ -8,11 +8,11 @@ class ApplicationController < ActionController::Base
     @current_user ||= User.find_by(id: session[:user_id])
   end
   
-  def authorize(action, category)
+  def authorize(action, scopable)
     begin
-      raise Exceptions::AuthorizationError.new unless current_user.acl.allows? action, category
+      raise Exceptions::AuthorizationError.new unless current_user.acl.allows? action, scopable
     rescue Exceptions::AuthorizationError
-      render text: "category #{category.id} authorization error: #{current_user.name} #{action}"
+      render text: "#{scopable.class.name} #{scopable.id} authorization error: #{current_user.name} #{action}"
     end
   end
 

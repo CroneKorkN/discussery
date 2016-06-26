@@ -31,7 +31,8 @@ class Group < ActiveRecord::Base
   after_create do
     unless self.background
       self.categories.create name: "group_#{self.id}_category"
-      admin_group = Group.create name: "group_#{self.id}_admins", background: true
+      group_admins_group = Group.create name: "group_#{self.id}_admins", background: true
+      group_admins_group.role_scopes.create role: Role.find_by(name: "admin"), scopable: self
     end
   end
 end
