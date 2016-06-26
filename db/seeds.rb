@@ -25,7 +25,7 @@ blocked_role = Role.create name: "blocked"
   "create_topic",
   "create_post",
   "read_topics",
-  "read_category",
+  "read_category"
 ].each do |action|
   Permission.create action: action
 end
@@ -76,6 +76,7 @@ blocked_group = Group.create name: "blocked"
 staff_group = Group.create(name: "staff")
 staff_group.group_groups.create member_group: admin_group
 staff_group.group_groups.create member_group: supermod_group
+example_group = Group.create name: "Example Group"
 
 # group roles
 admin_group.role_scopes.create    role: admin_role,   scopable: root_category, recursive: true
@@ -90,9 +91,6 @@ example_user = member_group.users.create name: "Jon Doe", password: "admin", pas
 
 # contacts
 admin.contact_links.create contact: example_user
-
-# groups
-example_group = Group.create name: "Example Group"
 
 # setting groups
 setting_group = SettingGroup.create name: "default"

@@ -24,4 +24,14 @@ class Group < ActiveRecord::Base
   has_many :memberships,
     through: :group_memberships,
     source: :group
+    
+  has_many :categories,
+    as: :parent
+    
+  after_create do
+    unless self.background
+      self.categories.create name: "group_#{self.id}_category"
+      admin_group = Group.create name: "group_#{self.id}_admins", background: true
+    end
+  end
 end

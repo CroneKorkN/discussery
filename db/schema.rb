@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160626134347) do
+ActiveRecord::Schema.define(version: 20160626141928) do
 
   create_table "attachments", force: :cascade do |t|
     t.integer  "post_id"
@@ -65,8 +65,10 @@ ActiveRecord::Schema.define(version: 20160626134347) do
   create_table "groups", force: :cascade do |t|
     t.string   "name"
     t.text     "description"
-    t.datetime "created_at",  null: false
-    t.datetime "updated_at",  null: false
+    t.datetime "created_at",                  null: false
+    t.datetime "updated_at",                  null: false
+    t.boolean  "background",  default: false, null: false
+    t.index ["background"], name: "index_groups_on_background"
     t.index ["name"], name: "index_groups_on_name"
   end
 
