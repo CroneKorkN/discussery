@@ -7,9 +7,8 @@
           li = message
 
   .field.row
-    .column
+    .col
       = f.text_field :name, placeholder: :name
-    .compact.column
-      .actions = f.submit
+    .actions = f.submit
   .field
     = f.text_area :description, placeholder: :description

@@ -10,22 +10,41 @@ class ACL # Access Controll List
   end
   
   def visible_categories
-    @acl[:visible]
+    @acl[:categories][:visible]
   end
 
   private
-
-  def all_memberships user
-    Recursion.collect_all(user.groups, :groups)
-  end
   
   def build_for user
-    @acl = {
-      categories: {},
-      groups: {},
-      visible: []
-    }
+    @acl = {}
     
+    scopables_of(user).each do |scopable|
+      scopable.role.permissions.each do |permission|
+        add scopable.scopable.model_name.route_key.to_sym,
+          scopable.id,
+          permission
+      end
+    end
+    
+    user.update acl_cache: @acl
+    return @acl
+  end
+  
+  def add type, id, permission  
+    @acl[type] = {} unless @acl[type]
+    if permission.action.to_sym == :read_category
+      @acl[type][:visible] = [] unless @acl[type][:visible]
+      @acl[type][:visible] << id
+      @acl[type][:visible].uniq!
+    else
+      @acl[type][id] = [] unless @acl[type][id]
+      @acl[type][id] << permission.action
+      @acl[type][id].uniq!
+    end      
+  end
+
+  def scopables_of user
+    # init
     scopable_ids = []
     
     # collect groups
@@ -37,23 +56,11 @@ class ACL # Access Controll List
         # collect affected scopables
         scopable_ids << [role_scope.scopable.id]
         scopable_ids << Recursion.collect(role_scope.scopable, scopable_type).pluck(:id) if role_scope.recursive
-        
-        # insert permissions into acl
-        scopable_ids.flatten.uniq.each do |scopable_id|
-          # scopable-key exists?
-          @acl[scopable_type][scopable_id] = [] unless @acl[scopable_type][scopable_id]
-          # insert permissions
-          role_scope.role.permissions.each do |permission|
-            @acl[scopable_type][scopable_id] << permission.action.to_sym
-            @acl[:visible] << scopable_id if permission.action.to_sym == :read_category
-          end
-        end
       end
     end
     
-    @acl[:visible].uniq!
-    user.update acl_cache: @acl
-    return @acl
+    # return
+    return RoleScope.find(scopable_ids.flatten.uniq)
   end
 
   def category_id_of object
