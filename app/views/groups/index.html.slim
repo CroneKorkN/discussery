@@ -1,4 +1,9 @@
-h2 = "groups #{link_to '+', new_group_path}".html_safe
+= render "layouts/settings_tabs"
+
+h2
+  | groups 
+  .if-edit-mode
+    = link_to '+', new_group_path
 
 ul
   = render @groups

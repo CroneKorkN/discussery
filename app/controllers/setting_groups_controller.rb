@@ -26,14 +26,10 @@ class SettingGroupsController < ApplicationController
   def create
     @setting_group = SettingGroup.new(setting_group_params)
 
-    respond_to do |format|
-      if @setting_group.save
-        format.html { redirect_to @setting_group, notice: 'Setting group was successfully created.' }
-        format.json { render :show, status: :created, location: @setting_group }
-      else
-        format.html { render :new }
-        format.json { render json: @setting_group.errors, status: :unprocessable_entity }
-      end
+    if @setting_group.save
+      redirect_to settings_path, notice: 'Setting group was successfully created.'
+    else
+      render :new
     end
   end
 
@@ -56,7 +52,7 @@ class SettingGroupsController < ApplicationController
   def destroy
     @setting_group.destroy
     respond_to do |format|
-      format.html { redirect_to setting_groups_url, notice: 'Setting group was successfully destroyed.' }
+      format.html { redirect_to settings_path, notice: 'Setting group was successfully destroyed.' }
       format.json { head :no_content }
     end
   end

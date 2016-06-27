@@ -2,11 +2,11 @@ h2
   = editable @user, :name, trigger: "edit-mode"
 
 .avatar
-  = image_tag @user.medium.file.url :thumbnail if @user.medium
+  = image_tag @user.medium.file.url(:thumbnail) if @user.medium
 
 p
   = editable @user, :mail, trigger: "edit-mode"
-  
+
 h3 activity
 = render @user.topics.uniq
 

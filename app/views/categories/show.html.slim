@@ -2,6 +2,7 @@ h2
   = editable @category, :name, trigger: "edit-mode"
   .if-edit-mode
     =< link_to "+", new_category_category_path(@category)
+    =< link_to 'x', @category, data: {confirm: 'Are you sure?'}, method: :delete
 
 = editable @category, :description, trigger: "edit-mode"
 

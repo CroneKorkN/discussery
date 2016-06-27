@@ -1,6 +1,0 @@
-h2
-  | manage categories
-  =< link_to '[+]', new_category_path
-
-ul
-  = render collection: @root_category.categories, as: :category, partial: "manage_category"

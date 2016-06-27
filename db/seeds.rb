@@ -20,23 +20,23 @@ guest_role = Role.create name: "guest"
 blocked_role = Role.create name: "blocked"
 
 # permissions
+visibility_permission = Permission.create action: :read
 [ # admin
   "admin",
   "create_topic",
   "create_post",
-  "read_topics",
-  "read_category"
+  "read_topics"
 ].each do |action|
   Permission.create action: action
 end
   
-# permissions
+# role permissions
 [ # admin
   "admin",
   "create_topic",
   "create_post",
   "read_topics",
-  "read_category",
+  "read",
 ].each do |action|
   admin_role.role_permissions.create permission: Permission[action]
 end
@@ -44,7 +44,7 @@ end
   "create_topic",
   "create_post",
   "read_topics",
-  "read_category",
+  "read",
 ].each do |action|
   mod_role.role_permissions.create permission: Permission[action]
 end
@@ -52,13 +52,13 @@ end
   "create_topic",
   "create_post",
   "read_topics",
-  "read_category",
+  "read",
 ].each do |action|
   member_role.role_permissions.create permission: Permission[action]
 end
 [ # guest
   "read_topics",
-  "read_category",
+  "read",
 ].each do |action|
   guest_role.role_permissions.create permission: Permission[action]
 end
@@ -99,6 +99,7 @@ setting_group = SettingGroup.create name: "default"
 avatar_placeholder_medium = Medium.create file: File.new("#{Rails.root}/app/assets/images/avatar.svg")
 
 # settings
+setting_group.settings.create key: "visibility_permission_id", value: visibility_permission.id
 setting_group.settings.create key: "root_category", value: root_category.id
 setting_group.settings.create key: "threads_per_page", value: 20
 setting_group.settings.create key: "admin_group_id", value: admin_group.id

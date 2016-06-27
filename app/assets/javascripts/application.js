@@ -22,6 +22,6 @@ $(document).ready(function(){
 });
 
 // back button
-$(window).bind("popstate", function() {
-  $.getScript(location.href);
+$(window).on("popstate", function(e) {
+  console.log(e.originalEvent.state);
 });

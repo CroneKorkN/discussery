@@ -52,7 +52,7 @@ class ACL # Access Controll List
     @acl[type] = {} unless @acl[type]
     @acl[type][id] = [] unless @acl[type][id]
     @acl[type][id] << permission.action.to_sym
-    if permission.action.to_sym == :see
+    if permission.action == Permission.find(Setting[:visibility_permission_id]).action
       @acl[type][:visible] = [] unless @acl[type][:visible]
       @acl[type][:visible] << id
       @acl[type][:visible].uniq!

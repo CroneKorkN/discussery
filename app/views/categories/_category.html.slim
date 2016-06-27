@@ -1,9 +1,5 @@
 forum-category
-  h2.row
-    .column
-      = link_to(category.name, category)
-    .column.if-edit-mode
-        =< link_to "+", new_category_category_path(category)
-        =< link_to "x", new_category_category_path(category)
+  h2 = link_to(category.name, category)
+
   ul
     = render collection: category.categories, as: :category, partial: "sub_category"

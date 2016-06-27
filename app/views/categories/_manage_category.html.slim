@@ -1,7 +1,7 @@
 li
   = editable category, :name, trigger: :auto
-  =< link_to '[+]', category_new_sub_category_path(category)
-  =< link_to '[x]', category, data: {:confirm => 'Are you sure?'}, :method => :delete
+  =< link_to '+', category_new_sub_category_path(category)
+  =< link_to 'x', category, data: {confirm: 'Are you sure?'}, method: :delete
   - if category.categories.any?
     ul
       = render collection: category.categories, as: :category, partial: "manage_category"
