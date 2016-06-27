@@ -1,9 +1,18 @@
-h2 = "#{editable @group, :name} group".html_safe
+h2
+  = editable @group, :name
+  | group
 p
   = editable @group, :description
   
 - if false#@group.category
   = render @group.category
+
+- if @group.topic
+  section.topic
+    ul.posts
+      = render @group.topic.posts
+      = render "posts/new"
+
   
 h3 members
 ul 

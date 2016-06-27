@@ -1,9 +1,11 @@
 Rails.application.routes.draw do
+  
+  root to: "users#activity"
+  
   resources :role_scopes
   resources :last_accesses
   resources :contacts
   resources :group_groups
-  root to: "users#activity"
   get 'test/new'
   get "activity", to: "users#activity"
 

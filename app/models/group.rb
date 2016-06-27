@@ -27,12 +27,33 @@ class Group < ActiveRecord::Base
     
   has_many :categories,
     as: :parent
-    
+  has_one :topic,
+    as: :topicable
+  
   after_create do
     unless self.background
-      self.categories.create name: "group_#{self.id}_category"
-      group_admins_group = Group.create name: "group_#{self.id}_admins", background: true
-      group_admins_group.role_scopes.create role: Role.find_by(name: "admin"), scopable: self
+      create_group_category
+      create_group_topic
+      admin_group = create_admin_group
+      make_creator_admin admin_group
     end
+  end
+  
+  private
+  
+  def create_group_category
+    self.categories.create name: "group_#{self.id}_category"
+  end
+  
+  def create_group_topic
+    self.create_topic name: "group_#{self.id}_topic"
+  end
+      
+  def create_admin_group
+    Group.create name: "group_#{self.id}_admins", background: true
+  end
+  
+  def make_creator_admin group_admin_group
+    group_admin_group.role_scopes.create role: Role.find_by(name: "admin"), scopable: self
   end
 end

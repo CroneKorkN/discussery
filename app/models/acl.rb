@@ -10,7 +10,7 @@ class ACL # Access Controll List
   end
   
   def visible_categories
-    @acl[:categories][:visible]
+    @acl[:categories][:visible]if @acl[:categories]
   end
 
   private

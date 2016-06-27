@@ -22,6 +22,10 @@ class User < ActiveRecord::Base
     through: :user_groups
   serialize :acl_cache
   
+  has_many :groups_created,
+    class_name: "Group",
+    foreign_key: :creator_id
+  
   has_secure_password validations: false
     
   def avatar

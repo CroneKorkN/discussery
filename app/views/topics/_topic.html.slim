@@ -1,3 +1,3 @@
-li
-  h3 = link_to topic.name, topic
-  = render "posts/recent", post: topic.posts.last
+h3 = link_to topic.name, topic
+ul
+  = render topic.posts
