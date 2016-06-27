@@ -1,16 +1,19 @@
 h2
-  = editable @user, :name
+  = editable @user, :name, trigger: "edit-mode"
 
-div.avatar
+.avatar
   = image_tag @user.medium.file.url :thumbnail if @user.medium
 
 p
-  = editable @user, :mail
+  = editable @user, :mail, trigger: "edit-mode"
   
-p
-  h3 media
-  = render @user.media
-  = render "media/form"
-  
-p
-  = render @user.topics.uniq
+h3 activity
+= render @user.topics.uniq
+
+h3 groups
+ul
+  = render @user.groups
+
+h3 media
+= render @user.media
+= render "media/form"

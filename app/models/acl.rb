@@ -4,9 +4,9 @@ class ACL # Access Controll List
     @acl
   end
 
-  def allows?(action, scopable)
-    scopable_type = scopable.model_name.route_key.to_sym
-    @acl[scopable_type][scopable.id] and @acl[scopable_type][scopable.id].include?(action.to_sym)
+  def allows?(action, object)
+    object_type = object.model_name.route_key.to_sym
+    @acl[object_type][object.id] and @acl[object_type][object.id].include?(action.to_sym)
   end
   
   def visible_categories
@@ -30,8 +30,10 @@ class ACL # Access Controll List
         # recursive?
         if role_scope.recursive
           affected_scopable_ids << Recursion.collect(role_scope.scopable, scopable_type).pluck(:id)
-          affected_scopable_ids.flatten.uniq!
-        end 
+          affected_scopable_ids.flatten!.uniq!
+        end
+        
+        p affected_scopable_ids
         
         # apply each permission to each affected scopable
         role_scope.role.permissions.each do |permission|
@@ -48,14 +50,14 @@ class ACL # Access Controll List
   
   def add type, id, permission  
     @acl[type] = {} unless @acl[type]
-    if permission.action.to_sym == :read_category
+    @acl[type][id] = [] unless @acl[type][id]
+    @acl[type][id] << permission.action.to_sym
+    if permission.action.to_sym == :see
       @acl[type][:visible] = [] unless @acl[type][:visible]
       @acl[type][:visible] << id
       @acl[type][:visible].uniq!
-    else
-      @acl[type][id] = [] unless @acl[type][id]
-      @acl[type][id] << permission.action
-    end      
+    end
+    return true
   end
 
   def role_scopes_of user

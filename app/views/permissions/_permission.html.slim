@@ -1,5 +1,4 @@
 li
-  = link_to permission.action, edit_permission_path(permission)
-  if-editing
-    = link_to permission, data: {confirm: 'Are you sure?'}, method: :delete do
-      button löschen
+  = editable permission, :action, trigger: "edit-mode"
+  .if-edit-mode
+    =< link_to "x", permission, data: {confirm: 'Are you sure?'}, method: :delete

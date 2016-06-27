@@ -7,18 +7,9 @@ class PermissionsController < ApplicationController
     @permissions = Permission.all
   end
 
-  # GET /permissions/1
-  # GET /permissions/1.json
-  def show
-  end
-
   # GET /permissions/new
   def new
     @permission = Permission.new
-  end
-
-  # GET /permissions/1/edit
-  def edit
   end
 
   # POST /permissions
@@ -28,8 +19,8 @@ class PermissionsController < ApplicationController
 
     respond_to do |format|
       if @permission.save
-        format.html { redirect_to @permission, notice: 'Permission was successfully created.' }
-        format.json { render :show, status: :created, location: @permission }
+        format.html { redirect_to permissions_path, notice: 'Permission was successfully created.' }
+        format.json { render :show, status: :created, location: permissions_path }
       else
         format.html { render :new }
         format.json { render json: @permission.errors, status: :unprocessable_entity }

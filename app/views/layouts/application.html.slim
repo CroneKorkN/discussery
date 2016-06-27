@@ -1,8 +1,7 @@
 doctype html
 html
   head
-    title 
-      | Forum
+    title Freibrief.net
     = stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true
     = javascript_include_tag 'application', 'data-turbolinks-track' => true
     = csrf_meta_tags
@@ -17,7 +16,6 @@ html
         nav.nav
           = render "pagination"
         #page-content
-          = "MMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMM" if request.xhr?
           = yield
     footer.footer
       .wrapper

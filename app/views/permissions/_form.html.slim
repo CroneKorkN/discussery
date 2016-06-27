@@ -6,8 +6,8 @@
         - @permission.errors.full_messages.each do |message|
           li = message
 
-  .field
-    = f.text_field :action, placeholder: "action"
-    = f.text_field :controller, placeholder: "Controller"
+  .row
+    .field
+      = f.text_field :action, placeholder: "action"
     
-  .actions = f.submit
+    .actions = f.submit
