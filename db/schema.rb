@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160627223036) do
+ActiveRecord::Schema.define(version: 20160627232229) do
 
   create_table "attachments", force: :cascade do |t|
     t.integer  "post_id"
@@ -91,6 +91,16 @@ ActiveRecord::Schema.define(version: 20160627223036) do
     t.integer  "file_file_size"
     t.datetime "file_updated_at"
     t.index ["user_id"], name: "index_media_on_user_id"
+  end
+
+  create_table "memberships", force: :cascade do |t|
+    t.string   "member_type"
+    t.integer  "member_id"
+    t.integer  "group_id"
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
+    t.index ["group_id"], name: "index_memberships_on_group_id"
+    t.index ["member_type", "member_id"], name: "index_memberships_on_member_type_and_member_id"
   end
 
   create_table "permissions", force: :cascade do |t|

@@ -1,0 +1,12 @@
+p#notice = notice
+
+p
+  strong Member:
+  = @membership.member
+p
+  strong Group:
+  = @membership.group
+
+= link_to 'Edit', edit_membership_path(@membership)
+'|
+= link_to 'Back', memberships_path

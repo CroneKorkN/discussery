@@ -82,13 +82,14 @@ supermod_group = system_user.groups_created.create name: "supermods"
 member_group = system_user.groups_created.create name: "members"
 guest_group = system_user.groups_created.create name: "guests"
 blocked_group = system_user.groups_created.create name: "blocked"
-staff_group = system_user.groups_created.create name: "staff"
-staff_group.group_groups.create member_group: admin_group
-staff_group.group_groups.create member_group: supermod_group
 example_group = example_user.groups_created.create name: "Example Group"
+staff_group = system_user.groups_created.create name: "staff"
+staff_group.memberships.create member: admin_group
+staff_group.memberships.create member: supermod_group
 
 # user groups
-admin_group.user_groups.create user: admin_user
+admin_group.memberships.create member: admin_user
+member_group.memberships.create member: example_user
 
 # group roles
 admin_group.role_scopes.create    role: admin_role,   scopable: root_category, recursive: true
@@ -106,7 +107,6 @@ setting_group = SettingGroup.create name: "default"
 # settings
 {
   visibility_permission_id: visibility_permission.id,
-  root_category: root_category.id,
   threads_per_page: 20,
   admin_group_id: admin_group.id,
   member_group_id: member_group.id,
@@ -116,7 +116,6 @@ setting_group = SettingGroup.create name: "default"
 }.each do |key, value|
   setting_group.settings.create key: key, value: value
 end
-
 
 # threads
 example_topic = example_category.topics.create user: admin_user, name: "hello world!"

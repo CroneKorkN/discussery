@@ -1,7 +1,6 @@
 class User < ActiveRecord::Base
   # content
   has_many :topics
-
   has_many :posts
   has_many :answered_topics,
            through: :posts,
@@ -17,14 +16,21 @@ class User < ActiveRecord::Base
     through: :contact_links,
     class_name: "User",
     primary_key: :contact_id
-  has_many :user_groups
+
+  has_many :groups_created,
+    foreign_key: :creator_id,
+    class_name: "Group"
+
+  has_many :memberships,
+    as: :member
   has_many :groups,
-    through: :user_groups
+    through: :memberships
+  has_many :group_chats,
+    through: :groups,
+    source: :topic
+
   serialize :acl_cache
   
-  has_many :groups_created,
-    class_name: "Group",
-    foreign_key: :creator_id
   
   has_secure_password validations: false
     
@@ -41,6 +47,6 @@ class User < ActiveRecord::Base
   end
   
   def activities
-    answered_topics.uniq
+    (answered_topics + group_chats).uniq
   end
 end

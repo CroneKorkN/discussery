@@ -9,7 +9,7 @@ class Setting < ActiveRecord::Base
       @@cache[key] = setting.value
       return setting.value
     else
-      raise "Setting '#{setting_key}' not found."
+      raise "Setting '#{key}' not found."
     end
   end
   
@@ -18,7 +18,7 @@ class Setting < ActiveRecord::Base
     if setting = find_by_key(key)
       setting.update(value: value)
     else
-      raise "Setting '#{setting_key}' not found."
+      raise "Setting '#{key}' not found."
     end    
   end
 end

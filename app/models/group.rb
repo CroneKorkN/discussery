@@ -12,16 +12,14 @@ class Group < ActiveRecord::Base
     through: :scoping_role_scopes,
     source: :role
   
+  # has members
   has_many :group_groups
   has_many :groups,
     through: :group_groups
-  has_many :member_groups,
-    through: :group_groups
   
-  has_many :group_memberships,
-    class_name: "GroupGroup",
-    foreign_key: :member_group_id
-  has_many :memberships,
+  # is member
+  has_many :memberships
+  has_many :in_groups,
     through: :group_memberships,
     source: :group
     

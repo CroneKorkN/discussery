@@ -8,7 +8,8 @@ p
   = editable @user, :mail, trigger: "edit-mode"
 
 h3 activity
-= render @user.topics.uniq
+ul
+  = render partial: "activity", collection: current_user.activities, as: :activity
 
 h3 groups
 ul

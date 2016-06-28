@@ -1,5 +1,6 @@
 Rails.application.routes.draw do
   
+  resources :memberships
   root to: "users#activity"
   
   resources :role_scopes
