@@ -1,12 +1,12 @@
 class Group < ActiveRecord::Base    
-  has_many :role_scopes
-  has_many :roles,
-    through: :role_scopes
-  has_many :scoping_role_scopes,
-    class_name: "RoleScope"
+  has_many :roles
+  has_many :role_types,
+    through: :roles
   has_many :scoping_roles,
-    through: :scoping_role_scopes,
-    source: :role
+    class_name: "Role"
+  has_many :scoping_role_types,
+    through: :scoping_roles,
+    source: :role_type
   
   # memberships
   has_many :is_member_of,
@@ -62,6 +62,6 @@ class Group < ActiveRecord::Base
   end
   
   def make_creator_admin group_admin_group
-    group_admin_group.role_scopes.create role: Role.find_by(name: "admin"), scopable: self
+    group_admin_group.roles.create role_type: RoleType.find_by(name: "admin"), scopable: self
   end
 end

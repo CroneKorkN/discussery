@@ -2,12 +2,12 @@
 
 one:
   group: one
-  role: one
+  role_type: one
   scopable_id: 1
   scopable_type: 1
 
 two:
   group: two
-  role: two
+  role_type: two
   scopable_id: 1
   scopable_type: 1

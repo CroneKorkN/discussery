@@ -1,48 +1,48 @@
 require 'test_helper'
 
-class RoleScopesControllerTest < ActionDispatch::IntegrationTest
+class RolesControllerTest < ActionDispatch::IntegrationTest
   setup do
-    @role_scope = role_scopes(:one)
+    @role = roles(:one)
   end
 
   test "should get index" do
-    get role_scopes_url
+    get roles_url
     assert_response :success
   end
 
   test "should get new" do
-    get new_role_scope_url
+    get new_role_url
     assert_response :success
   end
 
-  test "should create role_scope" do
-    assert_difference('RoleScope.count') do
-      post role_scopes_url, params: { role_scope: { group_id: @role_scope.group_id, role_id: @role_scope.role_id, scopable_id: @role_scope.scopable_id, scopable_type: @role_scope.scopable_type } }
+  test "should create role" do
+    assert_difference('Role.count') do
+      post roles_url, params: { role: { group_id: @role.group_id, role_type_id: @role.role_type_id, scopable_id: @role.scopable_id, scopable_type: @role.scopable_type } }
     end
 
-    assert_redirected_to role_scope_url(RoleScope.last)
+    assert_redirected_to role_url(Role.last)
   end
 
-  test "should show role_scope" do
-    get role_scope_url(@role_scope)
+  test "should show role" do
+    get role_url(@role)
     assert_response :success
   end
 
   test "should get edit" do
-    get edit_role_scope_url(@role_scope)
+    get edit_role_url(@role)
     assert_response :success
   end
 
-  test "should update role_scope" do
-    patch role_scope_url(@role_scope), params: { role_scope: { group_id: @role_scope.group_id, role_id: @role_scope.role_id, scopable_id: @role_scope.scopable_id, scopable_type: @role_scope.scopable_type } }
-    assert_redirected_to role_scope_url(@role_scope)
+  test "should update role" do
+    patch role_url(@role), params: { role: { group_id: @role.group_id, role_type_id: @role.role_type_id, scopable_id: @role.scopable_id, scopable_type: @role.scopable_type } }
+    assert_redirected_to role_url(@role)
   end
 
-  test "should destroy role_scope" do
-    assert_difference('RoleScope.count', -1) do
-      delete role_scope_url(@role_scope)
+  test "should destroy role" do
+    assert_difference('Role.count', -1) do
+      delete role_url(@role)
     end
 
-    assert_redirected_to role_scopes_url
+    assert_redirected_to roles_url
   end
 end

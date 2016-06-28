@@ -2,10 +2,10 @@ rails g scaffold user       name:string:index mail:string:index password:string 
 rails g scaffold category   name:string:index description:text parent_id:integer:index
 rails g scaffold topic      name:string:index category:references user:references
 rails g scaffold post       content:text content_searchable:text topic:references user:references date:datetime:index
-rails g scaffold role       name:string
+rails g scaffold role_type       name:string
 rails g scaffold permission_type permissible_type:string:index permissible_id:integer:index action:string
-rails g scaffold permission role:references permission_type:references
-rails g scaffold user_role  user:references role:references scopable_type:string:index scopable_id:integer:index
+rails g scaffold permission role_type:references permission_type:references
+rails g scaffold user_role_type  user:references role_type:references scopable_type:string:index scopable_id:integer:index
 rails g scaffold medium     type:string location:string
 rails g scaffold attachment post:references medium:references
 rails g scaffold setting_group name:string:index setting_group:references

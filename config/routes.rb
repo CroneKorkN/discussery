@@ -3,7 +3,7 @@ Rails.application.routes.draw do
   resources :memberships
   root to: "users#activity"
   
-  resources :role_scopes
+  resources :roles
   resources :last_accesses
   resources :contacts
   resources :group_groups
@@ -31,7 +31,7 @@ Rails.application.routes.draw do
       resources :user_groups
     resources :media
   end
-  resources :roles, shallow: true do
+  resources :role_types, shallow: true do
     resources :permissions
   end
   resources :permission_types

@@ -93,13 +93,13 @@ ActiveRecord::Schema.define(version: 20160627232229) do
   end
 
   create_table "permissions", force: :cascade do |t|
-    t.integer  "role_id"
+    t.integer  "role_type_id"
     t.integer  "permission_type_id"
     t.datetime "created_at",                         null: false
     t.datetime "updated_at",                         null: false
     t.boolean  "denied",             default: false, null: false
     t.index ["permission_type_id"], name: "index_permissions_on_permission_type_id"
-    t.index ["role_id"], name: "index_permissions_on_role_id"
+    t.index ["role_type_id"], name: "index_permissions_on_role_type_id"
   end
 
   create_table "posts", force: :cascade do |t|
@@ -115,20 +115,20 @@ ActiveRecord::Schema.define(version: 20160627232229) do
     t.index ["user_id"], name: "index_posts_on_user_id"
   end
 
-  create_table "role_scopes", force: :cascade do |t|
-    t.integer "group_id"
-    t.integer "role_id"
-    t.string  "scopable_type"
-    t.integer "scopable_id"
-    t.boolean "recursive",     default: false, null: false
-    t.index ["group_id"], name: "index_role_scopes_on_group_id"
-    t.index ["role_id"], name: "index_role_scopes_on_role_id"
-    t.index ["scopable_type", "scopable_id"], name: "index_role_scopes_on_scopable_type_and_scopable_id"
+  create_table "role_types", force: :cascade do |t|
+    t.string "name", null: false
+    t.index ["name"], name: "index_role_types_on_name"
   end
 
   create_table "roles", force: :cascade do |t|
-    t.string "name", null: false
-    t.index ["name"], name: "index_roles_on_name"
+    t.integer "group_id"
+    t.integer "role_type_id"
+    t.string  "scopable_type"
+    t.integer "scopable_id"
+    t.boolean "recursive",     default: false, null: false
+    t.index ["group_id"], name: "index_roles_on_group_id"
+    t.index ["role_type_id"], name: "index_roles_on_role_type_id"
+    t.index ["scopable_type", "scopable_id"], name: "index_roles_on_scopable_type_and_scopable_id"
   end
 
   create_table "setting_groups", force: :cascade do |t|

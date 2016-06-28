@@ -12,12 +12,12 @@ discussion_category = root_category.categories.create name: "Discussions"
 example_category = discussion_category.categories.create name: "Politics"
 discussion_category.categories.create name: "Science"
 
-# roles
-admin_role = Role.create name: "admin"
-mod_role = Role.create name: "mod"
-member_role = Role.create name: "user"
-guest_role = Role.create name: "guest"
-blocked_role = Role.create name: "blocked"
+# role_types
+admin_role_type = RoleType.create name: "admin"
+mod_role_type = RoleType.create name: "mod"
+member_role_type = RoleType.create name: "user"
+guest_role_type = RoleType.create name: "guest"
+blocked_role_type = RoleType.create name: "blocked"
 
 # permission_types
 visibility_permission_type = PermissionType.create action: :read
@@ -30,7 +30,7 @@ visibility_permission_type = PermissionType.create action: :read
   PermissionType.create action: action
 end
   
-# role permission_types
+# role_type permission_types
 [ # admin
   "admin",
   "create_topic",
@@ -38,7 +38,7 @@ end
   "read_topics",
   "read",
 ].each do |action|
-  admin_role.permissions.create permission_type: PermissionType[action]
+  admin_role_type.permissions.create permission_type: PermissionType[action]
 end
 [ # mod
   "create_topic",
@@ -46,7 +46,7 @@ end
   "read_topics",
   "read",
 ].each do |action|
-  mod_role.permissions.create permission_type: PermissionType[action]
+  mod_role_type.permissions.create permission_type: PermissionType[action]
 end
 [ # member
   "create_topic",
@@ -54,17 +54,17 @@ end
   "read_topics",
   "read",
 ].each do |action|
-  member_role.permissions.create permission_type: PermissionType[action]
+  member_role_type.permissions.create permission_type: PermissionType[action]
 end
 [ # guest
   "read_topics",
   "read",
 ].each do |action|
-  guest_role.permissions.create permission_type: PermissionType[action]
+  guest_role_type.permissions.create permission_type: PermissionType[action]
 end
 
 PermissionType.all.each do |permission_type|
-  blocked_role.permissions.create permission_type: permission_type, denied: true
+  blocked_role_type.permissions.create permission_type: permission_type, denied: true
 end
 
 # users
@@ -91,12 +91,12 @@ staff_group.has_members.create member: supermod_group
 admin_group.has_members.create member: admin_user
 member_group.has_members.create member: example_user
 
-# group roles
-admin_group.role_scopes.create    role: admin_role,   scopable: root_category, recursive: true
-supermod_group.role_scopes.create role: mod_role,     scopable: root_category, recursive: true
-member_group.role_scopes.create   role: member_role,  scopable: root_category, recursive: true
-guest_group.role_scopes.create    role: guest_role,   scopable: root_category, recursive: true
-blocked_group.role_scopes.create  role: blocked_role, scopable: root_category, recursive: true
+# group role_types
+admin_group.roles.create    role_type: admin_role_type,   scopable: root_category, recursive: true
+supermod_group.roles.create role_type: mod_role_type,     scopable: root_category, recursive: true
+member_group.roles.create   role_type: member_role_type,  scopable: root_category, recursive: true
+guest_group.roles.create    role_type: guest_role_type,   scopable: root_category, recursive: true
+blocked_group.roles.create  role_type: blocked_role_type, scopable: root_category, recursive: true
 
 # media
 avatar_placeholder_medium = Medium.create file: File.new("#{Rails.root}/app/assets/images/avatar.svg")

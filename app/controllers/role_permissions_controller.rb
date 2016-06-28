@@ -28,7 +28,7 @@ class PermissionsController < ApplicationController
 
     respond_to do |format|
       if @permission.save
-        format.html { redirect_to @permission, notice: 'Role permission_type was successfully created.' }
+        format.html { redirect_to @permission, notice: 'RoleType permission_type was successfully created.' }
         format.json { render :show, status: :created, location: @permission }
       else
         format.html { render :new }
@@ -42,7 +42,7 @@ class PermissionsController < ApplicationController
   def update
     respond_to do |format|
       if @permission.update(permission_params)
-        format.html { redirect_to @permission, notice: 'Role permission_type was successfully updated.' }
+        format.html { redirect_to @permission, notice: 'RoleType permission_type was successfully updated.' }
         format.json { render :show, status: :ok, location: @permission }
       else
         format.html { render :edit }
@@ -56,7 +56,7 @@ class PermissionsController < ApplicationController
   def destroy
     @permission.destroy
     respond_to do |format|
-      format.html { redirect_to permissions_url, notice: 'Role permission_type was successfully destroyed.' }
+      format.html { redirect_to permissions_url, notice: 'RoleType permission_type was successfully destroyed.' }
       format.json { head :no_content }
     end
   end
@@ -69,6 +69,6 @@ class PermissionsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def permission_params
-      params.require(:permission).permit(:role_id, :permission_type_id, :grant)
+      params.require(:permission).permit(:role_type_id, :permission_type_id, :grant)
     end
 end

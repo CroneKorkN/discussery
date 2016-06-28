@@ -1,10 +1,10 @@
-<%= form_for(@role) do |f| %>
-  <% if @role.errors.any? %>
+<%= form_for(@role_type) do |f| %>
+  <% if @role_type.errors.any? %>
     <div id="error_explanation">
-      <h2><%= pluralize(@role.errors.count, "error") %> prohibited this role from being saved:</h2>
+      <h2><%= pluralize(@role_type.errors.count, "error") %> prohibited this role_type from being saved:</h2>
 
       <ul>
-      <% @role.errors.full_messages.each do |message| %>
+      <% @role_type.errors.full_messages.each do |message| %>
         <li><%= message %></li>
       <% end %>
       </ul>
@@ -17,7 +17,7 @@
   </div>
   
   <% PermissionType.all.each do |permission_type| %>
-      <%= check_box_tag :permission_type_ids, permission_type.id, @role.permission_types.include?(permission_type), name: 'role[permission_type_ids][]' %>
+      <%= check_box_tag :permission_type_ids, permission_type.id, @role_type.permission_types.include?(permission_type), name: 'role_type[permission_type_ids][]' %>
       <%= label_tag :permission_type_ids, "#{permission_type.action}" %><br>
   <% end %>
   
