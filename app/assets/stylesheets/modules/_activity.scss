@@ -1,0 +1,15 @@
+.activities {
+  padding: 0;
+  
+  .activity {
+    list-style-type: none;
+    box-shadow: $shadow;
+    background: white;
+    padding: .5rem 1rem;
+    margin-bottom: 1rem;
+    
+    h3 {
+      margin: 0;
+    }
+  }
+}

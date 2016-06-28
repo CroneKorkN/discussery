@@ -125,7 +125,7 @@ ActiveRecord::Schema.define(version: 20160627232229) do
     t.integer "role_type_id"
     t.string  "permittable_type"
     t.integer "permittable_id"
-    t.boolean "recursive",    default: false, null: false
+    t.boolean "recursive",        default: false, null: false
     t.index ["group_id"], name: "index_roles_on_group_id"
     t.index ["permittable_type", "permittable_id"], name: "index_roles_on_permittable_type_and_permittable_id"
     t.index ["role_type_id"], name: "index_roles_on_role_type_id"

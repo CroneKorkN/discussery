@@ -54,29 +54,8 @@
      inkscape:groupmode="layer"
      id="layer1"
      transform="translate(0,-1014.3622)">
-    <rect
-       style="fill:#000000;fill-opacity:1;stroke:#000000;stroke-width:0;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
-       id="rect3346"
-       width="43.999981"
-       height="3.9999919"
-       x="56.568546"
-       y="1014.6144" />
-    <rect
-       style="fill:#000000;fill-opacity:1;stroke:#000000;stroke-width:0;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
-       id="rect3346-3"
-       width="43.999985"
-       height="3.9999919"
-       x="56.56855"
-       y="1031.6147" />
-    <rect
-       style="fill:#000000;fill-opacity:1;stroke:#000000;stroke-width:0;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
-       id="rect3346-6"
-       width="43.999981"
-       height="3.9999919"
-       x="56.56855"
-       y="1048.6147" />
     <circle
-       style="fill:#ffffff;fill-opacity:1;stroke:#000000;stroke-width:3.5;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
+       style="fill:none;fill-opacity:1;stroke:#000000;stroke-width:3.5;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
        id="path3385"
        cx="-19.875"
        cy="1026.5408"

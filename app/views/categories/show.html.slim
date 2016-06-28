@@ -13,8 +13,9 @@ h2
     = render partial: "sub_category", collection: @category.categories, as: :category
 
 <!-- topics -->
-h3 topics
-ul.topics
-  = render @category.topics
-  li
-    = link_to '+', new_category_topic_path(@category)
+h3
+  | topics 
+  = link_to '+', new_category_topic_path(@category)
+  
+ul.topics.activities
+  = render partial: "users/activity", collection: @category.topics, as: :activity
