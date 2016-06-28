@@ -1,4 +1,4 @@
 li
-  = editable permission, :action, trigger: "edit-mode"
+  = editable permission_type, :action, trigger: "edit-mode"
   .if-edit-mode
-    =< link_to "x", permission, data: {confirm: 'Are you sure?'}, method: :delete
+    =< link_to "x", permission_type, data: {confirm: 'Are you sure?'}, method: :delete

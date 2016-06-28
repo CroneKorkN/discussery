@@ -8,11 +8,11 @@ ul
 
         
         
-h2 Permissions
+h2 PermissionTypes
 
 ul
-  = render @permissions
+  = render @permission_types
   if-editing
     li
-      =< link_to '[+]', new_permission_path
+      =< link_to '[+]', new_permission_type_path
   

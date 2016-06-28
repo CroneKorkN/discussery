@@ -20,7 +20,7 @@ class ACL # Access Controll List
     # collect groups
     Recursion.collect_all(user.groups, :memberships).each do |group|
       group.role_scopes.each do |role_scope|
-        # category- or group-permission?
+        # category- or group-permission_type?
         scopable_type = role_scope.scopable.model_name.route_key.to_sym
         
         
@@ -34,10 +34,10 @@ class ACL # Access Controll List
         
         p affected_scopable_ids
         
-        # apply each permission to each affected scopable
-        role_scope.role.permissions.each do |permission|
+        # apply each permission_type to each affected scopable
+        role_scope.role.permission_types.each do |permission_type|
           affected_scopable_ids.each do |id|
-            add role_scope.scopable.model_name.route_key.to_sym, id, permission
+            add role_scope.scopable.model_name.route_key.to_sym, id, permission_type
           end
         end
       end
@@ -47,11 +47,11 @@ class ACL # Access Controll List
     return @acl
   end
   
-  def add type, id, permission  
+  def add type, id, permission_type  
     @acl[type] = {} unless @acl[type]
     @acl[type][id] = [] unless @acl[type][id]
-    @acl[type][id] << permission.action.to_sym
-    if permission.action == Permission.find(Setting[:visibility_permission_id]).action
+    @acl[type][id] << permission_type.action.to_sym
+    if permission_type.action == PermissionType.find(Setting[:visibility_permission_type_id]).action
       @acl[type][:visible] = [] unless @acl[type][:visible]
       @acl[type][:visible] << id
       @acl[type][:visible].uniq!
@@ -66,7 +66,7 @@ class ACL # Access Controll List
     # collect groups
     Recursion.collect_all(user.groups, :groups).each do |group|
       group.role_scopes.each do |role_scope|
-        # category- or group-permission?
+        # category- or group-permission_type?
         scopable_type = role_scope.scopable.model_name.route_key.to_sym
         
         # collect affected scopables

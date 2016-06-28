@@ -1,12 +1,11 @@
 class CreatePermissions < ActiveRecord::Migration
   def change
     create_table :permissions do |t|
-      t.string :controller
-      t.string :action
+      t.references :role, index: true, foreign_key: true
+      t.references :permission_type, index: true, foreign_key: true
+      t.integer :grant
 
       t.timestamps null: false
     end
-    add_index :permissions, :controller
-    add_index :permissions, :action
   end
 end

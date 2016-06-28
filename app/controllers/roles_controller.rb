@@ -6,7 +6,7 @@ class RolesController < ApplicationController
   def index
     #authorize :admin
     @roles = Role.all
-    @permissions = Permission.all
+    @permission_types = PermissionType.all
   end
 
   # GET /roles/1
@@ -71,6 +71,6 @@ class RolesController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def role_params
-      params.require(:role).permit(:name, permission_ids: [])
+      params.require(:role).permit(:name, permission_type_ids: [])
     end
 end

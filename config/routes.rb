@@ -32,9 +32,9 @@ Rails.application.routes.draw do
     resources :media
   end
   resources :roles, shallow: true do
-    resources :role_permissions
+    resources :permissions
   end
-  resources :permissions
+  resources :permission_types
     
   resources :sessions, only: [:new, :create, :destroy]
   get 'signup', to: 'users#new', as: 'signup'

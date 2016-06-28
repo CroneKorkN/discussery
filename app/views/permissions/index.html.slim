@@ -1,9 +1,9 @@
 = render "layouts/settings_tabs"
 
 h2
-  |Permissions
+  |PermissionTypes
   .if-edit-mode
-    =< link_to '+', new_permission_path
+    =< link_to '+', new_permission_type_path
   
 ul
-  = render @permissions
+  = render @permission_types

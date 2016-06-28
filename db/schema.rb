@@ -85,11 +85,21 @@ ActiveRecord::Schema.define(version: 20160627232229) do
     t.index ["member_type", "member_id"], name: "index_memberships_on_member_type_and_member_id"
   end
 
-  create_table "permissions", force: :cascade do |t|
+  create_table "permission_types", force: :cascade do |t|
     t.string   "action"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["action"], name: "index_permissions_on_action"
+    t.index ["action"], name: "index_permission_types_on_action"
+  end
+
+  create_table "permissions", force: :cascade do |t|
+    t.integer  "role_id"
+    t.integer  "permission_type_id"
+    t.datetime "created_at",                         null: false
+    t.datetime "updated_at",                         null: false
+    t.boolean  "denied",             default: false, null: false
+    t.index ["permission_type_id"], name: "index_permissions_on_permission_type_id"
+    t.index ["role_id"], name: "index_permissions_on_role_id"
   end
 
   create_table "posts", force: :cascade do |t|
@@ -103,16 +113,6 @@ ActiveRecord::Schema.define(version: 20160627232229) do
     t.index ["date"], name: "index_posts_on_date"
     t.index ["topic_id"], name: "index_posts_on_topic_id"
     t.index ["user_id"], name: "index_posts_on_user_id"
-  end
-
-  create_table "role_permissions", force: :cascade do |t|
-    t.integer  "role_id"
-    t.integer  "permission_id"
-    t.datetime "created_at",                    null: false
-    t.datetime "updated_at",                    null: false
-    t.boolean  "denied",        default: false, null: false
-    t.index ["permission_id"], name: "index_role_permissions_on_permission_id"
-    t.index ["role_id"], name: "index_role_permissions_on_role_id"
   end
 
   create_table "role_scopes", force: :cascade do |t|

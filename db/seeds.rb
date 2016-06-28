@@ -19,18 +19,18 @@ member_role = Role.create name: "user"
 guest_role = Role.create name: "guest"
 blocked_role = Role.create name: "blocked"
 
-# permissions
-visibility_permission = Permission.create action: :read
+# permission_types
+visibility_permission_type = PermissionType.create action: :read
 [ # admin
   "admin",
   "create_topic",
   "create_post",
   "read_topics"
 ].each do |action|
-  Permission.create action: action
+  PermissionType.create action: action
 end
   
-# role permissions
+# role permission_types
 [ # admin
   "admin",
   "create_topic",
@@ -38,7 +38,7 @@ end
   "read_topics",
   "read",
 ].each do |action|
-  admin_role.role_permissions.create permission: Permission[action]
+  admin_role.permissions.create permission_type: PermissionType[action]
 end
 [ # mod
   "create_topic",
@@ -46,7 +46,7 @@ end
   "read_topics",
   "read",
 ].each do |action|
-  mod_role.role_permissions.create permission: Permission[action]
+  mod_role.permissions.create permission_type: PermissionType[action]
 end
 [ # member
   "create_topic",
@@ -54,17 +54,17 @@ end
   "read_topics",
   "read",
 ].each do |action|
-  member_role.role_permissions.create permission: Permission[action]
+  member_role.permissions.create permission_type: PermissionType[action]
 end
 [ # guest
   "read_topics",
   "read",
 ].each do |action|
-  guest_role.role_permissions.create permission: Permission[action]
+  guest_role.permissions.create permission_type: PermissionType[action]
 end
 
-Permission.all.each do |permission|
-  blocked_role.role_permissions.create permission: permission, denied: true
+PermissionType.all.each do |permission_type|
+  blocked_role.permissions.create permission_type: permission_type, denied: true
 end
 
 # users
@@ -106,7 +106,7 @@ setting_group = SettingGroup.create name: "default"
 
 # settings
 {
-  visibility_permission_id: visibility_permission.id,
+  visibility_permission_type_id: visibility_permission_type.id,
   threads_per_page: 20,
   admin_group_id: admin_group.id,
   member_group_id: member_group.id,
