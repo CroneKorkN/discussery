@@ -2,6 +2,7 @@ class Group < ActiveRecord::Base
   has_many :roles
   has_many :role_types,
     through: :roles
+    
   has_many :scoping_roles,
     class_name: "Role"
   has_many :scoping_role_types,
@@ -28,20 +29,22 @@ class Group < ActiveRecord::Base
     through: :has_members,
     source: :member,
     source_type: Group
-  
   def members
     member_users + member_groups
   end
   
   has_many :categories,
     as: :parent
-  has_one :topic,
-    as: :topicable
+  has_many :posts,
+    through: :categories
+  def category
+    categories.first
+  end
+  
   
   after_create do
     unless self.background
-      create_group_category
-      create_group_topic
+      create_group_category.posts.create content: "hallo", user: User.first
       admin_group = create_admin_group
       make_creator_admin admin_group
     end
@@ -51,10 +54,6 @@ class Group < ActiveRecord::Base
   
   def create_group_category
     self.categories.create name: "group_#{self.id}_category"
-  end
-  
-  def create_group_topic
-    self.create_topic name: "group_#{self.id}_topic"
   end
       
   def create_admin_group

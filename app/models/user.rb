@@ -3,8 +3,13 @@ class User < ActiveRecord::Base
   has_many :topics
   has_many :posts
   has_many :answered_topics,
-           through: :posts,
-           source: :topic
+    through: :posts,
+    source: :postable,
+    source_type: "Topic"
+  has_many :answered_groups,
+    through: :posts,
+    source: :postable,
+    source_type: "Group"
   has_many :media
   has_many :attachments
   belongs_to :medium, optional: true
@@ -47,6 +52,6 @@ class User < ActiveRecord::Base
   end
   
   def activities
-    (answered_topics + group_chats).uniq
+    (answered_topics + answered_groups).uniq
   end
 end

@@ -4,19 +4,20 @@ h2
 p
   = editable @group, :description
   
-- if false#@group.category
+- if @group.category
+-if false
   = render @group.category
 
-- if @group.topic
+- if @group.category
   section.topic
     ul.posts
-      = render @group.topic.posts
-      = render "posts/new"
+      = render @group.posts
+      = render "posts/new", postable: @group
 
   
 h3 members
 ul 
   - @group.member_groups.each do |group|
     li = link_to group.name, group
-  - @group.users.each do |user|
+  - @group.members.each do |user|
     li = link_to user.name, user

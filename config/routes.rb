@@ -4,6 +4,7 @@ Rails.application.routes.draw do
   root to: "users#activity"
   
   resources :roles
+  resources :posts
   resources :last_accesses
   resources :contacts
   resources :group_groups

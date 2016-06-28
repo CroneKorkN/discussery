@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160627232229) do
+ActiveRecord::Schema.define(version: 20160628125226) do
 
   create_table "attachments", force: :cascade do |t|
     t.integer  "post_id"
@@ -105,13 +105,14 @@ ActiveRecord::Schema.define(version: 20160627232229) do
   create_table "posts", force: :cascade do |t|
     t.text     "content"
     t.text     "content_searchable"
-    t.integer  "topic_id"
     t.integer  "user_id"
     t.datetime "date"
     t.datetime "created_at",         null: false
     t.datetime "updated_at",         null: false
+    t.string   "postable_type"
+    t.integer  "postable_id"
     t.index ["date"], name: "index_posts_on_date"
-    t.index ["topic_id"], name: "index_posts_on_topic_id"
+    t.index ["postable_type", "postable_id"], name: "index_posts_on_postable_type_and_postable_id"
     t.index ["user_id"], name: "index_posts_on_user_id"
   end
 
@@ -159,12 +160,11 @@ ActiveRecord::Schema.define(version: 20160627232229) do
   create_table "topics", force: :cascade do |t|
     t.string   "name"
     t.integer  "user_id"
-    t.datetime "created_at",     null: false
-    t.datetime "updated_at",     null: false
-    t.string   "topicable_type"
-    t.integer  "topicable_id"
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
+    t.integer  "category_id"
+    t.index ["category_id"], name: "index_topics_on_category_id"
     t.index ["name"], name: "index_topics_on_name"
-    t.index ["topicable_type", "topicable_id"], name: "index_topics_on_topicable_type_and_topicable_id"
     t.index ["user_id"], name: "index_topics_on_user_id"
   end
 

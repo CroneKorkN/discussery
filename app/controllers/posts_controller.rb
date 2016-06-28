@@ -25,7 +25,16 @@ class PostsController < ApplicationController
   # POST /posts
   # POST /posts.json
   def create
-    @post = Topic.find(params[:topic_id]).posts.new(post_params)
+    
+    p post_params[:postable_type]
+    p post_params[:postable_id]
+
+
+    
+    @post = Object.const_get(
+      post_params[:postable_type]
+    ).find(post_params[:postable_id]).posts.new(post_params)
+    
     @post.user = current_user
 
     respond_to do |format|
@@ -73,6 +82,6 @@ class PostsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def post_params
-      params.require(:post).permit(:content, :content_searchable, :topic_id, :user_id, :date)
+      params.require(:post).permit(:content, :content_searchable, :postable_id, :postable_type, :user_id, :date)
     end
 end

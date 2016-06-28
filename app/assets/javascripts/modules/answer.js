@@ -1,13 +1,14 @@
 $.fn.answer = function() {
   $(this).click(function(){
     content = $("[data-answer-content]").html();
-    topic_id = $(this).data("topic-id");
+    id = $(this).data("postable-id");
+    type = $(this).data("postable-type");
     $.ajax({
       type: "POST",
-      url: "/topics/"+topic_id+"/posts",
+      url: "/posts",
       context: this,
       contentType: "application/json; charset=utf-8",
-      data: '{"post":{"content":"'+content+'"}}',
+      data: '{"post":{"content":"'+content+'","postable_id":"'+id+'","postable_type":"'+type+'"}}',
       dataType: 'html',
     }).done(function(data) {
       $(".posts .new").before(data);

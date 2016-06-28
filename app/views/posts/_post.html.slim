@@ -11,7 +11,7 @@ li.post class=("own" if post.user == current_user)
       ul.post-menu.hidden.dropdown.context-menu
         li
           a href="" 
-            = link_to "answer", new_topic_post_path(post.topic)
+            = link_to "answer", "new_topic_post_path(post.topic)"
         li
           a href="" edit
         li
