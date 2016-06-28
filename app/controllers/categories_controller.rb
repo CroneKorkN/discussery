@@ -4,8 +4,9 @@ class CategoriesController < ApplicationController
   # GET /categories
   # GET /categories.json
   def index
-#    @categories = Category.root.visible_for current_user
-    @categories = Category.find(Setting[:root_category_id]).categories.where id: current_user.categories.pluck(:id)
+    @categories = Category.find(
+      Setting[:root_category_id]
+    ).categories.where id: current_user.visibile(:categories).pluck(:id)
   end
 
   # GET /categories/1

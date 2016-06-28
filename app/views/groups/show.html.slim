@@ -12,7 +12,7 @@ p
   section.topic
     ul.posts
       = render @group.posts
-      = render "posts/new", postable: @group
+      = render "posts/new", postable: @group.category.root_topic
 
   
 h3 members

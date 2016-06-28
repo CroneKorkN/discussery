@@ -24,36 +24,39 @@ class Group < ActiveRecord::Base
   has_many :member_users,
     through: :has_members,
     source: :member,
-    source_type: User
+    source_type: "User"
   has_many :member_groups,
     through: :has_members,
     source: :member,
-    source_type: Group
+    source_type: "Group"
   def members
     member_users + member_groups
   end
   
-  has_many :categories,
+  has_one :category,
     as: :parent
+  has_one :topic,
+    through: :category,
+    source: :root_topic
   has_many :posts,
-    through: :categories
-  def category
-    categories.first
-  end
-  
+    through: :topic
   
   after_create do
     unless self.background
-      create_group_category.posts.create content: "hallo", user: User.first
-      admin_group = create_admin_group
-      make_creator_admin admin_group
+      category = self.create_category name: "group_#{self.id}_category"
+      self.category.create_root_topic name: "group_#{self.id}_topic", user_id: Setting[:system_user_id], category: category
+      make_creator_admin create_admin_group
     end
   end
   
   private
   
   def create_group_category
-    self.categories.create name: "group_#{self.id}_category"
+    self.create_category name: "group_#{self.id}_category"
+  end
+  
+  def create_group_topic
+    self.create_topic name: "group_#{self.id}_category"
   end
       
   def create_admin_group

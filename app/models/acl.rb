@@ -9,8 +9,9 @@ class ACL # Access Controll List
     @acl[object_type][object.id] and @acl[object_type][object.id].include?(action.to_sym)
   end
   
-  def visible_categories
-    @acl[:categories][:visible]if @acl[:categories]
+  def visible objects
+    objects = objects.to_sym
+    @acl[objects][:visible] if @acl[objects]
   end
 
   private

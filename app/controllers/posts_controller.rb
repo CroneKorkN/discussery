@@ -25,12 +25,6 @@ class PostsController < ApplicationController
   # POST /posts
   # POST /posts.json
   def create
-    
-    p post_params[:postable_type]
-    p post_params[:postable_id]
-
-
-    
     @post = Object.const_get(
       post_params[:postable_type]
     ).find(post_params[:postable_id]).posts.new(post_params)

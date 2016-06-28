@@ -5,4 +5,4 @@ section.topic
     = pluralize @topic.posts.count, "posts"
   ul.posts
     = render @topic.posts 
-    = render "posts/new"
+    = render "posts/new", postable: @topic

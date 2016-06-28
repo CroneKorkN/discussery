@@ -42,16 +42,21 @@ class User < ActiveRecord::Base
   def avatar
     medium || Medium.find(Setting["avatar_placeholder_medium_id"])
   end
-
-  def acl
-    ACL.new(self)
-  end
-
-  def categories
-    Category.where("id IN(?)", acl.visible_categories)
-  end
   
   def activities
     (answered_topics + answered_groups).uniq
+  end
+
+  def may? action, object
+    acl.allows? action, object
+  end
+  def visibile objects # :categories e.g.
+    Object.const_get(objects.to_s.classify).where("id IN(?)", acl.visible(objects))
+  end
+  
+  private
+  
+  def acl
+    @acl ||= ACL.new(self)
   end
 end

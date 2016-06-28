@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160628125226) do
+ActiveRecord::Schema.define(version: 20160628203156) do
 
   create_table "attachments", force: :cascade do |t|
     t.integer  "post_id"
@@ -29,10 +29,12 @@ ActiveRecord::Schema.define(version: 20160628125226) do
     t.integer  "parent_id",   default: 0
     t.integer  "category_id"
     t.string   "parent_type"
+    t.integer  "topic_id"
     t.index ["category_id"], name: "index_categories_on_category_id"
     t.index ["name"], name: "index_categories_on_name"
     t.index ["parent_id"], name: "index_categories_on_parent_id"
     t.index ["parent_type"], name: "index_categories_on_parent_type"
+    t.index ["topic_id"], name: "index_categories_on_topic_id"
   end
 
   create_table "contacts", force: :cascade do |t|

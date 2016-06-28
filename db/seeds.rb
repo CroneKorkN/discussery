@@ -67,11 +67,36 @@ PermissionType.all.each do |permission_type|
   blocked_role_type.permissions.create permission_type: permission_type, denied: true
 end
 
+# media
+avatar_placeholder_medium = Medium.create file: File.new("#{Rails.root}/app/assets/images/avatar.svg")
+
 # users
 random = (0...128).map { (65 + rand(26)).chr }.join
 admin_user = User.create name: "admin", password: "admin", password_confirmation: "admin", mail: "admin"
 system_user = User.create name: "SYSTEM", password: random, password_confirmation: random, mail: "nothing"
 example_user = User.create name: "Jon Doe", password: "admin", password_confirmation: "admin", mail: "jon.doe@example.com"
+
+# setting groups
+setting_group = SettingGroup.create name: "default"
+
+# settings
+{
+  visibility_permission_type_id: visibility_permission_type.id,
+  threads_per_page: 20,
+  avatar_placeholder_medium_id: avatar_placeholder_medium.id,
+  system_user_id: system_user.id
+}.each do |key, value|
+  setting_group.settings.create key: key, value: value
+end
+
+# threads
+example_topic = example_category.topics.create user: admin_user, name: "hello world!"
+
+# posts
+6.times do
+  example_topic.posts.create user: admin_user, content: TextGenerator.text
+  example_topic.posts.create user: example_user, content: TextGenerator.text
+end
 
 # contacts
 admin_user.contact_links.create contact: example_user
@@ -87,6 +112,15 @@ staff_group = system_user.groups_created.create name: "staff"
 staff_group.has_members.create member: admin_group
 staff_group.has_members.create member: supermod_group
 
+# more settings
+{
+  admin_group_id: admin_group.id,
+  member_group_id: member_group.id,
+  root_category_id: root_category.id,
+}.each do |key, value|
+  setting_group.settings.create key: key, value: value
+end
+
 # user groups
 admin_group.has_members.create member: admin_user
 member_group.has_members.create member: example_user
@@ -97,31 +131,3 @@ supermod_group.roles.create role_type: mod_role_type,     permittable: root_cate
 member_group.roles.create   role_type: member_role_type,  permittable: root_category, recursive: true
 guest_group.roles.create    role_type: guest_role_type,   permittable: root_category, recursive: true
 blocked_group.roles.create  role_type: blocked_role_type, permittable: root_category, recursive: true
-
-# media
-avatar_placeholder_medium = Medium.create file: File.new("#{Rails.root}/app/assets/images/avatar.svg")
-
-# setting groups
-setting_group = SettingGroup.create name: "default"
-
-# settings
-{
-  visibility_permission_type_id: visibility_permission_type.id,
-  threads_per_page: 20,
-  admin_group_id: admin_group.id,
-  member_group_id: member_group.id,
-  root_category_id: root_category.id,
-  avatar_placeholder_medium_id: avatar_placeholder_medium.id,
-  system_user_id: system_user.id
-}.each do |key, value|
-  setting_group.settings.create key: key, value: value
-end
-
-# threads
-example_topic = example_category.topics.create user: admin_user, name: "hello world!"
-
-# posts
-4.times do
-  example_topic.posts.create user: admin_user, content: "hallo welt!"
-  example_topic.posts.create user: admin_user, content: "Moep"
-end

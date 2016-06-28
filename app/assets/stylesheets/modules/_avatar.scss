@@ -1,0 +1,17 @@
+.avatar, .answer {
+  display: flex;
+  justify-content: center;
+  width: 3.5rem;
+  height: 3.5rem;
+  border-radius: 100%;
+  box-shadow: $shadow;
+  background-color: white;
+  background-position: center;
+  background-size: 100%;
+  background-repeat: no-repeat;
+}
+.avatar {
+  img {
+    height: 100%;
+  }
+}
