@@ -123,11 +123,11 @@ ActiveRecord::Schema.define(version: 20160627232229) do
   create_table "roles", force: :cascade do |t|
     t.integer "group_id"
     t.integer "role_type_id"
-    t.string  "rolable_type"
-    t.integer "rolable_id"
+    t.string  "permittable_type"
+    t.integer "permittable_id"
     t.boolean "recursive",    default: false, null: false
     t.index ["group_id"], name: "index_roles_on_group_id"
-    t.index ["rolable_type", "rolable_id"], name: "index_roles_on_rolable_type_and_rolable_id"
+    t.index ["permittable_type", "permittable_id"], name: "index_roles_on_permittable_type_and_permittable_id"
     t.index ["role_type_id"], name: "index_roles_on_role_type_id"
   end
 

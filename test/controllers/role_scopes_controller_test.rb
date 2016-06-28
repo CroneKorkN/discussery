@@ -17,7 +17,7 @@ class RolesControllerTest < ActionDispatch::IntegrationTest
 
   test "should create role" do
     assert_difference('Role.count') do
-      post roles_url, params: { role: { group_id: @role.group_id, role_type_id: @role.role_type_id, rolable_id: @role.rolable_id, rolable_type: @role.rolable_type } }
+      post roles_url, params: { role: { group_id: @role.group_id, role_type_id: @role.role_type_id, permittable_id: @role.permittable_id, permittable_type: @role.permittable_type } }
     end
 
     assert_redirected_to role_url(Role.last)
@@ -34,7 +34,7 @@ class RolesControllerTest < ActionDispatch::IntegrationTest
   end
 
   test "should update role" do
-    patch role_url(@role), params: { role: { group_id: @role.group_id, role_type_id: @role.role_type_id, rolable_id: @role.rolable_id, rolable_type: @role.rolable_type } }
+    patch role_url(@role), params: { role: { group_id: @role.group_id, role_type_id: @role.role_type_id, permittable_id: @role.permittable_id, permittable_type: @role.permittable_type } }
     assert_redirected_to role_url(@role)
   end
 
