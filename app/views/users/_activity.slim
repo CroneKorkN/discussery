@@ -1,2 +1,7 @@
-li
-  = link_to activity.name, activity
+li.activity
+  = activity.class.name
+  =< link_to activity.name, activity
+  |  with 
+  = activity.posts.count
+  =< "answer".pluralize(activity.posts.count)
+  = render "posts/post", post: activity.posts.last if activity.posts.any?

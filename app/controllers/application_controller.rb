@@ -17,6 +17,11 @@ class ApplicationController < ActionController::Base
     end
   end
 
+  def mobile_device?
+    @mobile_device ||= request.user_agent =~ /Mobile|webOS/
+  end
+  helper_method :mobile_device?
+
   private
 
   def require_login
@@ -40,5 +45,5 @@ class ApplicationController < ActionController::Base
       object = args.first.values.first
     end
     return [user, action, object]
-end
+  end
 end
