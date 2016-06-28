@@ -44,7 +44,10 @@ class Group < ActiveRecord::Base
   after_create do
     unless self.background
       category = self.create_category name: "group_#{self.id}_category"
-      self.category.create_root_topic name: "group_#{self.id}_topic", user_id: Setting[:system_user_id], category: category
+      
+      # ERROR: root-topic-id muss aus irgendeinem Grund manuell gesetzt werden. Relation falsch?
+      category.update root_topic: self.category.create_root_topic(name: "group_#{self.id}_topic", user_id: Setting[:system_user_id], category: category)
+      
       make_creator_admin create_admin_group
     end
   end
