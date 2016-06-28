@@ -21,23 +21,23 @@ class ACL # Access Controll List
     Recursion.collect_all(user.groups, :memberships).each do |group|
       group.roles.each do |role|
         # category- or group-permission_type?
-        scopable_type = role.scopable.model_name.route_key.to_sym
+        rolable_type = role.rolable.model_name.route_key.to_sym
         
         
-        affected_scopable_ids = [role.scopable.id]
+        affected_rolable_ids = [role.rolable.id]
 
         # recursive?
         if role.recursive
-          affected_scopable_ids << Recursion.collect(role.scopable, scopable_type).pluck(:id)
-          affected_scopable_ids.flatten!.uniq!
+          affected_rolable_ids << Recursion.collect(role.rolable, rolable_type).pluck(:id)
+          affected_rolable_ids.flatten!.uniq!
         end
         
-        p affected_scopable_ids
+        p affected_rolable_ids
         
-        # apply each permission_type to each affected scopable
+        # apply each permission_type to each affected rolable
         role.role_type.permission_types.each do |permission_type|
-          affected_scopable_ids.each do |id|
-            add role.scopable.model_name.route_key.to_sym, id, permission_type
+          affected_rolable_ids.each do |id|
+            add role.rolable.model_name.route_key.to_sym, id, permission_type
           end
         end
       end
@@ -61,23 +61,23 @@ class ACL # Access Controll List
 
   def roles_of user
     # init
-    scopable_ids = []
+    rolable_ids = []
     
     # collect groups
     Recursion.collect_all(user.groups, :groups).each do |group|
       group.roles.each do |role|
         # category- or group-permission_type?
-        scopable_type = role.scopable.model_name.route_key.to_sym
+        rolable_type = role.rolable.model_name.route_key.to_sym
         
-        # collect affected scopables
-        p Recursion.collect(role.scopable, scopable_type).pluck(:id) if role.recursive
-        scopable_ids << role.id
-        scopable_ids << Recursion.collect(role.scopable, scopable_type).pluck(:id) if role.recursive
+        # collect affected rolables
+        p Recursion.collect(role.rolable, rolable_type).pluck(:id) if role.recursive
+        rolable_ids << role.id
+        rolable_ids << Recursion.collect(role.rolable, rolable_type).pluck(:id) if role.recursive
       end
     end
     
     # return
-    return Role.find(scopable_ids.flatten.uniq)
+    return Role.find(rolable_ids.flatten.uniq)
   end
 
   def category_id_of object

@@ -5,7 +5,7 @@ rails g scaffold post       content:text content_searchable:text topic:reference
 rails g scaffold role_type       name:string
 rails g scaffold permission_type permissible_type:string:index permissible_id:integer:index action:string
 rails g scaffold permission role_type:references permission_type:references
-rails g scaffold user_role_type  user:references role_type:references scopable_type:string:index scopable_id:integer:index
+rails g scaffold user_role_type  user:references role_type:references rolable_type:string:index rolable_id:integer:index
 rails g scaffold medium     type:string location:string
 rails g scaffold attachment post:references medium:references
 rails g scaffold setting_group name:string:index setting_group:references

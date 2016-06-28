@@ -92,11 +92,11 @@ admin_group.has_members.create member: admin_user
 member_group.has_members.create member: example_user
 
 # group role_types
-admin_group.roles.create    role_type: admin_role_type,   scopable: root_category, recursive: true
-supermod_group.roles.create role_type: mod_role_type,     scopable: root_category, recursive: true
-member_group.roles.create   role_type: member_role_type,  scopable: root_category, recursive: true
-guest_group.roles.create    role_type: guest_role_type,   scopable: root_category, recursive: true
-blocked_group.roles.create  role_type: blocked_role_type, scopable: root_category, recursive: true
+admin_group.roles.create    role_type: admin_role_type,   rolable: root_category, recursive: true
+supermod_group.roles.create role_type: mod_role_type,     rolable: root_category, recursive: true
+member_group.roles.create   role_type: member_role_type,  rolable: root_category, recursive: true
+guest_group.roles.create    role_type: guest_role_type,   rolable: root_category, recursive: true
+blocked_group.roles.create  role_type: blocked_role_type, rolable: root_category, recursive: true
 
 # media
 avatar_placeholder_medium = Medium.create file: File.new("#{Rails.root}/app/assets/images/avatar.svg")

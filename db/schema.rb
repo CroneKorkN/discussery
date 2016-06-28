@@ -123,12 +123,12 @@ ActiveRecord::Schema.define(version: 20160627232229) do
   create_table "roles", force: :cascade do |t|
     t.integer "group_id"
     t.integer "role_type_id"
-    t.string  "scopable_type"
-    t.integer "scopable_id"
-    t.boolean "recursive",     default: false, null: false
+    t.string  "rolable_type"
+    t.integer "rolable_id"
+    t.boolean "recursive",    default: false, null: false
     t.index ["group_id"], name: "index_roles_on_group_id"
+    t.index ["rolable_type", "rolable_id"], name: "index_roles_on_rolable_type_and_rolable_id"
     t.index ["role_type_id"], name: "index_roles_on_role_type_id"
-    t.index ["scopable_type", "scopable_id"], name: "index_roles_on_scopable_type_and_scopable_id"
   end
 
   create_table "setting_groups", force: :cascade do |t|

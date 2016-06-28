@@ -3,11 +3,11 @@
 one:
   group: one
   role_type: one
-  scopable_id: 1
-  scopable_type: 1
+  rolable_id: 1
+  rolable_type: 1
 
 two:
   group: two
   role_type: two
-  scopable_id: 1
-  scopable_type: 1
+  rolable_id: 1
+  rolable_type: 1

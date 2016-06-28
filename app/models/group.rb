@@ -62,6 +62,6 @@ class Group < ActiveRecord::Base
   end
   
   def make_creator_admin group_admin_group
-    group_admin_group.roles.create role_type: RoleType.find_by(name: "admin"), scopable: self
+    group_admin_group.roles.create role_type: RoleType.find_by(name: "admin"), rolable: self
   end
 end
