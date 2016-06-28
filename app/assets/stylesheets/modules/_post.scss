@@ -25,12 +25,12 @@
       justify-content: center;
       width: 3.5rem;
       height: 3.5rem;
-      overflow: hidden;
       border-radius: 100%;
       box-shadow: $shadow;
-      background: white;
-      box-shadow: $shadow;
-      background: white;
+      background-color: white;
+      background-position: center;
+      background-size: 90%;
+      background-repeat: no-repeat;
     }
     .avatar {
       img {

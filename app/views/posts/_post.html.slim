@@ -1,11 +1,14 @@
 li.post class=("own" if post.user == current_user)
   .info
-    .avatar
-      = image_tag post.user.avatar.file.url(:thumbnail) if post.user and post.user.avatar
+    - style = "background-image: url(#{image_url(post.user.avatar.file.url(:thumbnail))})"
+    .avatar.has-dropdown style=style
+      ul.hidden.dropdown.context-menu
+        li = link_to "Profile", post.user
+        li Message
   .content 
     article.speechbubble.has-dropdown
       = editable post, :content, trigger: :"edit-mode"
-      ul.post-menu.dropdown.hidden.context-menu
+      ul.post-menu.hidden.dropdown.context-menu
         li
           a href="" 
             = link_to "answer", new_topic_post_path(post.topic)

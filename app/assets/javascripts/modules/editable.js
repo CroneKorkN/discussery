@@ -32,7 +32,7 @@ $.fn.editable = function(trigger=true) {
     var model = $(this).data("editable-model");
     var id = $(this).data("editable-id");
     var method = $(this).data("editable-method");
-    var value = $(this).html();
+    var value = $(this).html().trim();
     var dataType = $(this).data("editable-datatype");
     var display_with = $(this).data("editable-display-with");
     $("[data-editable]").editable();

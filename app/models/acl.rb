@@ -17,9 +17,8 @@ class ACL # Access Controll List
   
   def build_for user
     @acl = {}
-    
     # collect groups
-    Recursion.collect_all(user.groups, :groups).each do |group|
+    Recursion.collect_all(user.groups, :memberships).each do |group|
       group.role_scopes.each do |role_scope|
         # category- or group-permission?
         scopable_type = role_scope.scopable.model_name.route_key.to_sym

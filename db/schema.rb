@@ -44,24 +44,6 @@ ActiveRecord::Schema.define(version: 20160627232229) do
     t.index ["user_id"], name: "index_contacts_on_user_id"
   end
 
-  create_table "group_groups", force: :cascade do |t|
-    t.integer  "group_id"
-    t.integer  "member_group_id", default: 0, null: false
-    t.datetime "created_at",                  null: false
-    t.datetime "updated_at",                  null: false
-    t.index ["group_id"], name: "index_group_groups_on_group_id"
-    t.index ["member_group_id"], name: "index_group_groups_on_member_group_id"
-  end
-
-  create_table "group_users", force: :cascade do |t|
-    t.integer  "group_id"
-    t.integer  "user_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["group_id"], name: "index_group_users_on_group_id"
-    t.index ["user_id"], name: "index_group_users_on_user_id"
-  end
-
   create_table "groups", force: :cascade do |t|
     t.string   "name"
     t.text     "description"
@@ -184,15 +166,6 @@ ActiveRecord::Schema.define(version: 20160627232229) do
     t.index ["name"], name: "index_topics_on_name"
     t.index ["topicable_type", "topicable_id"], name: "index_topics_on_topicable_type_and_topicable_id"
     t.index ["user_id"], name: "index_topics_on_user_id"
-  end
-
-  create_table "user_groups", force: :cascade do |t|
-    t.integer  "group_id"
-    t.integer  "user_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["group_id"], name: "index_user_groups_on_group_id"
-    t.index ["user_id"], name: "index_user_groups_on_user_id"
   end
 
   create_table "users", force: :cascade do |t|

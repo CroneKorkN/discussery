@@ -84,12 +84,12 @@ guest_group = system_user.groups_created.create name: "guests"
 blocked_group = system_user.groups_created.create name: "blocked"
 example_group = example_user.groups_created.create name: "Example Group"
 staff_group = system_user.groups_created.create name: "staff"
-staff_group.memberships.create member: admin_group
-staff_group.memberships.create member: supermod_group
+staff_group.has_members.create member: admin_group
+staff_group.has_members.create member: supermod_group
 
 # user groups
-admin_group.memberships.create member: admin_user
-member_group.memberships.create member: example_user
+admin_group.has_members.create member: admin_user
+member_group.has_members.create member: example_user
 
 # group roles
 admin_group.role_scopes.create    role: admin_role,   scopable: root_category, recursive: true
@@ -119,6 +119,9 @@ end
 
 # threads
 example_topic = example_category.topics.create user: admin_user, name: "hello world!"
-3.times do
+
+# posts
+4.times do
   example_topic.posts.create user: admin_user, content: "hallo welt!"
+  example_topic.posts.create user: admin_user, content: "Moep"
 end

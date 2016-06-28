@@ -1,8 +1,4 @@
-class Group < ActiveRecord::Base
-  has_many :user_groups
-  has_many :users,
-    through: :user_groups
-    
+class Group < ActiveRecord::Base    
   has_many :role_scopes
   has_many :roles,
     through: :role_scopes
@@ -12,17 +8,31 @@ class Group < ActiveRecord::Base
     through: :scoping_role_scopes,
     source: :role
   
-  # has members
-  has_many :group_groups
-  has_many :groups,
-    through: :group_groups
+  # memberships
+  has_many :is_member_of,
+    class_name: "Membership",
+    as: :member
+  has_many :memberships,
+     through: :is_member_of,
+     source: :group
   
-  # is member
-  has_many :memberships
-  has_many :in_groups,
-    through: :group_memberships,
-    source: :group
-    
+  # members
+  has_many :has_members,
+    class_name: "Membership",
+    foreign_key: :group_id
+  has_many :member_users,
+    through: :has_members,
+    source: :member,
+    source_type: User
+  has_many :member_groups,
+    through: :has_members,
+    source: :member,
+    source_type: Group
+  
+  def members
+    member_users + member_groups
+  end
+  
   has_many :categories,
     as: :parent
   has_one :topic,
