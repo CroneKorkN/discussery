@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160630121858) do
+ActiveRecord::Schema.define(version: 20160630140621) do
 
   create_table "attachments", force: :cascade do |t|
     t.integer  "post_id"
@@ -116,6 +116,11 @@ ActiveRecord::Schema.define(version: 20160630121858) do
     t.index ["date"], name: "index_posts_on_date"
     t.index ["postable_type", "postable_id"], name: "index_posts_on_postable_type_and_postable_id"
     t.index ["user_id"], name: "index_posts_on_user_id"
+  end
+
+  create_table "private_chats", force: :cascade do |t|
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "role_types", force: :cascade do |t|

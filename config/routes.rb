@@ -1,5 +1,6 @@
 Rails.application.routes.draw do
   
+  resources :private_chats
   root to: "users#activity"
   get "activity", to: "users#activity"
   
