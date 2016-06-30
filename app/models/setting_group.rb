@@ -1,4 +1,4 @@
-class SettingGroup < ActiveRecord::Base
+class SettingGroup < ApplicationRecord
   belongs_to :setting_group, optional: true
   has_many :setting_groups
   has_many :settings

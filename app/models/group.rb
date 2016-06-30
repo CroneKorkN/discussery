@@ -1,9 +1,10 @@
-class Group < ActiveRecord::Base 
+class Group < ApplicationRecord 
   belongs_to :creator,
     class_name: "User",
     optional: true
     
-  has_many :roles
+  has_many :roles,
+    as: :permittable
   has_many :role_types,
     through: :roles
     

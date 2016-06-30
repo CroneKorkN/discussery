@@ -1,4 +1,4 @@
-class User < ActiveRecord::Base
+class User < ApplicationRecord
   # content
   has_many :topics
   has_many :posts
@@ -33,6 +33,9 @@ class User < ActiveRecord::Base
   has_many :group_chats,
     through: :groups,
     source: :topic
+    
+  has_many :roles,
+    as: :permittable
 
   serialize :acl_cache
   

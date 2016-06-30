@@ -1,4 +1,4 @@
-class PermissionType < ActiveRecord::Base
+class PermissionType < ApplicationRecord
   has_many :permissions, dependent: :destroy
   
   # read

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160628203156) do
+ActiveRecord::Schema.define(version: 20160630114913) do
 
   create_table "attachments", force: :cascade do |t|
     t.integer  "post_id"
@@ -129,7 +129,10 @@ ActiveRecord::Schema.define(version: 20160628203156) do
     t.string  "protectable_type"
     t.integer "protectable_id"
     t.boolean "recursive",        default: false, null: false
+    t.string  "permittable_type"
+    t.integer "permittable_id"
     t.index ["group_id"], name: "index_roles_on_group_id"
+    t.index ["permittable_type", "permittable_id"], name: "index_roles_on_permittable_type_and_permittable_id"
     t.index ["protectable_type", "protectable_id"], name: "index_roles_on_protectable_type_and_protectable_id"
     t.index ["role_type_id"], name: "index_roles_on_role_type_id"
   end

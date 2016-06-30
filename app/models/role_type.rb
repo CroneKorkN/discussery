@@ -1,4 +1,4 @@
-class RoleType < ActiveRecord::Base
+class RoleType < ApplicationRecord
   has_many :permissions
   has_many :permission_types, through: :permissions
   accepts_nested_attributes_for :permissions
