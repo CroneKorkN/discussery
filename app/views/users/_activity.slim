@@ -1,18 +1,23 @@
 li.activity
-  h3
-    - if activity.group
-      | Group 
-      = link_to activity.group.name, activity.group
-    - elsif activity.root_of
-      | Category 
-      = link_to activity.root_of.name, activity.root_of
-    - else
-      | Topic 
-      = link_to activity.name, activity
-
-  |  with 
-  = activity.posts.count
-  =< "answer".pluralize(activity.posts.count)
+  .row
+    .col
+      h3
+        - if activity.group
+          = link_to activity.group.name, activity.group
+        - elsif activity.root_of
+          = link_to activity.root_of.name, activity.root_of
+        - else
+          = link_to activity.name, activity
+    .col
+      - if activity.group
+        | Group 
+      - elsif activity.root_of
+        | Category 
+      - else
+        | Topic 
+      |  with 
+      = activity.posts.count
+      =< "answer".pluralize(activity.posts.count)
   section.topic
     ul.posts
       = render "posts/post", post: activity.posts.last if activity.posts.any?

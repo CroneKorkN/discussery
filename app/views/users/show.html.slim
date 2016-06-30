@@ -1,12 +1,15 @@
-h2
-  | user 
-  = editable @user, :name, trigger: "edit-mode"
-
-.avatar
-  = image_tag @user.medium.file.url(:thumbnail) if @user.medium
-
-p
-  = editable @user, :mail, trigger: "edit-mode"
+.row
+  .col
+    h2
+      | user 
+      = editable @user, :name, trigger: "edit-mode"
+    | email:
+    = editable @user, :mail, trigger: "edit-mode"
+    br
+    = link_to "private message", user_private_chat_path(@user)
+  .compact.col
+    - style = "background-image: url(#{image_url(@user.avatar.file.url)})"
+    .avatar.large style=style
 
 h3 activity
 ul.activities

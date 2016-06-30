@@ -1,0 +1,7 @@
+= render "categories/discover_menu"
+
+h2
+  | New Posts
+  
+.activities
+  = render partial: "users/activity", collection: @topics, as: :activity

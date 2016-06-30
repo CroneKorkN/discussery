@@ -4,6 +4,7 @@ Rails.application.routes.draw do
   get "activity", to: "users#activity"
   
   resources :roles
+  resources :topics
 
   resources :group_users
   patch "/editable", to: "editables#update"
@@ -29,7 +30,8 @@ Rails.application.routes.draw do
 
   resources :users, shallow: true do
     resources :media
-  resources :contacts
+    resources :contacts
+    get "private_chat", to: "private_chats#show"
   end
 
   resources :role_types, shallow: true do

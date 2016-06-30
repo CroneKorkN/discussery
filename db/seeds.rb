@@ -74,7 +74,7 @@ avatar_placeholder_medium = Medium.create file: File.new("#{Rails.root}/app/asse
 random = (0...128).map { (65 + rand(26)).chr }.join
 admin_user = User.create name: "admin", password: "admin", password_confirmation: "admin", mail: "admin"
 system_user = User.create name: "SYSTEM", password: random, password_confirmation: random, mail: "nothing"
-example_user = User.create name: "Jon Doe", password: "admin", password_confirmation: "admin", mail: "jon.doe@example.com"
+example_user = User.create name: "Jon Doe", password: "admin", password_confirmation: "admin", mail: "jon.doe@example.com", medium: Medium.create(file: File.new("#{Rails.root}/app/assets/images/example_avatar_1.png"))
 
 # setting groups
 setting_group = SettingGroup.create name: "default"
