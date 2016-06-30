@@ -22,23 +22,23 @@ class ACL # Access Controll List
     Recursion.collect_all(user.groups, :memberships).each do |group|
       group.roles.each do |role|
         # category- or group-permission_type?
-        permittable_type = role.permittable.model_name.route_key.to_sym
+        protectable_type = role.protectable.model_name.route_key.to_sym
         
         
-        affected_permittable_ids = [role.permittable.id]
+        affected_protectable_ids = [role.protectable.id]
 
         # recursive?
         if role.recursive
-          affected_permittable_ids << Recursion.collect(role.permittable, permittable_type).pluck(:id)
-          affected_permittable_ids.flatten!.uniq!
+          affected_protectable_ids << Recursion.collect(role.protectable, protectable_type).pluck(:id)
+          affected_protectable_ids.flatten!.uniq!
         end
         
-        p affected_permittable_ids
+        p affected_protectable_ids
         
-        # apply each permission_type to each affected permittable
+        # apply each permission_type to each affected protectable
         role.role_type.permission_types.each do |permission_type|
-          affected_permittable_ids.each do |id|
-            add role.permittable.model_name.route_key.to_sym, id, permission_type
+          affected_protectable_ids.each do |id|
+            add role.protectable.model_name.route_key.to_sym, id, permission_type
           end
         end
       end
@@ -62,23 +62,23 @@ class ACL # Access Controll List
 
   def roles_of user
     # init
-    permittable_ids = []
+    protectable_ids = []
     
     # collect groups
     Recursion.collect_all(user.groups, :groups).each do |group|
       group.roles.each do |role|
         # category- or group-permission_type?
-        permittable_type = role.permittable.model_name.route_key.to_sym
+        protectable_type = role.protectable.model_name.route_key.to_sym
         
-        # collect affected permittables
-        p Recursion.collect(role.permittable, permittable_type).pluck(:id) if role.recursive
-        permittable_ids << role.id
-        permittable_ids << Recursion.collect(role.permittable, permittable_type).pluck(:id) if role.recursive
+        # collect affected protectables
+        p Recursion.collect(role.protectable, protectable_type).pluck(:id) if role.recursive
+        protectable_ids << role.id
+        protectable_ids << Recursion.collect(role.protectable, protectable_type).pluck(:id) if role.recursive
       end
     end
     
     # return
-    return Role.find(permittable_ids.flatten.uniq)
+    return Role.find(protectable_ids.flatten.uniq)
   end
 
   def category_id_of object

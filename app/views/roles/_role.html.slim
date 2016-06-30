@@ -1,7 +1,7 @@
 li
   = link_to role.role_type.name, edit_role_path(role)
   |  in 
-  = role.permittable_type.downcase
-  =< role.permittable.name
+  = role.protectable_type.downcase
+  =< role.protectable.name
   - if role.recursive
     |  recursivly

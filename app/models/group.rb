@@ -60,7 +60,7 @@ class Group < ActiveRecord::Base
       
       # give the background-group admin-permissions
       # todo: get role_type by setting
-      admin_group.roles.create role_type: RoleType.find_by(name: "admin"), permittable: self
+      admin_group.roles.create role_type: RoleType.find_by(name: "admin"), protectable: self
       
       # make creator member of group admins group      
       admin_group.has_members.create member: creator

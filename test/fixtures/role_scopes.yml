@@ -3,11 +3,11 @@
 one:
   group: one
   role_type: one
-  permittable_id: 1
-  permittable_type: 1
+  protectable_id: 1
+  protectable_type: 1
 
 two:
   group: two
   role_type: two
-  permittable_id: 1
-  permittable_type: 1
+  protectable_id: 1
+  protectable_type: 1
