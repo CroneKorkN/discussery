@@ -1,0 +1,20 @@
+= form_for [@group, @role] do |f|
+  - if @role.errors.any?
+    #error_explanation
+      h2 = "#{pluralize(@role.errors.count, "error")} prohibited this role from being saved:"
+      ul
+        - @role.errors.full_messages.each do |message|
+          li = message
+          
+  = f.hidden_field :group_id
+
+  .row
+    .column
+      =< f.collection_select :role_type_id, RoleType.all, :id, :name, prompt: true
+      |  in 
+      =< f.select :permittable_type, options_for_select([['Category', 'Category'], ['Group' ,'Group']])
+      =< f.collection_select :permittable_id, current_user.visible(:categories), :id, :name, prompt: true
+      =< f.check_box :recursive
+      = f.label :recursively
+    .column.compact
+      .actions = f.submit

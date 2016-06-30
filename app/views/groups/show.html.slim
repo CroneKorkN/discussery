@@ -1,6 +1,13 @@
-h2
-  = editable @group, :name
-  | group
+.row
+  .doubble.col
+    h2
+      = editable @group, :name
+      | group
+  .col
+    = link_to "members", group_members_path(@group)
+    |  &bull; 
+    = link_to "permissions", group_roles_path(@group)
+    
 p
   = editable @group, :description
   
@@ -13,11 +20,3 @@ p
     ul.posts
       = render @group.posts
       = render "posts/new", postable: @group.category.root_topic
-
-  
-h3 members
-ul 
-  - @group.member_groups.each do |group|
-    li = link_to group.name, group
-  - @group.members.each do |user|
-    li = link_to user.name, user

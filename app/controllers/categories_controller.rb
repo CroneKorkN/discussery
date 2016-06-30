@@ -6,7 +6,7 @@ class CategoriesController < ApplicationController
   def index
     @categories = Category.find(
       Setting[:root_category_id]
-    ).categories.where id: current_user.visibile(:categories).pluck(:id)
+    ).categories.where id: current_user.visible(:categories).pluck(:id)
   end
 
   # GET /categories/1

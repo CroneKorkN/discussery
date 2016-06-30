@@ -44,13 +44,13 @@ class User < ActiveRecord::Base
   end
   
   def activities
-    (answered_topics + answered_groups).uniq
+    (answered_topics + group_chats).uniq
   end
 
   def may? action, object
     acl.allows? action, object
   end
-  def visibile objects # :categories e.g.
+  def visible objects # :categories e.g.
     Object.const_get(objects.to_s.classify).where("id IN(?)", acl.visible(objects))
   end
   

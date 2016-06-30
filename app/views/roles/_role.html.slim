@@ -1,4 +1,7 @@
 li
-  = link_to role_type.name, edit_role_type_path(role_type)
-  ul
-    = render role_type.permissions
+  = link_to role.role_type.name, edit_role_path(role)
+  |  in 
+  = role.permittable_type.downcase
+  =< role.permittable.name
+  - if role.recursive
+    |  recursivly

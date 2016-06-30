@@ -8,4 +8,9 @@ $.fn.edit_mode_trigger = function() {
       $("body").removeClass("edit-mode");
     }
   });
+  
+  if (this.checked) {
+    $("[data-editable-trigger=\"edit-mode\"]").editable();
+    $("body").addClass("edit-mode");
+  }
 }

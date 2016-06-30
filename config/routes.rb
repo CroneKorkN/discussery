@@ -1,21 +1,19 @@
 Rails.application.routes.draw do
   
-  resources :memberships
   root to: "users#activity"
+  get "activity", to: "users#activity"
   
   resources :roles
-  resources :posts
-  resources :last_accesses
-  resources :contacts
-  resources :group_groups
-  get 'test/new'
-  get "activity", to: "users#activity"
 
   resources :group_users
   patch "/editable", to: "editables#update"
   get "/backend", to: "backend#show", as: 'backend'
 
-  resources :groups
+  resources :groups do
+    resources :roles
+    resources :memberships
+    resources :members
+  end
   
   get "/categories/manage", to: "categories#manage", as: 'manage_categories'
   resources :categories, shallow: true do
@@ -27,11 +25,13 @@ Rails.application.routes.draw do
       end
     end
   end
+  resources :posts
 
   resources :users, shallow: true do
-      resources :user_groups
     resources :media
+  resources :contacts
   end
+
   resources :role_types, shallow: true do
     resources :permissions
   end

@@ -1,4 +1,8 @@
-class Group < ActiveRecord::Base    
+class Group < ActiveRecord::Base 
+  belongs_to :creator,
+    class_name: "User",
+    optional: true
+    
   has_many :roles
   has_many :role_types,
     through: :roles
@@ -42,31 +46,33 @@ class Group < ActiveRecord::Base
     through: :topic
   
   after_create do
+    # make creator member of the group
+    has_members.create member: creator
+
     unless self.background
+      # create group-category
       category = self.create_category name: "group_#{self.id}_category"
-      
       # ERROR: root-topic-id muss aus irgendeinem Grund manuell gesetzt werden. Relation falsch?
       category.update root_topic: self.category.create_root_topic(name: "group_#{self.id}_topic", user_id: Setting[:system_user_id], category: category)
+
+      # create background-group to handle permissions
+      admin_group = Group.create name: "group_#{self.id}_admins", background: true
       
-      make_creator_admin create_admin_group
+      # give the background-group admin-permissions
+      # todo: get role_type by setting
+      admin_group.roles.create role_type: RoleType.find_by(name: "admin"), permittable: self
+      
+      # make creator member of group admins group      
+      admin_group.has_members.create member: creator
     end
   end
   
   private
-  
-  def create_group_category
-    self.create_category name: "group_#{self.id}_category"
-  end
-  
-  def create_group_topic
-    self.create_topic name: "group_#{self.id}_category"
-  end
       
   def create_admin_group
     Group.create name: "group_#{self.id}_admins", background: true
   end
   
-  def make_creator_admin group_admin_group
-    group_admin_group.roles.create role_type: RoleType.find_by(name: "admin"), permittable: self
+  def make_creator_admin admin_group
   end
 end

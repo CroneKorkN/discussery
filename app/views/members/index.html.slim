@@ -1,0 +1,7 @@
+h2 
+  = @group.name
+  | -group members 
+  = link_to "+", new_group_member_path(@group)
+
+ul
+  = render partial: "member", collection: @members, as: :member

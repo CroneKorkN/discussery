@@ -5,31 +5,24 @@ class UsersController < ApplicationController
   def avater_selection
   end
 
-  # GET /users
-  # GET /users.json
   def index
     @users = User.all
   end
 
   def activity
+    @user = params[:user_id] || current_user
   end
 
-  # GET /users/1
-  # GET /users/1.json
   def show
   end
 
-  # GET /users/new
   def new
     @user = User.new
   end
 
-  # GET /users/1/edit
   def edit
   end
 
-  # POST /users
-  # POST /users.json
   def create
     @user = User.new(user_params)
 

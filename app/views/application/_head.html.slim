@@ -17,12 +17,12 @@ nav
         - if current_user
           li
             label
-              input type="checkbox" data-edit-mode=""
+              input type="checkbox" data-edit-mode="" checked="unchecked"
               | &nbsp;manage
           li
             = link_to "Settings", settings_path, "data-link-scope": "#page-content"
           li
-            = link_to current_user.name, current_user
+            = link_to "#{current_user.name}s profile", current_user
           li
             = link_to "log out", logout_path
         - else

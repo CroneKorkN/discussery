@@ -20,8 +20,3 @@
 $(document).ready(function(){
   $("html").initialize();
 });
-
-// back button
-$(window).on("popstate", function(e) {
-  console.log(e.originalEvent.state);
-});

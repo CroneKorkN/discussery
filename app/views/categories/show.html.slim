@@ -8,7 +8,6 @@ h2
 
 <!-- sub categories -->
 - if @category.categories.any?
-  h3 categories
   ul
     = render partial: "sub_category", collection: @category.categories, as: :category
 
@@ -17,5 +16,5 @@ h3
   | topics 
   = link_to '+', new_category_topic_path(@category)
   
-ul.topics.activities
+ul.activities
   = render partial: "users/activity", collection: @category.topics, as: :activity

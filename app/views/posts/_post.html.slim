@@ -21,4 +21,4 @@ li.post class=("own" if post.user == current_user)
     .author
       = time_ago_in_words(post.date || post.created_at)
       |  ago by
-      =< post.user.name if post.user
+      =< link_to post.user.name, post.user
