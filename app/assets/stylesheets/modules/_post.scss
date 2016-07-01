@@ -1,3 +1,15 @@
+/*#page-content {
+  position: relative;
+  display: block;
+
+  .post.new {
+    position: fixed;
+    max-width: 48rem;
+    bottom: 0;
+  }
+  margin-bottom: 5rem;
+}*/
+
 .post {
   display: flex;
   margin: 1rem 0;
@@ -36,6 +48,7 @@
     > .speechbubble {
       box-sizing: content-box;
       min-height: 1em;
+      text-align: left;
 
       display: inline-block;
       padding: .4rem .8rem;
@@ -53,7 +66,8 @@
     }
   }
   &.new .speechbubble {
-    min-height: 2rem;
+    min-height: 3.5rem;
+    display: block;
   }
 
   &.new .info .button {

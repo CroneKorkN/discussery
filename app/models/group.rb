@@ -67,6 +67,10 @@ class Group < ApplicationRecord
       admin_group.has_members.create member: creator
     end
   end
+
+  def private_chat?
+    true if name =~ /^PRIVATE_CHAT/
+  end
   
   private
       

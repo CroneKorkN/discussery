@@ -72,8 +72,9 @@ avatar_placeholder_medium = Medium.create file: File.new("#{Rails.root}/app/asse
 
 # users
 random = (0...128).map { (65 + rand(26)).chr }.join
-admin_user = User.create name: "admin", password: "admin", password_confirmation: "admin", mail: "admin"
+admin_user = User.create name: "admin", password: "admin", password_confirmation: "admin", mail: "admin", medium: Medium.create(file: File.new("#{Rails.root}/app/assets/images/example_avatar_2.jpg"))
 system_user = User.create name: "SYSTEM", password: random, password_confirmation: random, mail: "nothing"
+private_chat_user = User.create name: "PRIVATE_CHAT", password: random, password_confirmation: random, mail: "nothing"
 example_user = User.create name: "Jon Doe", password: "admin", password_confirmation: "admin", mail: "jon.doe@example.com", medium: Medium.create(file: File.new("#{Rails.root}/app/assets/images/example_avatar_1.png"))
 
 # setting groups
@@ -84,7 +85,8 @@ setting_group = SettingGroup.create name: "default"
   visibility_permission_type_id: visibility_permission_type.id,
   threads_per_page: 20,
   avatar_placeholder_medium_id: avatar_placeholder_medium.id,
-  system_user_id: system_user.id
+  system_user_id: system_user.id,
+  private_chat_user_id: private_chat_user.id
 }.each do |key, value|
   setting_group.settings.create key: key, value: value
 end

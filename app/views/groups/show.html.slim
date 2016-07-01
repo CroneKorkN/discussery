@@ -1,8 +1,10 @@
 .row
   .doubble.col
     h2
-      = editable @group, :name
-      | group
+      - if @group.private_chat?
+        = parse_name @group
+      - else
+        = editable @group, :name
   .col
     = link_to "members", group_members_path(@group)
     |  &bull; 

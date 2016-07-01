@@ -38,7 +38,7 @@ class User < ApplicationRecord
     as: :permittable
 
   serialize :acl_cache
-  
+
   
   has_secure_password validations: false
     

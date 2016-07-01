@@ -1,21 +1,22 @@
 class PrivateChatsController < ApplicationController
   def show
-    @group = find_chat || create_chat
+    raise "diskussery: can`t messege yourself!" if params[:user_id].to_i == current_user.id
     @chat_partner = User.find params[:user_id]
+    unless @group = Group.find_by(name: name)
+      @group = Group.create(name: name)
+      @group.has_members.create member_id: params[:user_id], member_type: "User"
+      @group.has_members.create member_id: current_user.id, member_type: "User"
+    end
   end
   
   private
   
-  def find_chat
-    Group.find_by(name: name(current_user.id, params[:user_id])) ||
-    Group.find_by(name: name(params[:user_id], current_user.id))
+  def name
+    ids = [current_user.id, params[:user_id].to_i].sort
+    "PRIVATE_CHAT_#{ids[0]}_#{ids[1]}"
   end
   
-  def create_chat
-    Group.create(name: name(current_user.id, params[:user_id]))
-  end
-  
-  def name uid_a, uid_b
-    "PRIVATE_CHAT_#{uid_a}_#{uid_b}"
+  def private_chat_user
+    User.find Setting[:private_chat_user_id]
   end
 end

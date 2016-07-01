@@ -2,19 +2,9 @@ li.activity
   .row
     .col
       h3
-        - if activity.group
-          = link_to activity.group.name, activity.group
-        - elsif activity.root_of
-          = link_to activity.root_of.name, activity.root_of
-        - else
-          = link_to activity.name, activity
+        = link_to parse_name(activity.container), activity.container
     .col
-      - if activity.group
-        | Group 
-      - elsif activity.root_of
-        | Category 
-      - else
-        | Topic 
+      = activity.container.class.name.downcase
       |  with 
       = activity.posts.count
       =< "answer".pluralize(activity.posts.count)

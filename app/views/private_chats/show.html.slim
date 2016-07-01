@@ -1,8 +1,1 @@
-h2
-  = link_to @chat_partner.name, @chat_partner 
-  |  private chat
-
-section.topic
-  ul.posts
-    = render @group.topic.posts 
-    = render "posts/new", postable: @group.topic
+= render template: "groups/show"

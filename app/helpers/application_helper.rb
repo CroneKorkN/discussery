@@ -35,4 +35,17 @@ module ApplicationHelper
       </#{tag.to_s}>
       ".html_safe
   end
+  
+  def parse_name group
+    if group.name =~ /^PRIVATE_CHAT/
+      chat_partner = group.member_users.where.not("users.id = ?", current_user.id).first
+      return "Private chat with #{chat_partner.name}" if chat_partner
+    end
+    return group.name
+  end
+  
+  def private_chat_path user_a, user_b=current_user
+    ids = [user_a.id, user_b.id].sort
+    "PRIVATE_CHAT_#{ids[0]}_#{ids[1]}"
+  end
 end

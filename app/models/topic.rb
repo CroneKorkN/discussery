@@ -10,4 +10,8 @@ class Topic < ApplicationRecord
     through: :root_of,
     source: :parent,
     source_type: "Group"
+    
+  def container
+    group || root_of || self
+  end
 end

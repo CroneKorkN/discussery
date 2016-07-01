@@ -23,20 +23,16 @@ class ACL # Access Controll List
       group.roles.each do |role|
         # category- or group-permission_type?
         protectable_type = role.protectable.model_name.route_key.to_sym
-        
-        
         affected_protectable_ids = [role.protectable.id]
 
-        # recursive?
+        # recursively?
         if role.recursive
           affected_protectable_ids << Recursion.collect(role.protectable, protectable_type).pluck(:id)
           affected_protectable_ids.flatten!.uniq!
         end
         
-        p affected_protectable_ids
-        
         # apply each permission_type to each affected protectable
-        role.role_type.permission_types.each do |permission_type|
+        role.permission_types.each do |permission_type|
           affected_protectable_ids.each do |id|
             add role.protectable.model_name.route_key.to_sym, id, permission_type
           end
@@ -48,11 +44,13 @@ class ACL # Access Controll List
     return @acl
   end
   
-  def add type, id, permission_type  
+  def add type, id, permission_type
+    visibility_permission = PermissionType.find(Setting[:visibility_permission_type_id]).action
+    
     @acl[type] = {} unless @acl[type]
     @acl[type][id] = [] unless @acl[type][id]
     @acl[type][id] << permission_type.action.to_sym
-    if permission_type.action == PermissionType.find(Setting[:visibility_permission_type_id]).action
+    if permission_type.action == visibility_permission
       @acl[type][:visible] = [] unless @acl[type][:visible]
       @acl[type][:visible] << id
       @acl[type][:visible].uniq!
