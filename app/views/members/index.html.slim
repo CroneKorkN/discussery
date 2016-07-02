@@ -8,4 +8,4 @@ h2
   ul.result
 
 ul.members
-  = render @group.members
+  = render partial: "member", collection: @group.members, as: :member

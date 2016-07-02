@@ -1,2 +1,6 @@
-li
-  = render "users/user", user: member
+li.row.member
+  .col
+    = render "users/user", user: member
+  .compact.col
+    | x
+    //= link_to 'x', membership, data: {confirm: 'Are you sure?'}, method: :delete

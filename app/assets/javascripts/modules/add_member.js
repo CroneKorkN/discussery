@@ -1,8 +1,8 @@
 $.fn.add_member = function() {
   $(this).click(function(){
     // prepare
-    group_id = $(".member_selection").data("group-id");
-    member_node = $(this).closest(".user");
+    var group_id = $(".member_selection").data("group-id");
+    var member_node = $(this).closest(".member");
     
     // post
     $.post("/groups/"+group_id+"/memberships", {

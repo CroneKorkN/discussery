@@ -1,6 +1,6 @@
 $.fn.member_selection = function() {
-  input = $(this).find("input");
-  output = $(this).find(".result");
+  var input = $(this).find("input");
+  var output = $(this).find(".result");
   input.done_typing(function(){
     $.get("/user_selection", {
       query: input.val()
