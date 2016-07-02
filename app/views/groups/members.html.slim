@@ -1,7 +1,6 @@
 h2 
   = @group.name
-  | -group members 
-  = link_to "+", new_group_member_path(@group)
+  |  members
 
 .member_selection data-group-id=@group.id
   input type="text"

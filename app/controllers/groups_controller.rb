@@ -1,6 +1,11 @@
 class GroupsController < ApplicationController
   before_action :set_group, only: [:show, :edit, :update, :destroy]
-  
+
+  def members
+    @group = Group.find params[:group_id]
+    @members = @group.members
+  end
+
   # GET /groups
   # GET /groups.json
   def index

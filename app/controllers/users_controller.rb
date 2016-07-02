@@ -6,6 +6,11 @@ class UsersController < ApplicationController
     @users = User.all
   end
 
+  def list
+    return unless params[:query] and params[:query].length > 0
+    @members = User.where("name LIKE ? OR mail LIKE ?", "%#{params[:query]}%", "%#{params[:query]}%")
+  end
+  
   def activity
     @user = params[:user_id] || current_user
   end

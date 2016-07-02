@@ -3,7 +3,7 @@ Rails.application.routes.draw do
   resources :private_chats
   root to: "users#activity"
   get "activity", to: "users#activity"
-  get "user_selection", to: "members#select"
+  get "user_list", to: "users#list"
   
   resources :roles
   resources :topics
@@ -17,10 +17,9 @@ Rails.application.routes.draw do
   resources :groups do
     resources :roles
     resources :memberships
-    resources :members
+    get :members, to: "groups#members"
   end
   
-  get "/categories/manage", to: "categories#manage", as: 'manage_categories'
   resources :categories, shallow: true do
     resources :categories
     #get "sub_categories/new", to: "categories#new", as: 'new_sub_category'

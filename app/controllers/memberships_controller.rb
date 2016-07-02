@@ -1,10 +1,14 @@
 class MembershipsController < ApplicationController
   before_action :set_membership, only: [:show, :edit, :update, :destroy]
 
-  # GET /memberships
-  # GET /memberships.json
+  def select
+    return unless params[:query] and params[:query].length > 0
+    @members = User.where("name LIKE ? OR mail LIKE ?", "%#{params[:query]}%", "%#{params[:query]}%")
+  end  
+
   def index
-    @memberships = Membership.all
+    @group = Group.find params[:group_id]
+    @members = @group.members
   end
 
   # GET /memberships/1
@@ -28,7 +32,7 @@ class MembershipsController < ApplicationController
     @membership = @group.members.new(membership_params)
 
     if @membership.save
-      render partial: "members/member", locals: {member: @membership}
+      render partial: "groups/member", locals: {member: @membership}
     else
       render plain: "ERROR"
     end

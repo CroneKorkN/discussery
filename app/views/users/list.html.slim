@@ -1,0 +1,7 @@
+- if @members and @members.any?
+  = render partial: "groups/add_member", collection: @members, as: :member
+- else 
+  li
+    | no result
+  li
+    hr
