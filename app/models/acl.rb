@@ -1,7 +1,6 @@
 class ACL # Access Controll List
   def initialize(user)
-    build_for user unless @acl
-    @acl
+    @acl ||= build_for user
   end
 
   def allows?(action, object)

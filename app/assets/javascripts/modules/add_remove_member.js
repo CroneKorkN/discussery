@@ -13,6 +13,7 @@ $.fn.add_member = function() {
     }).done(function(response) {
       member_node.remove();
       $(".members").append(response);
+      $(".members > :last-child").initialize();
     });
     $(this).closest(".user").remove();
   });

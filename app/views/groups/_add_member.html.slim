@@ -1,6 +1,9 @@
 li.row.member
   .col
-    = render "users/user", user: member
+    - if member.class == User
+      = render "users/user", user: member
+    - elsif member.class == Group
+      = render "groups/group", group: member
   .compact.col
-    span data-add-member="" data-member-id=member.id data-member-type="User"
+    span data-add-member="" data-member-id=member.id data-member-type=member.class.name
       | +

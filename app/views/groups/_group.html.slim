@@ -1,2 +1,6 @@
-li
-  = link_to parse_name(group), group
+.user.row
+  .compact.info
+    = render "users/avatar", user: group
+  h3
+    = link_to parse_name(group), group
+  .col

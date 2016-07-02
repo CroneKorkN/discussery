@@ -8,7 +8,7 @@ class UsersController < ApplicationController
 
   def list
     return unless params[:query] and params[:query].length > 0
-    @members = User.where("name LIKE ? OR mail LIKE ?", "%#{params[:query]}%", "%#{params[:query]}%")
+    @members = User.where("name LIKE ? OR mail LIKE ?", "%#{params[:query]}%", "%#{params[:query]}%") + Group.where("name LIKE ? OR description LIKE ?", "%#{params[:query]}%", "%#{params[:query]}%")
   end
   
   def activity

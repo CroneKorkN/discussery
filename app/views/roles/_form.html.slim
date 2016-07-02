@@ -6,7 +6,8 @@
         - @role.errors.full_messages.each do |message|
           li = message
           
-  = f.hidden_field :group_id
+  = f.hidden_field :permittable_id
+  = f.hidden_field permittable_type: "Group"
 
   .row
     .column

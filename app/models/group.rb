@@ -41,6 +41,11 @@ class Group < ApplicationRecord
     source: :root_topic
   has_many :posts,
     through: :topic
+    
+  belongs_to :medium, optional: true
+  def avatar
+    medium || Medium.find(Setting["avatar_placeholder_medium_id"])
+  end
   
   after_create do
     # make creator member of the group

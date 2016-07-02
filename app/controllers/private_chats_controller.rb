@@ -4,8 +4,8 @@ class PrivateChatsController < ApplicationController
     @chat_partner = User.find params[:user_id]
     unless @group = Group.find_by(name: name)
       @group = Group.create(name: name)
-      @group.has_members.create member_id: params[:user_id], member_type: "User"
-      @group.has_members.create member_id: current_user.id, member_type: "User"
+      @group.members.create member_id: params[:user_id], member_type: "User"
+      @group.members.create member_id: current_user.id, member_type: "User"
     end
   end
   

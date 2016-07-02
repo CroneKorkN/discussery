@@ -39,7 +39,7 @@ module ApplicationHelper
   def parse_name group
     if group.name =~ /^PRIVATE_CHAT/
       chat_partner = group.member_users.where.not("users.id = ?", current_user.id).first
-      return "Private chat with #{chat_partner.name}" if chat_partner
+      return "Private chat with #{chat_partner.name}"
     end
     return group.name
   end

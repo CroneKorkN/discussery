@@ -32,7 +32,7 @@ class MembershipsController < ApplicationController
     @membership = @group.members.new(membership_params)
 
     if @membership.save
-      render partial: "groups/member", locals: {member: @membership}
+      render partial: "groups/member", locals: {membership: @membership}
     else
       render plain: "ERROR"
     end

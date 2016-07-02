@@ -18,5 +18,4 @@ class Topic < ApplicationRecord
   def icon 
     :topic
   end
-
 end
