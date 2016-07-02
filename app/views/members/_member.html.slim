@@ -2,4 +2,5 @@ li.row.member
   .col
     = render "users/user", user: member.member
   .compact.col
-    = link_to 'x', member, data: {confirm: 'Are you sure?'}, method: :delete
+    span data-remove-member=member.id
+      | x

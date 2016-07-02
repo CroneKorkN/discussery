@@ -25,10 +25,10 @@ class MembershipsController < ApplicationController
   # POST /memberships.json
   def create
     @group = Group.find params[:group_id]
-    @membership = @group.has_members.new(membership_params)
+    @membership = @group.members.new(membership_params)
 
     if @membership.save
-      render partial: "members/member", locals: {member: @membership.member}
+      render partial: "members/member", locals: {member: @membership}
     else
       render plain: "ERROR"
     end
@@ -52,10 +52,7 @@ class MembershipsController < ApplicationController
   # DELETE /memberships/1.json
   def destroy
     @membership.destroy
-    respond_to do |format|
-      format.html { redirect_to memberships_url, notice: 'Membership was successfully destroyed.' }
-      format.json { head :no_content }
-    end
+    render plain: "OK"
   end
 
   private

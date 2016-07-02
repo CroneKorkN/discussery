@@ -13,4 +13,5 @@ $.fn.initialize = function() {
   $(this).find(".member_selection").member_selection();
   
   $(this).find("[data-add-member]").add_member();
+  $(this).find("[data-remove-member]").remove_member();
 }

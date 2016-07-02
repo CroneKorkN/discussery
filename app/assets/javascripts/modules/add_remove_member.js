@@ -18,4 +18,20 @@ $.fn.add_member = function() {
   });
 }
 
-
+$.fn.remove_member = function() {
+  $(this).click(function(){
+    // prepare
+    var membership_id = $(this).data("remove-member");
+    l(membership_id);
+    var member_node = $(this).closest(".member");
+    
+    // post
+    $.ajax({
+      url: "/memberships/"+membership_id,
+      type: 'DELETE',
+      success: function(result) {
+        member_node.remove();
+      }
+    });
+  });
+}

@@ -15,7 +15,6 @@ class MembersController < ApplicationController
   end
 
   def create
-    p params
     @member = Membership.new(member_params)
 
     respond_to do |format|

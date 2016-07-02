@@ -75,7 +75,8 @@ random = (0...128).map { (65 + rand(26)).chr }.join
 admin_user = User.create name: "admin", password: "admin", password_confirmation: "admin", mail: "admin", medium: Medium.create(file: File.new("#{Rails.root}/app/assets/images/example_avatar_2.jpg"))
 system_user = User.create name: "SYSTEM", password: random, password_confirmation: random, mail: "nothing"
 private_chat_user = User.create name: "PRIVATE_CHAT", password: random, password_confirmation: random, mail: "nothing"
-example_user = User.create name: "Jon Doe", password: "admin", password_confirmation: "admin", mail: "jon.doe@example.com", medium: Medium.create(file: File.new("#{Rails.root}/app/assets/images/example_avatar_1.png"))
+example_user_1 = User.create name: "Jon Doe", password: "admin", password_confirmation: "admin", mail: "jon.doe@example.com", medium: Medium.create(file: File.new("#{Rails.root}/app/assets/images/example_avatar_1.png"))
+example_user_2 = User.create name: "Superman", password: "admin", password_confirmation: "admin", mail: "jon.doe@example.com", medium: Medium.create(file: File.new("#{Rails.root}/app/assets/images/example_avatar_3.png"))
 
 # setting groups
 setting_group = SettingGroup.create name: "default"
@@ -97,11 +98,12 @@ example_topic = example_category.topics.create user: admin_user, name: "hello wo
 # posts
 6.times do
   example_topic.posts.create user: admin_user, content: TextGenerator.text
-  example_topic.posts.create user: example_user, content: TextGenerator.text
+  example_topic.posts.create user: example_user_1, content: TextGenerator.text
+  example_topic.posts.create user: example_user_2, content: TextGenerator.text
 end
 
 # contacts
-admin_user.contact_links.create contact: example_user
+admin_user.contact_links.create contact: example_user_1
 
 # groups
 admin_group = system_user.groups_created.create name: "admins"
@@ -109,7 +111,7 @@ supermod_group = system_user.groups_created.create name: "supermods"
 member_group = system_user.groups_created.create name: "members"
 guest_group = system_user.groups_created.create name: "guests"
 blocked_group = system_user.groups_created.create name: "blocked"
-example_group = example_user.groups_created.create name: "Example Group"
+example_group = example_user_1.groups_created.create name: "Example Group"
 staff_group = system_user.groups_created.create name: "staff"
 staff_group.members.create member: admin_group
 staff_group.members.create member: supermod_group
@@ -125,7 +127,7 @@ end
 
 # user groups
 admin_group.members.create member: admin_user
-member_group.members.create member: example_user
+member_group.members.create member: example_user_1
 
 # group role_types
 admin_group.roles.create    role_type: admin_role_type,   protectable: root_category, recursive: true
