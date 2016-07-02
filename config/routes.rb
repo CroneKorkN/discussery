@@ -13,6 +13,7 @@ Rails.application.routes.draw do
   patch "/editable", to: "editables#update"
   get "/backend", to: "backend#show", as: 'backend'
 
+
   resources :groups do
     resources :roles
     resources :memberships
