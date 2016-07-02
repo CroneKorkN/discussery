@@ -10,7 +10,7 @@ $.fn.initialize = function() {
   
   $(this).find("[data-edit-mode]").edit_mode_trigger();
   
-  $(this).find(".user_selection").user_selection();
+  $(this).find(".member_selection").member_selection();
   
   $(this).find("[data-add-member]").add_member();
 }

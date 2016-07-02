@@ -27,14 +27,10 @@ class MembershipsController < ApplicationController
     @group = Group.find params[:group_id]
     @membership = @group.has_members.new(membership_params)
 
-    respond_to do |format|
-      if @membership.save
-        format.html { redirect_to @membership, notice: 'Membership was successfully created.' }
-        format.json { render :show, status: :created, location: @membership }
-      else
-        format.html { render :new }
-        format.json { render json: @membership.errors, status: :unprocessable_entity }
-      end
+    if @membership.save
+      render partial: "members/member", locals: {member: @membership.member}
+    else
+      render plain: "ERROR"
     end
   end
 

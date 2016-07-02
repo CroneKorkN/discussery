@@ -1,7 +1,8 @@
 $.fn.add_member = function() {
   $(this).click(function(){
     // prepare
-    group_id = $(".user_selection").data("group-id");
+    group_id = $(".member_selection").data("group-id");
+    member_node = $(this).closest(".user");
     
     // post
     $.post("/groups/"+group_id+"/memberships", {
@@ -10,9 +11,10 @@ $.fn.add_member = function() {
         member_type: $(this).data("member-type"),
       }
     }).done(function(response) {
-      output.html(response);
-      output.initialize();
+      member_node.remove();
+      $(".members").append(response);
     });
+    $(this).closest(".user").remove();
   });
 }
 

@@ -1,1 +1,5 @@
-= render @users, user_selection: true if @users
+- if @members and @members.any?
+  = render partial: "new_member", collection: @members, as: :member
+- else 
+  li
+    | no result

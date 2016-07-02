@@ -4,7 +4,7 @@ class MembersController < ApplicationController
   def select
     return unless params[:query] and params[:query].length > 0
     @group = params[:group_id]
-    @users = User.where("name LIKE ? OR mail LIKE ?", "%#{params[:query]}%", "%#{params[:query]}%")
+    @members = User.where("name LIKE ? OR mail LIKE ?", "%#{params[:query]}%", "%#{params[:query]}%")
   end  
 
   # GET /members

@@ -1,10 +1,6 @@
-li.user.row
+.user.row
   .compact.info
     = render "users/avatar", user: user
   h3
     = link_to user.name, user
-  - if defined? user_selection
-    .col
-      span data-add-member="" data-member-id=user.id data-member-type="User"
-        | +
   .col

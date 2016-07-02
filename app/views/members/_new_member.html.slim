@@ -1,0 +1,6 @@
+li.row
+  .col
+    = render "users/user", user: member
+  .compact.col
+    span data-add-member="" data-member-id=member.id data-member-type="User"
+      | +
