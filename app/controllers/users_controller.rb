@@ -2,13 +2,6 @@ class UsersController < ApplicationController
   before_action :set_user, only: [:show, :edit, :update, :destroy]
   skip_before_filter :require_login, only: [:new, :create]
 
-  def select
-    q = params[:query]
-    if q.length > 0
-      @users = User.where("name LIKE ? OR mail LIKE ?", "%#{q}%", "%#{q}%")
-    end
-  end
-
   def index
     @users = User.all
   end

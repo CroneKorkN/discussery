@@ -1,7 +1,6 @@
-$.fn.done_typing = function(callback) {
+$.fn.done_typing = function(callback, delay=200) {
   // init
   var timer;
-  var delay = 500;
 
   // on keyup, start the countdown
   $(this).keyup(function(){

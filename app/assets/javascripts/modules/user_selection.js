@@ -6,6 +6,7 @@ $.fn.user_selection = function() {
       query: input.val()
     }).done(function(response) {
       output.html(response);
+      output.initialize();
     });
-  });
+  }, 200);
 }

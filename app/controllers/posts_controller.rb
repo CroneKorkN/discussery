@@ -63,7 +63,7 @@ class PostsController < ApplicationController
   def destroy
     @post.update trash: true
     respond_to do |format|
-      format.html { redirect_to @post.topic, notice: 'Post was successfully destroyed.' }
+      format.html { redirect_to @post.postable, notice: 'Post was successfully destroyed.' }
       format.json { head :no_content }
     end
   end

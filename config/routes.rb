@@ -3,7 +3,7 @@ Rails.application.routes.draw do
   resources :private_chats
   root to: "users#activity"
   get "activity", to: "users#activity"
-  get "user_selection", to: "users#select"
+  get "user_selection", to: "members#select"
   
   resources :roles
   resources :topics

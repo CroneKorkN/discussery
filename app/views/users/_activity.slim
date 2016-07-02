@@ -2,7 +2,9 @@ li.activity
   .row
     .col
       h3
-        = link_to parse_name(activity.container), activity.container
+        = link_to activity.container do
+          = image_tag "#{activity.container.icon}.svg"
+          = parse_name(activity.container)
     .col
       = activity.container.class.name.downcase
       |  with 

@@ -72,6 +72,10 @@ class Group < ApplicationRecord
     true if name =~ /^PRIVATE_CHAT/
   end
   
+  def icon
+    private_chat? ? :private_chat : :group
+  end
+  
   private
       
   def create_admin_group

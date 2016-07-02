@@ -6,4 +6,6 @@ class Post < ApplicationRecord
   after_create do
     postable.update latest_activity_at: updated_at
   end
+  
+  default_scope ->{where(trash: false)}
 end

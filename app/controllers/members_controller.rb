@@ -1,12 +1,35 @@
 class MembersController < ApplicationController
-  before_action :set_member, only: [:show, :edit, :update, :destroy]
+  #before_action :set_member, only: [:show, :edit, :update, :destroy]
   
+  def select
+    return unless params[:query] and params[:query].length > 0
+    @group = params[:group_id]
+    @users = User.where("name LIKE ? OR mail LIKE ?", "%#{params[:query]}%", "%#{params[:query]}%")
+  end  
+
   # GET /members
   # GET /members.json
   def index
     @group = Group.find params[:group_id]
     @members = @group.members
   end
+
+  def create
+    p params
+    @member = Membership.new(member_params)
+
+    respond_to do |format|
+      if @member.save
+        format.html { redirect_to @member, notice: 'Membership was successfully created.' }
+        format.json { render :show, status: :created, location: @member }
+      else
+        format.html { render :new }
+        format.json { render json: @member.errors, status: :unprocessable_entity }
+      end
+    end
+  end
+  
+  private
 
   # GET /members/1
   # GET /members/1.json
@@ -21,22 +44,6 @@ class MembersController < ApplicationController
 
   # GET /members/1/edit
   def edit
-  end
-
-  # POST /members
-  # POST /members.json
-  def create
-    @member = Membership.new(member_params)
-
-    respond_to do |format|
-      if @member.save
-        format.html { redirect_to @member, notice: 'Membership was successfully created.' }
-        format.json { render :show, status: :created, location: @member }
-      else
-        format.html { render :new }
-        format.json { render json: @member.errors, status: :unprocessable_entity }
-      end
-    end
   end
 
   # PATCH/PUT /members/1
@@ -71,6 +78,6 @@ class MembersController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def member_params
-      params.require(:member).permit(:member, :group_id)
+      params.require(:member).permit(:member_id, :group_id)
     end
 end

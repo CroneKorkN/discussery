@@ -2,6 +2,11 @@
   .doubble.col
     h2
       - if @group.private_chat?
+        = image_tag "private_chat.svg"
+      - else
+        = image_tag "group.svg"
+        
+      - if @group.private_chat?
         = parse_name @group
       - else
         = editable @group, :name

@@ -14,4 +14,9 @@ class Topic < ApplicationRecord
   def container
     group || root_of || self
   end
+  
+  def icon 
+    :topic
+  end
+
 end

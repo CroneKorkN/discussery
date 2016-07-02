@@ -3,9 +3,9 @@ h2
   | -group members 
   = link_to "+", new_group_member_path(@group)
 
-.user_selection
+.user_selection data-group-id=@group.id
   input type="text"
   ul.result
 
 ul
-  = render @members
+  = render @group.members

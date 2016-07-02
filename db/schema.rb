@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160630140621) do
+ActiveRecord::Schema.define(version: 20160702074011) do
 
   create_table "attachments", force: :cascade do |t|
     t.integer  "post_id"
@@ -109,12 +109,14 @@ ActiveRecord::Schema.define(version: 20160630140621) do
     t.text     "content_searchable"
     t.integer  "user_id"
     t.datetime "date"
-    t.datetime "created_at",         null: false
-    t.datetime "updated_at",         null: false
+    t.datetime "created_at",                         null: false
+    t.datetime "updated_at",                         null: false
     t.string   "postable_type"
     t.integer  "postable_id"
+    t.boolean  "trash",              default: false, null: false
     t.index ["date"], name: "index_posts_on_date"
     t.index ["postable_type", "postable_id"], name: "index_posts_on_postable_type_and_postable_id"
+    t.index ["trash"], name: "index_posts_on_trash"
     t.index ["user_id"], name: "index_posts_on_user_id"
   end
 
