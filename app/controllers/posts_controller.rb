@@ -61,7 +61,7 @@ class PostsController < ApplicationController
   # DELETE /posts/1
   # DELETE /posts/1.json
   def destroy
-    @post.destroy
+    @post.update trash: true
     respond_to do |format|
       format.html { redirect_to @post.topic, notice: 'Post was successfully destroyed.' }
       format.json { head :no_content }

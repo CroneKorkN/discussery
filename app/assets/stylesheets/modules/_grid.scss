@@ -9,10 +9,11 @@
     flex-grow: 1;
     _padding: 0 .5rem;
     
-    &:last-of-type {
+    &:last-child {
       text-align: right;
     }
   }
+  
   
   > .half {
     flex-grow: .5;

@@ -3,5 +3,9 @@ h2
   | -group members 
   = link_to "+", new_group_member_path(@group)
 
+.user_selection
+  input type="text"
+  ul.result
+
 ul
-  = render partial: "member", collection: @members, as: :member
+  = render @members

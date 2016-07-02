@@ -1,3 +1,7 @@
-li
+li.user.row
+  .compact.info
+    = render "users/avatar", user: user
   h3
     = link_to user.name, user
+  .col
+  

@@ -1,6 +1,7 @@
 section.topic
   header
     h2
+      = image_tag "topic.svg"
       = editable @topic, :name, trigger: "edit-mode"
     = pluralize @topic.posts.count, "posts"
   ul.posts

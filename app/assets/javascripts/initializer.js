@@ -9,4 +9,6 @@ $.fn.initialize = function() {
   // $(this).find("a").link_scope();
   
   $(this).find("[data-edit-mode]").edit_mode_trigger();
+  
+  $(".user_selection").user_selection();
 }

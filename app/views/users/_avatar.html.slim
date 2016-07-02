@@ -1,0 +1,5 @@
+- style = "background-image: url(#{image_url(user.avatar.file.url(:thumbnail))})"
+.avatar.has-dropdown style=style
+  ul.hidden.dropdown.context-menu
+    li = link_to "Profile", user
+    li = link_to "private message", user_private_chat_path(user)
