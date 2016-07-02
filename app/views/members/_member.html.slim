@@ -1,6 +1,5 @@
 li.row.member
   .col
-    = render "users/user", user: member
+    = render "users/user", user: has_member.member
   .compact.col
-    | x
-    //= link_to 'x', membership, data: {confirm: 'Are you sure?'}, method: :delete
+    = link_to 'x', has_member, data: {confirm: 'Are you sure?'}, method: :delete

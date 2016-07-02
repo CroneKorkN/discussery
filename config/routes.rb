@@ -7,6 +7,7 @@ Rails.application.routes.draw do
   
   resources :roles
   resources :topics
+  resources :memberships
 
   resources :group_users
   patch "/editable", to: "editables#update"
