@@ -11,7 +11,7 @@ class MembersController < ApplicationController
   # GET /members.json
   def index
     @group = Group.find params[:group_id]
-    @has_members = @group.has_members
+    @members = @group.members
   end
 
   def create

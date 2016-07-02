@@ -111,8 +111,8 @@ guest_group = system_user.groups_created.create name: "guests"
 blocked_group = system_user.groups_created.create name: "blocked"
 example_group = example_user.groups_created.create name: "Example Group"
 staff_group = system_user.groups_created.create name: "staff"
-staff_group.has_members.create member: admin_group
-staff_group.has_members.create member: supermod_group
+staff_group.members.create member: admin_group
+staff_group.members.create member: supermod_group
 
 # more settings
 {
@@ -124,8 +124,8 @@ staff_group.has_members.create member: supermod_group
 end
 
 # user groups
-admin_group.has_members.create member: admin_user
-member_group.has_members.create member: example_user
+admin_group.members.create member: admin_user
+member_group.members.create member: example_user
 
 # group role_types
 admin_group.roles.create    role_type: admin_role_type,   protectable: root_category, recursive: true

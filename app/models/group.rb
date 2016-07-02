@@ -15,28 +15,24 @@ class Group < ApplicationRecord
     source: :role_type
   
   # memberships
-  has_many :is_member_of,
-    class_name: "Membership",
-    as: :member
   has_many :memberships,
-     through: :is_member_of,
-     source: :group
-  
+    as: :member
+  has_many :membership_groups,
+    through: :memberships,
+    source: :group
+    
   # members
-  has_many :has_members,
+  has_many :members,
     class_name: "Membership",
     foreign_key: :group_id
   has_many :member_users,
-    through: :has_members,
+    through: :members,
     source: :member,
     source_type: "User"
   has_many :member_groups,
-    through: :has_members,
+    through: :members,
     source: :member,
     source_type: "Group"
-  def members
-    member_users + member_groups
-  end
   
   has_one :category,
     as: :parent
@@ -48,7 +44,7 @@ class Group < ApplicationRecord
   
   after_create do
     # make creator member of the group
-    has_members.create member: creator
+    members.create member: creator
 
     unless self.background
       # create group-category
@@ -64,7 +60,7 @@ class Group < ApplicationRecord
       admin_group.roles.create role_type: RoleType.find_by(name: "admin"), protectable: self
       
       # make creator member of group admins group      
-      admin_group.has_members.create member: creator
+      admin_group.members.create member: creator
     end
   end
 

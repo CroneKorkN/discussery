@@ -19,7 +19,7 @@ class ACL # Access Controll List
   def build_for user
     @acl = {}
     # collect groups
-    Recursion.collect_all(user.groups, :memberships).each do |group|
+    Recursion.collect_all(user.groups, :membership_groups).each do |group|
       group.roles.each do |role|
         # category- or group-permission_type?
         protectable_type = role.protectable.model_name.route_key.to_sym
