@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160702074011) do
+ActiveRecord::Schema.define(version: 20160702170344) do
 
   create_table "attachments", force: :cascade do |t|
     t.integer  "post_id"
@@ -165,6 +165,16 @@ ActiveRecord::Schema.define(version: 20160702074011) do
     t.index ["name"], name: "index_settings_on_name"
     t.index ["order"], name: "index_settings_on_order"
     t.index ["setting_group_id"], name: "index_settings_on_setting_group_id"
+  end
+
+  create_table "subscriptions", force: :cascade do |t|
+    t.integer  "user_id"
+    t.string   "subscribable_type"
+    t.integer  "subscribable_id"
+    t.datetime "created_at",        null: false
+    t.datetime "updated_at",        null: false
+    t.index ["subscribable_type", "subscribable_id"], name: "index_subscriptions_on_subscribable_type_and_subscribable_id"
+    t.index ["user_id"], name: "index_subscriptions_on_user_id"
   end
 
   create_table "topics", force: :cascade do |t|

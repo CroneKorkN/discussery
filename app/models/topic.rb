@@ -10,6 +10,8 @@ class Topic < ApplicationRecord
     through: :root_of,
     source: :parent,
     source_type: "Group"
+  has_many :subscriptions,
+    as: :subscribable
     
   def container
     group || root_of || self

@@ -38,9 +38,15 @@ class User < ApplicationRecord
     as: :permittable
 
   serialize :acl_cache
+  
+  has_many :subscriptions
 
   
   has_secure_password validations: false
+  
+  def subscribe subscribable
+    subscribable.container.subscriptions.find_or_create_by user: self
+  end
     
   def avatar
     medium || Medium.find(Setting["avatar_placeholder_medium_id"])

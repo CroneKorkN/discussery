@@ -32,6 +32,7 @@ Rails.application.routes.draw do
   resources :posts
 
   resources :users, shallow: true do
+    resources :subscriptions
     resources :media
     resources :contacts
     get "private_chat", to: "private_chats#show"
