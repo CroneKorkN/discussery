@@ -42,6 +42,9 @@ class Group < ApplicationRecord
   has_many :posts,
     through: :topic
     
+  has_many :subscriptions,
+    as: :subscribable
+    
   belongs_to :medium, optional: true
   def avatar
     medium || Medium.find(Setting["avatar_placeholder_medium_id"])

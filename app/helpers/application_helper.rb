@@ -48,4 +48,9 @@ module ApplicationHelper
     ids = [user_a.id, user_b.id].sort
     "PRIVATE_CHAT_#{ids[0]}_#{ids[1]}"
   end
+  
+  def markdown raw
+    @markdown ||= Redcarpet::Markdown.new(Redcarpet::Render::HTML, autolink: true, tables: true)
+    @markdown.render raw
+  end
 end

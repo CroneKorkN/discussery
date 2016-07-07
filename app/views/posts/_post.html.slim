@@ -4,14 +4,14 @@ li.post class=("own" if post.user == current_user)
   .content 
     article.speechbubble.has-dropdown
       = editable post, :content, trigger: :"edit-mode"
+      //= markdown(post.content).html_safe
       ul.post-menu.hidden.dropdown.context-menu
-        li
-          a href="" 
-            = link_to "answer", "new_topic_post_path(post.topic)"
         li
           a href="" edit
         li
           a href="" report
+        li
+          = link_to "thx", ""
         li
           = link_to 'trash', post, data: {:confirm => 'Are you sure?'}, method: :delete
     .author

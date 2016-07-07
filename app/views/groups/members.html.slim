@@ -6,7 +6,7 @@
   .col
     .member_selection data-group-id=@group.id
       input type="text" placeholder="add members"
-      ul.result
+      ul.result.context-menu
 
 ul.members
   = render partial: "member", collection: @group.members, as: :membership

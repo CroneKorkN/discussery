@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+
+<svg
+   xmlns:dc="http://purl.org/dc/elements/1.1/"
+   xmlns:cc="http://creativecommons.org/ns#"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   width="680"
+   height="800"
+   id="svg2"
+   sodipodi:version="0.32"
+   inkscape:version="0.91 r13725"
+   sodipodi:docname="avatar.svg"
+   inkscape:output_extension="org.inkscape.output.svg.inkscape"
+   version="1.1">
+  <defs
+     id="defs4">
+    <inkscape:perspective
+       sodipodi:type="inkscape:persp3d"
+       inkscape:vp_x="0 : 526.18109 : 1"
+       inkscape:vp_y="0 : 1000 : 0"
+       inkscape:vp_z="744.09448 : 526.18109 : 1"
+       inkscape:persp3d-origin="372.04724 : 350.78739 : 1"
+       id="perspective10" />
+    <inkscape:perspective
+       id="perspective2390"
+       inkscape:persp3d-origin="372.04724 : 350.78739 : 1"
+       inkscape:vp_z="744.09448 : 526.18109 : 1"
+       inkscape:vp_y="0 : 1000 : 0"
+       inkscape:vp_x="0 : 526.18109 : 1"
+       sodipodi:type="inkscape:persp3d" />
+  </defs>
+  <sodipodi:namedview
+     id="base"
+     pagecolor="#ffffff"
+     bordercolor="#666666"
+     borderopacity="1.0"
+     gridtolerance="10000"
+     guidetolerance="10"
+     objecttolerance="10"
+     inkscape:pageopacity="0.0"
+     inkscape:pageshadow="2"
+     inkscape:zoom="0.35"
+     inkscape:cx="-23.571429"
+     inkscape:cy="520"
+     inkscape:document-units="px"
+     inkscape:current-layer="layer1"
+     showgrid="false"
+     inkscape:window-width="1920"
+     inkscape:window-height="1016"
+     inkscape:window-x="0"
+     inkscape:window-y="27"
+     inkscape:window-maximized="1" />
+  <metadata
+     id="metadata7">
+    <rdf:RDF>
+      <cc:Work
+         rdf:about="">
+        <dc:format>image/svg+xml</dc:format>
+        <dc:type
+           rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
+        <dc:title></dc:title>
+        <dc:subject>
+          <rdf:Bag>
+            <rdf:li>Man silhouette people person head shoulders face</rdf:li>
+          </rdf:Bag>
+        </dc:subject>
+      </cc:Work>
+    </rdf:RDF>
+  </metadata>
+  <g
+     inkscape:label="Layer 1"
+     inkscape:groupmode="layer"
+     id="layer1"
+     transform="translate(0,-252.36221)">
+    <path
+       style="fill:#b3b3b3"
+       d="m 0,1042.3085 c 0,-11.34 18.88355,-108.79917 22.084119,-113.97783 1.140329,-1.84505 3.972813,-13.79645 6.294383,-26.55862 5.415625,-29.77033 15.400273,-61.75736 21.277435,-68.16481 2.526529,-2.7545 25.198625,-9.30206 50.382483,-14.55016 77.36521,-16.12227 111.46301,-28.54079 128.29743,-46.72625 8.02398,-8.66798 20.1596,-17.70188 26.96805,-20.0753 10.81719,-3.7709 12.37898,-6.17009 12.37898,-19.0166 0,-8.0857 -2.47147,-18.24754 -5.49214,-22.58193 -3.02066,-4.33438 -6.82108,-15.97112 -8.44539,-25.8594 -1.62432,-9.88829 -6.34433,-21.19501 -10.48894,-25.12603 -4.14461,-3.93107 -7.53567,-8.94801 -7.53567,-11.1488 0,-2.20075 -4.0452,-9.47274 -8.98935,-16.15989 -7.66792,-10.37124 -9.06295,-17.54191 -9.49012,-48.78026 -0.82526,-60.35219 4.34825,-87.96915 21.24919,-113.4315 23.864,-35.95266 69.94913,-60.854 112.83553,-60.96882 16.75775,-0.0448 23.79872,1.89807 30.83563,8.50888 5.31383,4.99209 17.80183,9.93958 29.92628,11.8562 24.12242,3.81324 45.81728,19.13213 56.35096,39.78985 5.29573,10.38554 6.98701,23.54832 6.99172,54.41506 0.003,22.82705 1.76155,41.80057 4.00145,43.18493 10.86413,6.71441 0.72918,53.10589 -16.31435,74.67698 -6.40889,8.11139 -11.69199,17.99967 -11.74025,21.97396 -0.0482,3.9743 -3.64401,15.06328 -7.99053,24.64217 -14.43547,31.81291 -9.46807,63.2987 11.09836,70.34647 3.83243,1.31333 13.26062,10.47903 20.95151,20.36819 7.69089,9.88921 18.47811,18.99642 23.9716,20.23819 5.49349,1.24181 30.12951,10.17258 54.74666,19.84621 24.61717,9.67358 45.95837,17.58836 47.42491,17.58836 1.4665,0 10.45457,4.94414 19.97346,10.98699 17.01089,10.79896 25.67985,25.21377 25.67985,42.70053 0,4.70099 3.71776,15.6694 8.26166,24.37424 7.31242,14.00845 12.28957,40.87291 22.36255,120.70279 l 2.14254,16.9799 -340.00003,0 -339.99997,0 0,-10.0537 z"
+       id="path2396"
+       inkscape:connector-curvature="0" />
+  </g>
+</svg>

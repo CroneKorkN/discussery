@@ -4,13 +4,8 @@ nav
         = active_link_to "Freibrief", "/activity", "data-link-scope": "#page-content"
     li
       = active_link_to "discover", "/categories", "data-link-scope": "#page-content"
-    li
-      = active_link_to "contacts", "/users", "data-link-scope": "#page-content"
-    li.placeholder
-    li.has-dropdown
-      img src=image_path("magnifier.svg")
-      .context-menu.dropdown.hidden
-        input type="input" placeholder="search"
+    li.has-dropdown.placeholder.search
+      input#search type="input"
     li.has-dropdown data-toggle="user-menu"
       img src=image_path("menu.svg")
       ul#user-menu.dropdown.hidden.context-menu
@@ -21,6 +16,8 @@ nav
               | &nbsp;manage
           li
             = link_to "Settings", settings_path, "data-link-scope": "#page-content"
+          li
+            = active_link_to "contacts", "/users", "data-link-scope": "#page-content"
           li
             = link_to "#{current_user.name}s profile", current_user
           li

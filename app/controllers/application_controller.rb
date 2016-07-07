@@ -2,6 +2,7 @@ class ApplicationController < ActionController::Base
   protect_from_forgery with: :exception
   helper_method :current_user, :authorize
   before_action :require_login, except: [:login, :signup]
+  #before_action :mobile_device? # define @mobile_device for scss
   layout proc{ false if request.xhr? }
   
   def current_user
@@ -18,7 +19,7 @@ class ApplicationController < ActionController::Base
   end
 
   def mobile_device?
-    @mobile_device ||= request.user_agent =~ /Mobile|webOS/
+    @mobile_device ||= request.user_agent.include? "Mobile"
   end
   helper_method :mobile_device?
 

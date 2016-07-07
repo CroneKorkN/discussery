@@ -1,0 +1,24 @@
+li.search {
+  display: block !important;
+  text-align: right;
+}
+
+#search {
+  background-color: transparent; 
+  background-size: 1em;
+  background-repeat: no-repeat;
+  background-position: right;
+  border: 0;
+  padding: 0 .2em;
+  text-align: center;
+  width: 100%;
+  height: 1.9rem;
+  line-height: 1.5rem;
+  font-size: inherit;
+  color: black;
+  font-weight: 100;
+  background-color: white;
+  &:focus, &:hover {
+    background-image: url(image_path("magnifier.svg"));
+  }
+}

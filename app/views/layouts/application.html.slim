@@ -2,7 +2,10 @@ doctype html
 html
   head
     title Freibrief.net
-    = stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true
+    = stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track' => true
+    - if mobile_device?
+      = stylesheet_link_tag 'mobile'
+      meta content='user-scalable=0' name='viewport'
     = javascript_include_tag 'application', 'data-turbolinks-track' => true
     = csrf_meta_tags
   body.app

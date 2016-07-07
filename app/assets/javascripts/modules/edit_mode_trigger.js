@@ -1,4 +1,6 @@
 $.fn.edit_mode_trigger = function() {
+  $(this).prop("checked", false);
+  
   $(this).change(function(){
     if (this.checked) {
       $("[data-editable-trigger=\"edit-mode\"]").editable();
