@@ -14,4 +14,8 @@ $.fn.initialize = function() {
   
   $(this).find("[data-add-member]").add_member();
   $(this).find("[data-remove-member]").remove_member();
+  
+  key('shift+enter', function(){ 
+    $("[data-send-answer]").trigger("click");  
+  });
 }

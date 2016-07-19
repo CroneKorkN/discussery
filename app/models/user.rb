@@ -30,6 +30,10 @@ class User < ApplicationRecord
     as: :member
   has_many :groups,
     through: :memberships
+  def all_groups
+    Recursion.collect_all groups, :membership_groups
+  end  
+  
   has_many :group_chats,
     through: :groups,
     source: :topic

@@ -1,0 +1,15 @@
+li.activity
+  .row
+    .col
+      h3
+        = link_to subscription.subscribable do
+          = image_tag "#{subscription.subscribable.icon}.svg"
+          = parse_name(subscription.subscribable)
+    .col
+      = subscription.subscribable.class.name.downcase
+      |  with 
+      = subscription.subscribable.posts.count
+      =< "answer".pluralize(subscription.subscribable.posts.count)
+  section.topic
+    ul.posts
+      = render "posts/post", post: subscription.subscribable.posts.last if subscription.subscribable.posts.any?

@@ -35,6 +35,7 @@ Rails.application.routes.draw do
     resources :subscriptions
     resources :media
     resources :contacts
+    resources :memberships
     get "private_chat", to: "private_chats#show"
   end
 

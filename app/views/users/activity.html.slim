@@ -1,2 +1,8 @@
+ul
+  li
+    = link_to "subscriptions", "activity"
+  li
+    = link_to "my groups", user_memberships_path(current_user)
+
 ul.activities
-  = render partial: "activity", collection: @user.activities, as: :activity
+  = render partial: "subscriptions", collection: @user.subscriptions, as: :subscription

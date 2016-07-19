@@ -23,4 +23,7 @@ function l(t) {
 
 $(document).ready(function(){
   $("html").initialize();
+  
+  
+
 });
